@@ -9,8 +9,8 @@ Deze app bied de oplossing om naar een spel te zoeken, te kijken hoelang dit bor
 ## Schetsen
 De volgende screenshots geven een idee van hoe de app werkt
 
-![text](https://github.com/Wohesi/programmeerproject/blob/master/doc/wireframes_flow.png)
-![text](https://github.com/Wohesi/programmeerproject/blob/master/doc/wireframes_image.png)
+![text](https://github.com/Wohesi/programmeerproject/blob/master/doc/wireframes_flow2.png)
+![text](https://github.com/Wohesi/programmeerproject/blob/master/doc/wireframes_image2.png)
 
 ## Main features
 De gebruiker kan de volgende activiteiten doen op de app. 
