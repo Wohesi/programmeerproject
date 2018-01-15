@@ -4,13 +4,20 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:srcCompat="@drawable/ic_launcher_background" />
+
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="600dp"
+        android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:layout_marginTop="60dp"
         app:cardCornerRadius="10dp"
-        app:cardElevation="6dp">
+        app:cardElevation="6dp"
+        android:id="@+id/cardView">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -20,10 +27,10 @@
                 android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Title"
+                android:layout_margin="10dp"
                 android:fontFamily="serif-monospace"
-                android:textSize="25dp"
-                android:layout_margin="10dp"/>
+                android:text="Title"
+                android:textSize="25dp" />
 
             <TextView
                 android:id="@+id/year"
@@ -31,64 +38,127 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/title"
-                android:text="year"
-                android:layout_margin="10dp"/>
+                android:layout_margin="10dp"
+                android:text="year" />
 
             <RelativeLayout
+                android:id="@+id/gameinfo"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:layout_below="@+id/year"
                 android:background="@drawable/bg_large_gradient">
 
+                <LinearLayout
+                    android:id="@+id/text_static"
+                    android:layout_width="wrap_content"
+                    android:layout_height="150dp"
+                    android:layout_marginStart="36dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/length_static"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="length:"
+                        android:textAlignment="viewStart"
+                        android:textColor="#FFFFFF" />
+
+                    <TextView
+                        android:id="@+id/weight_static"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignTop="@+id/length_static"
+                        android:layout_margin="10dp"
+                        android:text="weight:"
+                        android:textColor="#FFFFFF" />
+
+                    <TextView
+                        android:id="@+id/avg_rating_static"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/weight_static"
+                        android:layout_margin="10dp"
+                        android:text="Avg_rating:"
+                        android:textColor="#FFFFFF" />
+
+                    <TextView
+                        android:id="@+id/num_players_static"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/avg_rating_static"
+                        android:layout_margin="10dp"
+                        android:text="Players:"
+                        android:textColor="#FFFFFF" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/text_setter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="150dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginEnd="81dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/length_setter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="length: "
+                        android:textAlignment="viewStart"
+                        android:textColor="#FFFFFF" />
+
+                    <TextView
+                        android:id="@+id/weight_setter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="weight: "
+                        android:textColor="#FFFFFF" />
+
+                    <TextView
+                        android:id="@+id/avg_rating_setter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="Avg_rating: "
+                        android:textColor="#FFFFFF" />
+
+                    <TextView
+                        android:id="@+id/num_players_setter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="Players:"
+                        android:textColor="#FFFFFF" />
+
+
+                </LinearLayout>
             </RelativeLayout>
 
-            <LinearLayout
-                android:id="@+id/text_setter"
+            <TextView
+                android:id="@+id/description_title"
                 android:layout_width="wrap_content"
-                android:layout_height="200dp"
-                android:layout_below="@+id/year"
-                android:layout_marginStart="46dp"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/gameinfo"
+                android:padding="10dp"
+                android:layout_marginStart="11dp"
+                android:text="Description" />
 
-                <TextView
-                    android:id="@+id/length_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:text="length:"
-                    android:textAlignment="viewStart"
-                    android:textColor="#FFFFFF"/>
-
-                <TextView
-                    android:id="@+id/weight_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignTop="@+id/length_text"
-                    android:layout_margin="10dp"
-                    android:text="weight:"
-                    android:textColor="#FFFFFF"/>
-
-                <TextView
-                    android:id="@+id/avg_rating_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/weight_text"
-                    android:layout_margin="10dp"
-                    android:text="Avg_rating:"
-                    android:textColor="#FFFFFF"/>
-
-                <TextView
-                    android:id="@+id/num_players_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/avg_rating_text"
-                    android:layout_margin="10dp"
-                    android:text="Players:"
-                    android:textColor="#FFFFFF"/>
-
-
-            </LinearLayout>
+            <TextView
+                android:id="@+id/description_setter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/description_title"
+                android:layout_marginStart="11dp"
+                android:padding="10dp"
+                android:text="Description" />
 
 
         </RelativeLayout>
