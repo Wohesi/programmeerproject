@@ -6,10 +6,18 @@
     tools:context="com.example.gebruiker.boardgameapp.SearchFragment">
 
     <SearchView
+        android:id="@+id/search_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
     </SearchView>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="TextView" />
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"

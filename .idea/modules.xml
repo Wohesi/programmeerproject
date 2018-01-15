@@ -3,8 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://D:\Bibliotheken\Documents\MPROG\programmeerproject\programmeerproject\app\app.iml" filepath="D:\Bibliotheken\Documents\MPROG\programmeerproject\programmeerproject\app\app.iml" />
       <module fileurl="file://C:\Users\Wout\Documents\GitHub\programmeerproject\boardgameapp.iml" filepath="C:\Users\Wout\Documents\GitHub\programmeerproject\boardgameapp.iml" />
       <module fileurl="file://$PROJECT_DIR$/programmeerproject.iml" filepath="$PROJECT_DIR$/programmeerproject.iml" />
+      <module fileurl="file://D:\Bibliotheken\Documents\MPROG\programmeerproject\programmeerproject\programmeerproject.iml" filepath="D:\Bibliotheken\Documents\MPROG\programmeerproject\programmeerproject\programmeerproject.iml" />
     </modules>
   </component>
 </project>
