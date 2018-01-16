@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Xml;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,13 +44,13 @@ import java.util.List;
 
 public class SearchFragment extends Fragment {
 
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter adapter;
 
     private RequestQueue requestQueue;
     private bg_searchtile searchtile;
     private ArrayList<bg_searchtile> searchTiles = new ArrayList<>();
-
     private XmlPullParser xpp;
-
     private String url;
     private static final String ns = null;
 
@@ -59,6 +61,10 @@ public class SearchFragment extends Fragment {
 
         View searchFragment =  inflater.inflate(R.layout.fragment_search, container, false);
 
+        // setting the adaptor
+        recyclerView = searchFragment.findViewById(R.id.rv);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         // getting XML data from the API
         requestQueue = Volley.newRequestQueue(getContext());
@@ -82,7 +88,7 @@ public class SearchFragment extends Fragment {
 
                         // getting the correct url of searched game.
                         url = "https://www.boardgamegeek.com/xmlapi/search?search="+s+"&exact=1";
-
+                        System.out.println(url);
 
                         final StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
                             @Override
@@ -120,6 +126,9 @@ public class SearchFragment extends Fragment {
                                                 break;
                                         }
                                         event = xpp.next();
+
+                                        adapter = new MyAdapter(searchTiles, getContext());
+                                        recyclerView.setAdapter(adapter);
                                     }
 
 
@@ -153,6 +162,10 @@ public class SearchFragment extends Fragment {
                     }
                 }
         );
+
+
+
+
 
         // Inflate the layout for this fragment
         return searchFragment;

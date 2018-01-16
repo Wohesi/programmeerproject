@@ -16,10 +16,6 @@ public class bg_searchtile {
         System.out.println(id + " " + name + " " + yearpublished);
     }
 
-    public String getName(String value) {
-        return name;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -40,4 +36,11 @@ public class bg_searchtile {
         this.id = id;
     }
 
+    public String getName() {
+        return String.valueOf(Integer.parseInt(name));
+    }
+
+    public int getYearpublished() {
+        return yearpublished;
+    }
 }
