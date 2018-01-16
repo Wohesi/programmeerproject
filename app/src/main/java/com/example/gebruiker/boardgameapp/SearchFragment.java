@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -58,6 +59,8 @@ public class SearchFragment extends Fragment {
 
         View searchFragment =  inflater.inflate(R.layout.fragment_search, container, false);
 
+
+        // getting XML data from the API
         requestQueue = Volley.newRequestQueue(getContext());
 
         try {
@@ -89,17 +92,17 @@ public class SearchFragment extends Fragment {
                                     xpp.setInput(new StringReader(response));
                                     int event = xpp.getEventType();
 
-                                    String tag = "", value = "";
+                                    String tag = "", value = "", tag_id = "";
 
                                     while(event != XmlPullParser.END_DOCUMENT) {
                                         tag = xpp.getName();
+                                        tag_id = xpp.getNamespace();
                                         switch(event) {
                                             case XmlPullParser.START_TAG:
                                                 if(tag.equals("boardgame")) {
                                                     searchtile = new bg_searchtile();
-
-                                                    // not working??
                                                     searchTiles.add(searchtile);
+                                                    searchtile.setID(tag_id);
                                                 }
                                                 break;
                                             case XmlPullParser.TEXT:

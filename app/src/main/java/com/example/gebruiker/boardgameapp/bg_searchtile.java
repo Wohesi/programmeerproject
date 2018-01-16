@@ -6,8 +6,8 @@ package com.example.gebruiker.boardgameapp;
 
 public class bg_searchtile {
 
-    public String name;
-    public int yearpublished, id;
+    public String name, id ;
+    public int yearpublished;
 
     public bg_searchtile() {
     }
@@ -32,11 +32,11 @@ public class bg_searchtile {
         this.yearpublished = yearpublished;
     }
 
-    public int getID(Integer value) {
+    public String getID(String value) {
         return id;
     }
 
-    public void setID(int id) {
+    public void setID(String id) {
         this.id = id;
     }
 
