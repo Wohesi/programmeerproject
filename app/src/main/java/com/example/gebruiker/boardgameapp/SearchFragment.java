@@ -106,22 +106,25 @@ public class SearchFragment extends Fragment {
                     int event = xpp.getEventType();
 
                     String tag = "", value = "";
-                    String tag_id = null;
+                    int tag_id = 0;
 
                     while(event != XmlPullParser.END_DOCUMENT) {
 
                         tag = xpp.getName();
 
 
+
                         switch(event) {
+
                             case XmlPullParser.START_TAG:
+
+                                value = xpp.getAttributeName(event);
+
+
                                 if(tag.equals("boardgame")) {
                                     tileBoardgame = new SearchTile_boardgame();
                                     searchTiles.add(tileBoardgame);
-
-                                    tag_id = xpp.getAttributeValue(null, tag);
-
-                                    tileBoardgame.setID(tag_id);
+                                    tileBoardgame.setID(value);
                                 }
                                 break;
                             case XmlPullParser.TEXT:
@@ -140,6 +143,7 @@ public class SearchFragment extends Fragment {
                         }
                         event = xpp.next();
 
+                        // add searched items to the adapter
                         adapter = new MyAdapter(searchTiles, getContext());
                         recyclerView.setAdapter(adapter);
                     }
@@ -153,9 +157,6 @@ public class SearchFragment extends Fragment {
                 for(int i = 0; i < searchTiles.size(); i++ ) {
                     // print info to console
                     searchTiles.get(i).print_info();
-                    // add searched items to the adapter
-                    adapter = new MyAdapter(searchTiles, getContext());
-                    recyclerView.setAdapter(adapter);
                 }
             }
 
