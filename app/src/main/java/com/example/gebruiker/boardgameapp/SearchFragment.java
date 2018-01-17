@@ -90,66 +90,7 @@ public class SearchFragment extends Fragment {
                         url = "https://www.boardgamegeek.com/xmlapi/search?search="+s+"&exact=1";
                         System.out.println(url);
 
-                        final StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String response) {
-
-                                try {
-                                    xpp.setInput(new StringReader(response));
-                                    int event = xpp.getEventType();
-
-                                    String tag = "", value = "", tag_id = "";
-
-                                    while(event != XmlPullParser.END_DOCUMENT) {
-                                        tag = xpp.getName();
-                                        tag_id = xpp.getNamespace();
-                                        switch(event) {
-                                            case XmlPullParser.START_TAG:
-                                                if(tag.equals("boardgame")) {
-                                                    searchtile = new bg_searchtile();
-                                                    searchTiles.add(searchtile);
-                                                    searchtile.setID(tag_id);
-                                                }
-                                                break;
-                                            case XmlPullParser.TEXT:
-                                                value = xpp.getText();
-                                                break;
-                                            case XmlPullParser.END_TAG:
-
-                                                switch (tag) {
-                                                    case "name":
-                                                        searchtile.setName(value);
-                                                        break;
-                                                    case "yearpublished":
-                                                        searchtile.setYearpublished(Integer.parseInt(value));
-                                                }
-                                                break;
-                                        }
-                                        event = xpp.next();
-
-                                        adapter = new MyAdapter(searchTiles, getContext());
-                                        recyclerView.setAdapter(adapter);
-                                    }
-
-
-                                } catch (XmlPullParserException e) {
-                                    e.printStackTrace();
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
-                                for(int i = 0; i < searchTiles.size(); i++ ) {
-                                    searchTiles.get(i).print_info();
-                                }
-
-                            }
-                        }, new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                System.out.println(error);
-                            }
-                        });
-
-                        requestQueue.add(stringRequest);
+                        LoadData(url);
 
                         return false;
                     }
@@ -164,11 +105,75 @@ public class SearchFragment extends Fragment {
         );
 
 
-
-
-
         // Inflate the layout for this fragment
         return searchFragment;
+    }
+
+    public void LoadData(String url) {
+        final StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                try {
+                    xpp.setInput(new StringReader(response));
+                    int event = xpp.getEventType();
+
+                    String tag = "", value = "", tag_id = "";
+
+                    while(event != XmlPullParser.END_DOCUMENT) {
+                        tag = xpp.getName();
+                        tag_id = xpp.getNamespace();
+                        switch(event) {
+                            case XmlPullParser.START_TAG:
+                                if(tag.equals("boardgame")) {
+                                    searchtile = new bg_searchtile();
+                                    searchTiles.add(searchtile);
+                                    searchtile.setID(tag_id);
+                                }
+                                break;
+                            case XmlPullParser.TEXT:
+                                value = xpp.getText();
+                                break;
+                            case XmlPullParser.END_TAG:
+
+                                switch (tag) {
+                                    case "name":
+                                        searchtile.setName(value);
+                                        break;
+                                    case "yearpublished":
+                                        searchtile.setYearpublished(Integer.parseInt(value));
+                                }
+                                break;
+                        }
+                        event = xpp.next();
+
+                        //adapter = new MyAdapter(searchTiles, getContext());
+                        //recyclerView.setAdapter(adapter);
+                    }
+
+                // error catches
+                } catch (XmlPullParserException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                for(int i = 0; i < searchTiles.size(); i++ ) {
+                    // print info to console
+                    searchTiles.get(i).print_info();
+                    // add searched items to the adapter
+                    adapter = new MyAdapter(searchTiles, getContext());
+                    recyclerView.setAdapter(adapter);
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println(error);
+            }
+        });
+
+        requestQueue.add(stringRequest);
     }
 
 }
