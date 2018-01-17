@@ -1,4 +1,4 @@
-# programmerproject
+# programmerproject [![BCH compliance](https://bettercodehub.com/edge/badge/Wohesi/programmeerproject?branch=master)](https://bettercodehub.com/)
 
 ## Probleem
 Bordspellen zijn tegenwoordig razend populair. Veel mensen kiezen ervoor om samen te komen om bordspellen zeer complexe, or snelle bordspellen te spelen. Echter, met deze steeds populairder wordende hobby komen ook bordspellen kijken die soms veel tijd in beslag nemen. Dit kan soms moeilijk in te schatten en te plannen zijn. 
