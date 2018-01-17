@@ -6,7 +6,7 @@ package com.example.gebruiker.boardgameapp;
 
 public class SearchTile_boardgame {
 
-    public String name, id ;
+    public String name, id, year ;
     public int yearpublished;
 
     public SearchTile_boardgame() {
@@ -16,19 +16,27 @@ public class SearchTile_boardgame {
         System.out.println(id + " " + name + " " + yearpublished);
     }
 
+
+    // setter & getter of name
+    public String getName() {
+        return name;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
 
-    public int getYearpublished(Integer value) {
-        return yearpublished;
+    // setter & getter of year
+    public String getYear() {
+        return year;
     }
 
-    public void setYearpublished(int yearpublished) {
-        this.yearpublished = yearpublished;
+    public void setYear(String year) {
+        this.year = year;
     }
 
-    public String getID(String value) {
+    // setter & getter of id
+    public String getID() {
         return id;
     }
 
@@ -36,11 +44,5 @@ public class SearchTile_boardgame {
         this.id = id;
     }
 
-    public String getName() {
-        return String.valueOf(Integer.parseInt(name));
-    }
 
-    public int getYearpublished() {
-        return yearpublished;
-    }
 }

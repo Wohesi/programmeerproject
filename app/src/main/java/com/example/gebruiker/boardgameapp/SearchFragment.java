@@ -83,6 +83,8 @@ public class SearchFragment extends Fragment {
                     public boolean onQueryTextChange(String s) {
                         // perform the search query
                         System.out.println("this has been changed:  "+ s);
+
+                        //MyAdapter.getFilter().filter(s);
                         return false;
                     }
                 }
@@ -115,7 +117,7 @@ public class SearchFragment extends Fragment {
                                 if(tag.equals("boardgame")) {
                                     tileBoardgame = new SearchTile_boardgame();
                                     searchTiles.add(tileBoardgame);
-                                    tileBoardgame.setID(tag_id);
+                                    //tileBoardgame.setID(tag_id);
                                 }
                                 break;
                             case XmlPullParser.TEXT:
@@ -128,7 +130,7 @@ public class SearchFragment extends Fragment {
                                         tileBoardgame.setName(value);
                                         break;
                                     case "yearpublished":
-                                        tileBoardgame.setYearpublished(Integer.parseInt(value));
+                                        tileBoardgame.setYear(value);
                                 }
                                 break;
                         }
