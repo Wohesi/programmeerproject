@@ -25,4 +25,5 @@ De adapter en bijbehorende classe gemaakt om ervoor te zorgen dat de searchview 
 Aan de hand van de volgende tutorial is het filteren van de zoekfunctie werkend: 
 https://www.learn2crack.com/2017/03/searchview-with-recyclerview.html
 
-De adapter plaatst nu alleen de verkeerde elementen op de verkeerde positie.
+~~De adapter plaatst nu alleen de verkeerde elementen op de verkeerde positie.~~
+Positie can de textview is is nu correct. Momenteel is de truc om de juiste ID binnen een XML tag te verkrijgen van de XML pullparser
