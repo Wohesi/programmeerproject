@@ -17,3 +17,8 @@ Gewerkt aan de searchview functionaliteit / XML parser om de jusite data te krij
 # day 6 - 15-1-2018
 De volleyrequest werkt nog niet naar behoren. Nogsteeds een timeouterror. Ook de corresponderende id uit de xml tag moet nog eruit gehaald worden.
 Een begin gemaakt aan de adaptor voor de recycler view voor de searchfragment. Echter, dankzij de TimeOutError is dit moeilijk te testen.
+
+# day 7 - 16-1-2018
+De adapter en bijbehorende classe gemaakt om ervoor te zorgen dat de searchview een goede lijst van items laat zien. De TimeoutErrors van de vorige dagen kwamen door mankementen bij de server van de API, waar ik geen invloed op had. 
+
+# day 8 - 17-1-2017
