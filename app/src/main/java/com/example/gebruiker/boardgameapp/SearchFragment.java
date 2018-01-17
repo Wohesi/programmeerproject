@@ -96,7 +96,7 @@ public class SearchFragment extends Fragment {
     }
 
     // load the data with the url constructed by the searchview.
-    public void loadData(String url) {
+    public void loadData(final String url) {
         final StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -105,19 +105,23 @@ public class SearchFragment extends Fragment {
                     xpp.setInput(new StringReader(response));
                     int event = xpp.getEventType();
 
-                    String tag = "", value = "", tag_id = "";
+                    String tag = "", value = "";
+                    String tag_id = null;
 
                     while(event != XmlPullParser.END_DOCUMENT) {
 
                         tag = xpp.getName();
-                        tag_id = xpp.getNamespace();
+
 
                         switch(event) {
                             case XmlPullParser.START_TAG:
                                 if(tag.equals("boardgame")) {
                                     tileBoardgame = new SearchTile_boardgame();
                                     searchTiles.add(tileBoardgame);
-                                    //tileBoardgame.setID(tag_id);
+
+                                    tag_id = xpp.getAttributeValue(null, tag);
+
+                                    tileBoardgame.setID(tag_id);
                                 }
                                 break;
                             case XmlPullParser.TEXT:

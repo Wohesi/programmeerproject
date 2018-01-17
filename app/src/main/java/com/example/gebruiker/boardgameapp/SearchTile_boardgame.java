@@ -7,13 +7,13 @@ package com.example.gebruiker.boardgameapp;
 public class SearchTile_boardgame {
 
     public String name, id, year ;
-    public int yearpublished;
+    public int iD;
 
     public SearchTile_boardgame() {
     }
 
     public void print_info() {
-        System.out.println(id + " " + name + " " + yearpublished);
+        System.out.println(id + " " + name + " " + year);
     }
 
 
@@ -42,6 +42,15 @@ public class SearchTile_boardgame {
 
     public void setID(String id) {
         this.id = id;
+    }
+
+    // test ID
+    public int getiD() {
+        return iD;
+    }
+
+    public void setiD(int iD) {
+        this.iD = iD;
     }
 
 

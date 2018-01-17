@@ -30,7 +30,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implem
 
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v  = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.bg_listcard, parent, false);
         return new ViewHolder(v);
@@ -39,13 +39,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implem
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
-        //final SearchTile_boardgame SearchTile_boardgame = SearchTile_boardgames.get(position);
-
-        //holder.title.setText(SearchTile_boardgame.getName());
-        //holder.year.setText(SearchTile_boardgame.getYear());
-
         holder.title.setText(mFilteredList.get(position).getName());
-        holder.title.setText(mFilteredList.get(position).getYear());
+        holder.year.setText(mFilteredList.get(position).getYear());
 
     }
 
@@ -91,20 +86,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implem
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         public TextView title;
-        //Typeface benton_bold = Typeface.createFromAsset(itemView.getContext().getAssets(), "res/font/bentonsans_bold.otf");
-
-
         public TextView year;
-        //Typeface benton_reg = Typeface.createFromAsset(itemView.getContext().getAssets(), "res/font/bentonsans_reg.otf");
 
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
 
-            title = (TextView) itemView.findViewById(R.id.title);
-            //title.setTypeface(benton_bold);
-
-            year = (TextView) itemView.findViewById(R.id.year);
-            //year.setTypeface(benton_reg);
+            title =  itemView.findViewById(R.id.title);
+            year =  itemView.findViewById(R.id.year);
         }
     }
 }
