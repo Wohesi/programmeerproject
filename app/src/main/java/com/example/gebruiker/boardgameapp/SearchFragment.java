@@ -1,26 +1,17 @@
 package com.example.gebruiker.boardgameapp;
 
 
-import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Xml;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.SearchView;
-import android.widget.TextView;
 
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -30,16 +21,9 @@ import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.StringReader;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
 
 
 public class SearchFragment extends Fragment {
@@ -48,11 +32,10 @@ public class SearchFragment extends Fragment {
     private RecyclerView.Adapter adapter;
 
     private RequestQueue requestQueue;
-    private bg_searchtile searchtile;
-    private ArrayList<bg_searchtile> searchTiles = new ArrayList<>();
+    private SearchTile_boardgame tileBoardgame;
+    private ArrayList<SearchTile_boardgame> searchTiles = new ArrayList<>();
     private XmlPullParser xpp;
     private String url;
-    private static final String ns = null;
 
 
     @Override
@@ -69,6 +52,7 @@ public class SearchFragment extends Fragment {
         // getting XML data from the API
         requestQueue = Volley.newRequestQueue(getContext());
 
+        // initializing the pullparser for XMLparser
         try {
             XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
             xpp = factory.newPullParser();
@@ -76,7 +60,7 @@ public class SearchFragment extends Fragment {
             e.printStackTrace();
         }
 
-        // Searching
+        // searchview initializing
         SearchView searchView = (SearchView) searchFragment.findViewById(R.id.search_bar);
         searchView.setOnQueryTextListener(
                 new SearchView.OnQueryTextListener() {
@@ -90,7 +74,7 @@ public class SearchFragment extends Fragment {
                         url = "https://www.boardgamegeek.com/xmlapi/search?search="+s+"&exact=1";
                         System.out.println(url);
 
-                        LoadData(url);
+                        loadData(url);
 
                         return false;
                     }
@@ -109,7 +93,8 @@ public class SearchFragment extends Fragment {
         return searchFragment;
     }
 
-    public void LoadData(String url) {
+    // load the data with the url constructed by the searchview.
+    public void loadData(String url) {
         final StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -121,14 +106,16 @@ public class SearchFragment extends Fragment {
                     String tag = "", value = "", tag_id = "";
 
                     while(event != XmlPullParser.END_DOCUMENT) {
+
                         tag = xpp.getName();
                         tag_id = xpp.getNamespace();
+
                         switch(event) {
                             case XmlPullParser.START_TAG:
                                 if(tag.equals("boardgame")) {
-                                    searchtile = new bg_searchtile();
-                                    searchTiles.add(searchtile);
-                                    searchtile.setID(tag_id);
+                                    tileBoardgame = new SearchTile_boardgame();
+                                    searchTiles.add(tileBoardgame);
+                                    tileBoardgame.setID(tag_id);
                                 }
                                 break;
                             case XmlPullParser.TEXT:
@@ -138,17 +125,17 @@ public class SearchFragment extends Fragment {
 
                                 switch (tag) {
                                     case "name":
-                                        searchtile.setName(value);
+                                        tileBoardgame.setName(value);
                                         break;
                                     case "yearpublished":
-                                        searchtile.setYearpublished(Integer.parseInt(value));
+                                        tileBoardgame.setYearpublished(Integer.parseInt(value));
                                 }
                                 break;
                         }
                         event = xpp.next();
 
-                        //adapter = new MyAdapter(searchTiles, getContext());
-                        //recyclerView.setAdapter(adapter);
+                        adapter = new MyAdapter(searchTiles, getContext());
+                        recyclerView.setAdapter(adapter);
                     }
 
                 // error catches
@@ -164,8 +151,8 @@ public class SearchFragment extends Fragment {
                     adapter = new MyAdapter(searchTiles, getContext());
                     recyclerView.setAdapter(adapter);
                 }
-
             }
+
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {

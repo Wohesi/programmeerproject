@@ -1,35 +1,27 @@
 package com.example.gebruiker.boardgameapp;
 
-import android.app.LauncherActivity;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Wout on 16-1-2018.
- */
+
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
-    private List<bg_searchtile> bgSearcTile;
+    private List<SearchTile_boardgame> SearchTile_boardgames;
     private Context context;
 
-    public MyAdapter(ArrayList<bg_searchtile> searchTiles, Context context) {
-        bgSearcTile = searchTiles;
+    public MyAdapter(ArrayList<SearchTile_boardgame> searchTiles, Context context) {
+        SearchTile_boardgames = searchTiles;
         this.context = context;
     }
-
 
 
     @Override
@@ -42,10 +34,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
-        final bg_searchtile bg_searchtile = bgSearcTile.get(position);
+        final SearchTile_boardgame SearchTile_boardgame = SearchTile_boardgames.get(position);
 
-        holder.title.setText(bg_searchtile.getName());
-        holder.year.setText(bg_searchtile.getYearpublished());
+        holder.title.setText(SearchTile_boardgame.getName());
+        holder.year.setText(SearchTile_boardgame.getYearpublished());
 
     }
 

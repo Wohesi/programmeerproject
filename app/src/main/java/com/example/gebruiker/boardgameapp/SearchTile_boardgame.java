@@ -4,12 +4,12 @@ package com.example.gebruiker.boardgameapp;
  * Created by Wout on 15-1-2018.
  */
 
-public class bg_searchtile {
+public class SearchTile_boardgame {
 
     public String name, id ;
     public int yearpublished;
 
-    public bg_searchtile() {
+    public SearchTile_boardgame() {
     }
 
     public void print_info() {
