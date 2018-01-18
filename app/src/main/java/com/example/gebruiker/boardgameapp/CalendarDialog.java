@@ -1,6 +1,8 @@
 package com.example.gebruiker.boardgameapp;
 
 import android.app.DialogFragment;
+import android.icu.util.Calendar;
+import android.icu.util.GregorianCalendar;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -31,6 +33,9 @@ public class CalendarDialog extends DialogFragment {
         cancelButton = view.findViewById(R.id.cancelButton);
         datePicker = view.findViewById(R.id.datePicker);
 
+        Calendar calendar = new GregorianCalendar(datePicker.getYear(),
+                            datePicker.getMonth(),
+                            datePicker.getDayOfMonth());
 
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override

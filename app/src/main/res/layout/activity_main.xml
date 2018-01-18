@@ -8,6 +8,14 @@
     android:id="@+id/background"
     tools:context="com.example.gebruiker.boardgameapp.MainActivity">
 
+    <RelativeLayout
+        android:id="@+id/background_diagonal"
+        android:background="@drawable/background_diagonal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </RelativeLayout>
+
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
