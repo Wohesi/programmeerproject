@@ -27,3 +27,8 @@ https://www.learn2crack.com/2017/03/searchview-with-recyclerview.html
 
 ~~De adapter plaatst nu alleen de verkeerde elementen op de verkeerde positie.~~
 Positie can de textview is is nu correct. Momenteel is de truc om de juiste ID binnen een XML tag te verkrijgen van de XML pullparser
+
+# day 9 - 18-1-2017
+De API van boardgamegeek heeft onderhoud, vandaar dat ik niet kan werken aan de boardgame tabs, of testen hoe de juiste XML tag te verkrijgen. 
+zie: https://boardgamegeek.com/thread/1921913/xmlapi-outages-planned
+In plaats hiervan ben ik begonnen aan de fragments voor de calender pagina. 
