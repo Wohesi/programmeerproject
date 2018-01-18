@@ -90,7 +90,6 @@ public class SearchFragment extends Fragment {
                 }
         );
 
-
         // Inflate the layout for this fragment
         return searchFragment;
     }
@@ -112,15 +111,9 @@ public class SearchFragment extends Fragment {
 
                         tag = xpp.getName();
 
-
-
                         switch(event) {
-
                             case XmlPullParser.START_TAG:
-
                                 value = xpp.getAttributeName(event);
-
-
                                 if(tag.equals("boardgame")) {
                                     tileBoardgame = new SearchTile_boardgame();
                                     searchTiles.add(tileBoardgame);
