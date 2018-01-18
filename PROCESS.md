@@ -32,4 +32,6 @@ Positie can de textview is is nu correct. Momenteel is de truc om de juiste ID b
 De API van boardgamegeek heeft onderhoud, vandaar dat ik niet kan werken aan de boardgame tabs, of testen hoe de juiste XML tag te verkrijgen. 
 zie: https://boardgamegeek.com/thread/1921913/xmlapi-outages-planned
 In plaats hiervan ben ik begonnen aan de fragments voor de calender pagina. 
-Voor de largeboardgamefragment heb ik de fundatie gelegd. De loadData() functie, zoals deze ook in de searchfragment is geimplementeerd. 
+Voor de largeboardgamefragment heb ik de fundatie gelegd. De loadData() functie, zoals deze ook in de searchfragment is geimplementeerd.
+Een diagonale achtergrond toegevoegd aan de hand van de volgende tutorial: 
+https://medium.com/@adinugroho/create-diagonal-cut-view-in-android-5a376eca6a1c
