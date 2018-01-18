@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.DatePicker;
 import android.widget.TextView;
 
 /**
@@ -17,7 +18,7 @@ import android.widget.TextView;
 public class CalendarDialog extends DialogFragment {
 
     private Button confirmButton, cancelButton;
-    private CalendarView calendarView;
+    private DatePicker datePicker;
     private TextView dateSelected;
 
     @Nullable
@@ -28,8 +29,7 @@ public class CalendarDialog extends DialogFragment {
         // finding the views
         confirmButton = view.findViewById(R.id.confirmButton);
         cancelButton = view.findViewById(R.id.cancelButton);
-        dateSelected = view.findViewById(R.id.dateSelected);
-        calendarView = view.findViewById(R.id.calendarView);
+        datePicker = view.findViewById(R.id.datePicker);
 
 
         cancelButton.setOnClickListener(new View.OnClickListener() {

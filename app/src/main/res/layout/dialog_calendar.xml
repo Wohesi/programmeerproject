@@ -6,37 +6,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:id="@+id/header"
-        android:layout_width="match_parent"
-        android:layout_height="75dp"
-        tools:layout_editor_absoluteX="52dp"
-        android:background="@color/colorPrimary">
-
-        <TextView
-            android:id="@+id/dateSelected"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Date"
-            android:textSize="34dp"
-            android:textColor="@color/colorBackground"
-            android:padding="10dp"/>
-    </RelativeLayout>
-
-    <CalendarView
-        android:id="@+id/calendarView"
-        android:layout_width="387dp"
-        android:layout_height="372dp"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/header"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="79dp" />
+    <DatePicker
+        android:id="@+id/datePicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:id="@+id/confirmButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/calendarView"
+        android:layout_below="@+id/datePicker"
         android:layout_marginStart="24dp"
         android:layout_toEndOf="@+id/cancelButton"
         android:text="OK"
@@ -49,7 +30,7 @@
         android:id="@+id/cancelButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/calendarView"
+        android:layout_below="@+id/datePicker"
         android:layout_centerHorizontal="true"
         android:text="CANCEL"
         tools:layout_editor_absoluteX="211dp"
