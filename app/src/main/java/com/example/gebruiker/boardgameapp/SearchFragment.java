@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Xml;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,7 +72,7 @@ public class SearchFragment extends Fragment {
                         s  = s.replace(" ", "%20");
 
                         // getting the correct url of searched game.
-                        url = "https://www.boardgamegeek.com/xmlapi/search?search="+s;
+                        url = "https://www.boardgamegeek.com/xmlapi/search?search="+s+"&exact=1";
                         //+"&exact=1"
                         System.out.println(url);
 
@@ -108,19 +109,23 @@ public class SearchFragment extends Fragment {
                     int event = xpp.getEventType();
 
                     String tag = "", value = "";
-                    int tag_id = 0;
+                    String tag_id = null;
 
                     while(event != XmlPullParser.END_DOCUMENT) {
 
                         tag = xpp.getName();
 
                         switch(event) {
+
                             case XmlPullParser.START_TAG:
                                 //value = xpp.getAttributeName(event);
                                 if(tag.equals("boardgame")) {
+
+                                    tag_id = xpp.getAttributeValue(null, "objectid");
+
                                     tileBoardgame = new SearchTile_boardgame();
                                     searchTiles.add(tileBoardgame);
-                                    tileBoardgame.setID(value);
+                                    tileBoardgame.setID(tag_id);
                                 }
                                 break;
                             case XmlPullParser.TEXT:
