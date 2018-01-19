@@ -1,6 +1,12 @@
 package com.example.gebruiker.boardgameapp;
 
+import android.app.Activity;
+import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.Intent;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +23,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implem
     private ArrayList<SearchTile_boardgame> SearchTile_boardgames;
     private ArrayList<SearchTile_boardgame> mFilteredList;
     private Context context;
+    private String id;
 
     public MyAdapter(ArrayList<SearchTile_boardgame> searchTiles, Context context) {
 
@@ -34,11 +41,24 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implem
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
 
         holder.title.setText(mFilteredList.get(position).getName());
         holder.year.setText(mFilteredList.get(position).getYear());
+        holder.card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+
+                //FragmentManager fm;
+                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                LargeBgFragment largeBgFragment = new LargeBgFragment();
+                activity.getFragmentManager().beginTransaction()
+                        .replace(R.id.intent_activity, largeBgFragment )
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
     }
 
     @Override
@@ -84,10 +104,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implem
 
         public TextView title;
         public TextView year;
+        public CardView card;
 
         ViewHolder(View itemView) {
             super(itemView);
 
+            card = itemView.findViewById(R.id.card);
             title =  itemView.findViewById(R.id.title);
             year =  itemView.findViewById(R.id.year);
         }

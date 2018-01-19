@@ -76,7 +76,7 @@ public class LargeBgFragment extends Fragment {
         //loadData();
         return LargeBgFragment;
     }
-    /*
+
     public void loadData() {
         final StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
             @Override
@@ -120,7 +120,7 @@ public class LargeBgFragment extends Fragment {
         requestQueue.add(stringRequest);
     }
 
-    */
+
 
     public void makeEvent() {
         openCalendar.setOnClickListener(new View.OnClickListener() {

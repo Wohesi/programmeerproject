@@ -37,6 +37,7 @@ public class SearchFragment extends Fragment {
     private ArrayList<SearchTile_boardgame> searchTiles = new ArrayList<>();
     private XmlPullParser xpp;
     private String url;
+    public String tag_id = null;
 
 
     @Override
@@ -109,7 +110,7 @@ public class SearchFragment extends Fragment {
                     int event = xpp.getEventType();
 
                     String tag = "", value = "";
-                    String tag_id = null;
+
 
                     while(event != XmlPullParser.END_DOCUMENT) {
 
