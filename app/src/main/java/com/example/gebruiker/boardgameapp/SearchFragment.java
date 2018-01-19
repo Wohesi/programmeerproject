@@ -71,8 +71,11 @@ public class SearchFragment extends Fragment {
                         s  = s.replace(" ", "%20");
 
                         // getting the correct url of searched game.
-                        url = "https://www.boardgamegeek.com/xmlapi/search?search="+s+"&exact=1";
+                        url = "https://www.boardgamegeek.com/xmlapi/search?search="+s;
+                        //+"&exact=1"
                         System.out.println(url);
+
+                        searchTiles.clear();
 
                         loadData(url);
 
@@ -113,7 +116,7 @@ public class SearchFragment extends Fragment {
 
                         switch(event) {
                             case XmlPullParser.START_TAG:
-                                value = xpp.getAttributeName(event);
+                                //value = xpp.getAttributeName(event);
                                 if(tag.equals("boardgame")) {
                                     tileBoardgame = new SearchTile_boardgame();
                                     searchTiles.add(tileBoardgame);
@@ -137,8 +140,12 @@ public class SearchFragment extends Fragment {
                         event = xpp.next();
 
                         // add searched items to the adapter
+
                         adapter = new MyAdapter(searchTiles, getContext());
+                        adapter.notifyDataSetChanged();
                         recyclerView.setAdapter(adapter);
+
+
                     }
 
                 // error catches
@@ -147,6 +154,8 @@ public class SearchFragment extends Fragment {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+
+
                 for(int i = 0; i < searchTiles.size(); i++ ) {
                     // print info to console
                     searchTiles.get(i).print_info();

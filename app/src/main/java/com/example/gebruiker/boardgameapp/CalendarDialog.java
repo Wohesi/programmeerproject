@@ -21,7 +21,6 @@ public class CalendarDialog extends DialogFragment {
 
     private Button confirmButton, cancelButton;
     private DatePicker datePicker;
-    private TextView dateSelected;
 
     @Nullable
     @Override
