@@ -1,11 +1,12 @@
 package com.example.gebruiker.boardgameapp;
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -45,18 +46,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implem
 
         holder.title.setText(mFilteredList.get(position).getName());
         holder.year.setText(mFilteredList.get(position).getYear());
+        id = mFilteredList.get(position).getID();
         holder.card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
-                //FragmentManager fm;
-                AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                LargeBgFragment largeBgFragment = new LargeBgFragment();
-                activity.getFragmentManager().beginTransaction()
-                        .replace(R.id.intent_activity, largeBgFragment )
-                        .addToBackStack(null)
-                        .commit();
+                newFramgent();
             }
         });
     }
@@ -98,6 +92,25 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implem
 
            }
        };
+    }
+
+    public void newFramgent() {
+
+        // making new fragment
+        LargeBgFragment largeBgFragment = new LargeBgFragment();
+
+        // setting bundle to add items
+        Bundle arguments = new Bundle();
+        arguments.putString("id", id);
+        largeBgFragment.setArguments(arguments);
+
+        // commiting fragment
+        final FragmentTransaction transaction = ((Activity) context).getFragmentManager().beginTransaction();
+        transaction.replace(R.id.viewpager, largeBgFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+
+
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

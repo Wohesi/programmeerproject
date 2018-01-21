@@ -11,17 +11,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.w3c.dom.Text;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
-
-import java.io.IOException;
-import java.io.StringReader;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -49,7 +43,7 @@ public class LargeBgFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View LargeBgFragment = inflater.inflate(R.layout.bg_large, container, false);
+        View LargeBgFragment = inflater.inflate(R.layout.activity_large_game, container, false);
 
         title = LargeBgFragment.findViewById(R.id.title);
         year = LargeBgFragment.findViewById(R.id.year);
@@ -77,6 +71,7 @@ public class LargeBgFragment extends Fragment {
         return LargeBgFragment;
     }
 
+    /*
     public void loadData() {
         final StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
             @Override
@@ -99,6 +94,8 @@ public class LargeBgFragment extends Fragment {
 
                             case XmlPullParser.END_TAG:
 
+
+
                                 switch (tag) {
                                     case "":
                                         break;
@@ -119,6 +116,8 @@ public class LargeBgFragment extends Fragment {
 
         requestQueue.add(stringRequest);
     }
+
+    */
 
 
 

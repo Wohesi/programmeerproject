@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -28,9 +28,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:fontFamily="serif-monospace"
+                android:fontFamily="@font/bentonsans_bold"
                 android:text="Title"
-                android:textSize="25dp" />
+                android:textSize="30dp" />
 
             <TextView
                 android:id="@+id/year"
@@ -39,19 +39,20 @@
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/title"
                 android:layout_margin="10dp"
+                android:fontFamily="@font/bentonsans_reg"
                 android:text="year" />
 
             <RelativeLayout
                 android:id="@+id/gameinfo"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="180dp"
                 android:layout_below="@+id/year"
                 android:background="@drawable/bg_large_gradient">
 
                 <LinearLayout
                     android:id="@+id/text_static"
                     android:layout_width="wrap_content"
-                    android:layout_height="150dp"
+                    android:layout_height="180dp"
                     android:layout_marginStart="36dp"
                     android:orientation="vertical">
 
@@ -98,10 +99,9 @@
                 <LinearLayout
                     android:id="@+id/text_setter"
                     android:layout_width="wrap_content"
-                    android:layout_height="150dp"
-                    android:layout_alignParentEnd="true"
+                    android:layout_height="180dp"
                     android:layout_alignParentTop="true"
-                    android:layout_marginEnd="81dp"
+                    android:layout_toEndOf="@+id/text_static"
                     android:orientation="vertical">
 
                     <TextView
@@ -156,9 +156,11 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/gameinfo"
-                android:padding="10dp"
                 android:layout_marginStart="11dp"
-                android:text="Description" />
+                android:fontFamily="@font/bentonsans_bold"
+                android:padding="10dp"
+                android:text="Description"
+                android:textSize="18dp" />
 
             <TextView
                 android:id="@+id/description_setter"
