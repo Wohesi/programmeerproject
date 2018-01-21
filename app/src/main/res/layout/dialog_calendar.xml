@@ -19,7 +19,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/datePicker"
         android:layout_marginStart="24dp"
-        android:layout_toEndOf="@+id/cancelButton"
         android:text="OK"
         tools:layout_editor_absoluteX="299dp"
         tools:layout_editor_absoluteY="451dp"

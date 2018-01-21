@@ -106,7 +106,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implem
 
         // commiting fragment
         final FragmentTransaction transaction = ((Activity) context).getFragmentManager().beginTransaction();
-        transaction.replace(R.id.viewpager, largeBgFragment);
+        transaction.replace(R.id.root_frame, largeBgFragment);
+        transaction.setTransition(transaction.TRANSIT_FRAGMENT_OPEN);
         transaction.addToBackStack(null);
         transaction.commit();
 

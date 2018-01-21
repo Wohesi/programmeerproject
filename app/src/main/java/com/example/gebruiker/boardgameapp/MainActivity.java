@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         setupTabIcons();
     }
 
+
     // Setting icons to the tabs
     private void setupTabIcons() {
         tabLayout.getTabAt(0).setIcon(tabIcons[0]);
@@ -68,9 +69,15 @@ public class MainActivity extends AppCompatActivity {
             super(manager);
         }
 
+
         @Override
         public Fragment getItem(int position) {
-            return mFragmentList.get(position);
+            if (position == 0 ) {
+                return new BlankFragment();
+            }
+
+                return mFragmentList.get(position);
+
         }
 
         @Override
