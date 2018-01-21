@@ -39,3 +39,8 @@ https://medium.com/@adinugroho/create-diagonal-cut-view-in-android-5a376eca6a1c
 # day 10 - 19-1-2018
 De loadData functie haalt nu ook de juiste ID op van een bordspel, nu kan ik met dit ID de volgende query uitvoeren om meer data te krijgen over een specifiek bordspel. 
 
+# day 11 - 20-1-2018
+WEEKEND
+
+# day 12 - 21-1-2018
+WEEKEND - Ondanks het weekend, heb ik alsnog de XML voor een specifiek boardgame fragment werkend gekregen. 
