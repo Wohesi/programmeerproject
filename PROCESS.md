@@ -47,3 +47,5 @@ WEEKEND - Ondanks het weekend, heb ik alsnog de XML voor een specifiek boardgame
 
 # day 13 - 22-2-2018
 Google calendar API zorgt voor veel problemen met authenticatie etc. Ik heb hierdoor gekozen om google calendar api te laten vervallen en gebruik te maken van firebase om zo gebruikers evenementen te maken.
+
+De registratie / login gemaakt. Ook zijn de dialogfragments om een tijd, datum en titel te kiezen gemaakt. Deze zullen in een firebase database gestopt worden, en de user kan deze eruit halen op het events fragment.
