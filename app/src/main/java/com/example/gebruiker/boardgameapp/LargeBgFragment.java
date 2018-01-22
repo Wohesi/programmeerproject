@@ -133,8 +133,7 @@ public class LargeBgFragment extends Fragment {
 
                                     description.setText(value);
                                     String text = (String) description.getText();
-                                    text = text.replaceAll("<br/>", "\n");
-                                    text = text.replaceAll("&times;", " x ");
+                                    text = Html.fromHtml(text).toString();
                                     description.setText(text);
                                 }
 
