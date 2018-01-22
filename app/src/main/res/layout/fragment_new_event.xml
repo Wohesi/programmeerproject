@@ -1,0 +1,90 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.gebruiker.boardgameapp.NewEventFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:id="@+id/linearLayout">
+
+        <TextView
+            android:id="@+id/event_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/bentonsans_bold"
+            android:text="@string/set_a_title"
+            android:textSize="20sp"
+            android:paddingTop="60dp"/>
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:fontFamily="@font/bentonsans_reg"
+            android:inputType="textPersonName"
+            android:text="Name" />
+
+        <TextView
+            android:id="@+id/set_date_and_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/bentonsans_bold"
+            android:text="@string/set_date_and_time"
+            android:textSize="20sp"
+            android:paddingTop="60dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/setTime"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="10dp"
+                android:src="@android:drawable/ic_lock_idle_alarm"
+                android:background="#FFFFFFFF"/>
+
+            <ImageButton
+                android:id="@+id/setDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@android:drawable/ic_menu_today"
+                android:padding="10dp"
+                android:background="#FFFFFFFF"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/confirmEvent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/linearLayout"
+        android:layout_marginStart="20dp"
+        android:text="@string/ok"
+        android:background="#FFFFFFFF"
+        android:textColor="@color/colorPrimary"/>
+
+    <Button
+        android:id="@+id/cancelEvent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/linearLayout"
+        android:layout_marginEnd="20dp"
+        android:text="@string/cancel"
+        android:background="#FFFFFFFF"
+        android:textColor="@color/colorPrimary"/>
+</RelativeLayout>

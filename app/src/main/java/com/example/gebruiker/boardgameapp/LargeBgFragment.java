@@ -161,10 +161,8 @@ public class LargeBgFragment extends Fragment {
         openCalendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                CalendarDialog dialog = new CalendarDialog();
-                dialog.show(getFragmentManager(), "CalendarDialog");
-
+                NewEventFragment dialog = new NewEventFragment();
+                dialog.show(getFragmentManager(), "newEventDragment");
             }
 
         });

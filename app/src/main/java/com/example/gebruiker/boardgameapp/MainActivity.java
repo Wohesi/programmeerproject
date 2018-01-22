@@ -1,5 +1,8 @@
 package com.example.gebruiker.boardgameapp;
 
+import android.app.Activity;
+import android.app.FragmentTransaction;
+import android.net.Uri;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -20,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     // firebase instance
     private FirebaseAuth mAuth;
+    private FirebaseUser currentUser;
 
     // Setting variables for the toolbar
     private Toolbar toolbar;
@@ -65,9 +69,9 @@ public class MainActivity extends AppCompatActivity {
     // Setting the tabs into the tabbar
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new SearchFragment(), "");
-        adapter.addFragment(new EventsFragment(), "");
-        adapter.addFragment(new LoginFragment(), "");
+        adapter.addFragment(new SearchFragment(), "Search");
+        adapter.addFragment(new EventsFragment(), "Events");
+        adapter.addFragment(new LoginFragment(), "User");
         viewPager.setAdapter(adapter);
 
     }
@@ -113,8 +117,27 @@ public class MainActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+        currentUser = mAuth.getCurrentUser();
 
+    }
+
+
+    public void getCurrentUser() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            // Name, email address, and profile photo Url
+            String name = user.getDisplayName();
+            String email = user.getEmail();
+            Uri photoUrl = user.getPhotoUrl();
+
+            // Check if user's email is verified
+            boolean emailVerified = user.isEmailVerified();
+
+            // The user's ID, unique to the Firebase project. Do NOT use this value to
+            // authenticate with your backend server, if you have one. Use
+            // FirebaseUser.getToken() instead.
+            String uid = user.getUid();
+        }
     }
 
 

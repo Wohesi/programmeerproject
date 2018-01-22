@@ -1,38 +1,42 @@
 package com.example.gebruiker.boardgameapp;
 
+
+import android.app.Dialog;
 import android.app.DialogFragment;
-import android.icu.util.Calendar;
-import android.icu.util.GregorianCalendar;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.TimePicker;
+
 
 /**
- * Created by Wout on 18-1-2018.
+ * A simple {@link Fragment} subclass.
  */
-
-public class CalendarDialog extends DialogFragment {
+public class TimeDialog extends DialogFragment {
 
     private Button confirmButton, cancelButton;
-    private DatePicker datePicker;
+    private TimePicker timePicker;
 
-    @Nullable
+
+    public TimeDialog() {
+        // Required empty public constructor
+    }
+
+
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.dialog_calendar, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.dialog_time, container, false);
 
         // finding the views
         confirmButton = view.findViewById(R.id.confirmButton);
         cancelButton = view.findViewById(R.id.cancelButton);
-        datePicker = view.findViewById(R.id.datePicker);
-
-        Calendar calehoindar = new GregorianCalendar(datePicker.getYear(),
-                            datePicker.getMonth(),
-                            datePicker.getDayOfMonth());
+        timePicker = view.findViewById(R.id.timePicker);
 
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,4 +54,5 @@ public class CalendarDialog extends DialogFragment {
 
         return view;
     }
+
 }

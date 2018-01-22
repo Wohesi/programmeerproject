@@ -29,6 +29,7 @@ public class LoginFragment extends Fragment {
 
     private FirebaseAuth mAuth;
 
+
     private Button login, register;
     private EditText userEmail, userPassword;
 
@@ -96,12 +97,14 @@ public class LoginFragment extends Fragment {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("Signed in", "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+                            updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.d("Failed to sign in", "signInWithEmail:failure", task.getException());
                         }
                     }
                 });
+
     }
 
     public void newRegisterFragment() {
@@ -116,6 +119,20 @@ public class LoginFragment extends Fragment {
         transaction.addToBackStack(null);
         transaction.commit();
     }
+
+    private void updateUI(FirebaseUser currentUser) {
+
+        // making new fragment
+       UserFragment userFragment = new UserFragment();
+
+        // commiting fragment
+        final FragmentTransaction transaction = ((Activity) getContext()).getFragmentManager().beginTransaction();
+        transaction.replace(R.id.loginFragment, userFragment);
+        transaction.setTransition(transaction.TRANSIT_FRAGMENT_OPEN);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
 
 
 }
