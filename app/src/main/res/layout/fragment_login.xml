@@ -1,0 +1,85 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.gebruiker.boardgameapp.LoginFragment"
+    android:id="@+id/loginFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="50dp">
+
+        <TextView
+            android:id="@+id/loginText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/bentonsans_bold"
+            android:paddingBottom="20dp"
+            android:text="Login"
+            android:textAlignment="center"
+            android:textSize="30dp" />
+
+        <TextView
+            android:id="@+id/emailText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="email"
+            android:textSize="15dp"
+            android:textAlignment="center"/>
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            />
+
+        <TextView
+            android:id="@+id/passwordText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="password"
+            android:textSize="15dp"
+            android:textAlignment="center"
+            android:paddingTop="20dp"/>
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPassword"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/loginButton"
+                android:layout_width="match_parent"
+                android:padding="20dp"
+                android:layout_margin="30dp"
+                android:layout_height="5dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="login" />
+
+
+            <Button
+                android:id="@+id/registerButton"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:layout_weight="1"
+                android:layout_margin="30dp"
+                android:background="#00000000"
+                android:text="Register" />
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>

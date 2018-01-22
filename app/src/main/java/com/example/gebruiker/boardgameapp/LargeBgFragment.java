@@ -63,8 +63,6 @@ public class LargeBgFragment extends Fragment {
         }
 
         url = "https://www.boardgamegeek.com/xmlapi/boardgame/" + bg_id;
-        System.out.println(url);
-
 
         title = LargeBgFragment.findViewById(R.id.title);
         year = LargeBgFragment.findViewById(R.id.year);
@@ -75,8 +73,6 @@ public class LargeBgFragment extends Fragment {
         numPlayers_setter_min = LargeBgFragment.findViewById(R.id.num_players_setter_min);
         background_img = LargeBgFragment.findViewById(R.id.background_img);
         description = LargeBgFragment.findViewById(R.id.description_setter);
-
-
 
         // get the calendar dialog
         openCalendar = LargeBgFragment.findViewById(R.id.openCalendar);
@@ -120,52 +116,29 @@ public class LargeBgFragment extends Fragment {
 
                             case XmlPullParser.END_TAG:
 
-                                //System.out.println(tag);
-                                if (Objects.equals(tag, "yearpublished")) {
-                                    year.setText(value);
-                                    System.out.println(value + tag);
-                                }
+                                if (Objects.equals(tag, "yearpublished")) { year.setText(value);}
 
-                                if (Objects.equals(tag, "name")) {
-                                    title.setText(value);
-                                    System.out.println(value + tag);
-                                }
+                                if (Objects.equals(tag, "name")) {title.setText(value);}
 
-                                if (Objects.equals(tag, "playingtime")) {
-                                    length_setter.setText(value);
-                                    System.out.println(value + tag);
-                                }
+                                if (Objects.equals(tag, "playingtime")) {length_setter.setText(value);}
 
+                                if (Objects.equals(tag, "minplayers")) {numPlayers_setter_min.setText(value);}
 
-                                if (Objects.equals(tag, "minplayers")) {
-                                    numPlayers_setter_min.setText(value);
-                                    System.out.println(value + tag);
-                                }
+                                if (Objects.equals(tag, "maxplayers")) {numPlayers_setter_max.setText(value);}
 
-                                if (Objects.equals(tag, "maxplayers")) {
-                                    numPlayers_setter_max.setText(value);
-                                    System.out.println(value + tag);
-                                }
-
-
-                                if (Objects.equals(tag, "description")) {
-                                    description.setText(value);
-                                    System.out.println(value + tag);
-                                }
+                                if (Objects.equals(tag, "description")) {description.setText(value);}
 
                                 if (Objects.equals(tag, "image")) {
                                     if(tag == "") {
                                         background_img.setBackgroundColor(Color.TRANSPARENT);
                                     } else {
                                         Picasso.with(getContext()).load(value).fit().into(background_img);
-                                        System.out.println(value + tag);
                                     }
                                 }
 
                                 break;
                         }
                         event = xpp.next();
-
                     }
                 } catch (XmlPullParserException e) {
                     e.printStackTrace();
@@ -182,7 +155,6 @@ public class LargeBgFragment extends Fragment {
 
         requestQueue.add(stringRequest);
     }
-
 
 
     public void makeEvent() {
