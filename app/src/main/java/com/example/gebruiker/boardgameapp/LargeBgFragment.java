@@ -4,6 +4,7 @@ package com.example.gebruiker.boardgameapp;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,6 +45,8 @@ public class LargeBgFragment extends Fragment {
     private XmlPullParser xpp;
     private String id;
     private String bg_id;
+    private String tag = "";
+    private String value;
 
 
     public LargeBgFragment() {
@@ -102,7 +105,7 @@ public class LargeBgFragment extends Fragment {
                     xpp.setInput(new StringReader(response));
                     int event = xpp.getEventType();
 
-                    String tag = "", value = "";
+
 
                     while (event != XmlPullParser.END_DOCUMENT) {
                         tag = xpp.getName();
@@ -126,7 +129,14 @@ public class LargeBgFragment extends Fragment {
 
                                 if (Objects.equals(tag, "maxplayers")) {numPlayers_setter_max.setText(value);}
 
-                                if (Objects.equals(tag, "description")) {description.setText(value);}
+                                if (Objects.equals(tag, "description")) {
+
+                                    description.setText(value);
+                                    String text = (String) description.getText();
+                                    text = text.replaceAll("<br/>", "\n");
+                                    text = text.replaceAll("&times;", " x ");
+                                    description.setText(text);
+                                }
 
                                 if (Objects.equals(tag, "image")) {
                                     if(tag == "") {
