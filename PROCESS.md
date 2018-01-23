@@ -51,3 +51,9 @@ Google calendar API zorgt voor veel problemen met authenticatie etc. Ik heb hier
 De registratie / login gemaakt. Ook zijn de dialogfragments om een tijd, datum en titel te kiezen gemaakt. Deze zullen in een firebase database gestopt worden, en de user kan deze eruit halen op het events fragment.
 
 De html / xml markup is uit de beschrijving van de spellen gehaald. 
+
+# day 14 - 23-1-2018
+De dialog views geven nu de juiste data terug. Er kan een naam, tijd en datum geselecteerd worden voor een bepaald evenement en deze worden op geslagen. 
+Dit is gedaan aan de hand van de volgende stackoverflow hulp: 
+https://stackoverflow.com/questions/18579590/how-to-send-data-from-dialogfragment-to-a-fragment
+https://stackoverflow.com/questions/43866472/android-custom-dialog-view-change-button-color-before-showing-for-first-time
