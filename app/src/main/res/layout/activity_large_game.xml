@@ -1,9 +1,8 @@
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@drawable/background_diagonal"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="wrap_content"
+    android:background="@drawable/background_diagonal">
 
     <ImageView
         android:id="@+id/background_img"
@@ -12,13 +11,13 @@
         app:srcCompat="@drawable/ic_launcher_background" />
 
     <android.support.v7.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:layout_marginTop="60dp"
         app:cardCornerRadius="10dp"
-        app:cardElevation="6dp"
-        android:id="@+id/cardView">
+        app:cardElevation="6dp">
 
         <RelativeLayout
             android:layout_width="match_parent"

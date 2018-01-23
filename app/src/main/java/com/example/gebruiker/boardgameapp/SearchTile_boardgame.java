@@ -1,8 +1,5 @@
 package com.example.gebruiker.boardgameapp;
 
-/**
- * Created by Wout on 15-1-2018.
- */
 
 public class SearchTile_boardgame {
 
@@ -12,6 +9,7 @@ public class SearchTile_boardgame {
     public SearchTile_boardgame() {
     }
 
+    // test print
     public void print_info() {
         System.out.println(id + " " + name + " " + year);
     }
@@ -42,15 +40,6 @@ public class SearchTile_boardgame {
 
     public void setID(String id) {
         this.id = id;
-    }
-
-    // test ID
-    public int getiD() {
-        return iD;
-    }
-
-    public void setiD(int iD) {
-        this.iD = iD;
     }
 
 

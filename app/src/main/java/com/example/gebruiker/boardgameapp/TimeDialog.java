@@ -1,8 +1,10 @@
 package com.example.gebruiker.boardgameapp;
 
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -12,11 +14,19 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
 
+import java.sql.Time;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class TimeDialog extends DialogFragment {
+
+    public String time_selected;
+
+    public static final int TIMEPICKER_FRAGMENT=2;
 
     private Button confirmButton, cancelButton;
     private TimePicker timePicker;
@@ -48,11 +58,22 @@ public class TimeDialog extends DialogFragment {
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // add the date to the calendar.
+                getTime();
             }
         });
 
         return view;
+    }
+
+    public void getTime() {
+        int hour = timePicker.getHour();
+        int min = timePicker.getMinute();
+
+        time_selected = Integer.toString(hour) + " : " + Integer.toString(min);
+
+        Intent i  = new Intent();
+        i.putExtra("time", time_selected);
+        getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, i);
     }
 
 }
