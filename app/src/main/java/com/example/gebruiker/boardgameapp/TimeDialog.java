@@ -59,6 +59,7 @@ public class TimeDialog extends DialogFragment {
             @Override
             public void onClick(View view) {
                 getTime();
+                getDialog().dismiss();
             }
         });
 

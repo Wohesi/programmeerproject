@@ -50,6 +50,7 @@ public class CalendarDialog extends DialogFragment  {
             @Override
             public void onClick(View view) {
                 getDate();
+                getDialog().dismiss();
 
             }
         });

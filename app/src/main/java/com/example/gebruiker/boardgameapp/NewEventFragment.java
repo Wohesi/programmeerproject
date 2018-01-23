@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -46,6 +47,7 @@ public class NewEventFragment extends DialogFragment {
     // firebase connections - database
     private DatabaseReference mDatabase;
     private FirebaseDatabase mFirebaseDatabase;
+    private Context context;
 
     // firebase connections - user
     FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -83,6 +85,8 @@ public class NewEventFragment extends DialogFragment {
             public void onClick(View view) {
                 createEvent();
                 System.out.println(eventTitle);
+                getDialog().dismiss();
+                Toast.makeText(NewEventFragment.this.context, "You created event: " + eventTitle, Toast.LENGTH_LONG).show();
             }
         });
 
@@ -160,6 +164,16 @@ public class NewEventFragment extends DialogFragment {
         mDatabase.child("users")
                 .child(firebaseUser.getUid())
                 .child("event")
-                .setValue(eventData);
+                .setValue(eventTitle);
+
+        mDatabase.child("users")
+                .child(firebaseUser.getUid())
+                .child("event")
+                .setValue(resultTime);
+
+        mDatabase.child("users")
+                .child(firebaseUser.getUid())
+                .child("event")
+                .setValue(resultDate);
     }
 }
