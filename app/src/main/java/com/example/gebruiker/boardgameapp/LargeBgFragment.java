@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.text.Html;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,7 +42,6 @@ public class LargeBgFragment extends Fragment {
     private String url;
     private RequestQueue requestQueue;
     private XmlPullParser xpp;
-    private String id;
     private String bg_id;
     private String tag = "";
     private String value;
@@ -104,8 +102,6 @@ public class LargeBgFragment extends Fragment {
                 try {
                     xpp.setInput(new StringReader(response));
                     int event = xpp.getEventType();
-
-
 
                     while (event != XmlPullParser.END_DOCUMENT) {
                         tag = xpp.getName();

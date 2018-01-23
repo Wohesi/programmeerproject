@@ -2,7 +2,6 @@ package com.example.gebruiker.boardgameapp;
 
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.annotation.NonNull;
@@ -11,7 +10,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -25,7 +23,7 @@ import com.google.firebase.auth.FirebaseUser;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class RegisterFragment extends Fragment {
+public class RegisterFragment extends Fragment implements View.OnClickListener {
 
     // Firebase connection
     private FirebaseAuth mAuth;
@@ -34,7 +32,6 @@ public class RegisterFragment extends Fragment {
     // Set parameters
     private EditText newUserEmail;
     private EditText newUserPass;
-    private Button register;
 
     private RegisterFragment context;
 
@@ -49,19 +46,15 @@ public class RegisterFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_register, container, false);
 
+        // firebase authentication
         mAuth = FirebaseAuth.getInstance();
 
+        // get the email and username
         newUserEmail = view.findViewById(R.id.registerEmail);
         newUserPass = view.findViewById(R.id.registerPassword);
 
-        register = view.findViewById(R.id.registerButton);
-
-        register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                createAccount();
-            }
-        });
+        // set onclick listener
+        view.findViewById(R.id.registerButton).setOnClickListener(RegisterFragment.this);
 
         return view;
 
@@ -108,4 +101,11 @@ public class RegisterFragment extends Fragment {
                 });
     }
 
+    @Override
+    public void onClick(View v) {
+        int i = v.getId();
+        if (i == R.id.registerButton) {
+            createAccount();
+        }
+    }
 }

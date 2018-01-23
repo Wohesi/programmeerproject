@@ -1,7 +1,5 @@
 package com.example.gebruiker.boardgameapp;
 
-import android.app.Activity;
-import android.app.FragmentTransaction;
 import android.net.Uri;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;

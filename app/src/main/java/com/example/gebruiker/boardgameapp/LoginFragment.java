@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -25,12 +24,13 @@ import com.google.firebase.auth.FirebaseUser;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class LoginFragment extends Fragment {
+public class LoginFragment extends Fragment implements View.OnClickListener{
 
     private FirebaseAuth mAuth;
 
-    private Button login, register;
     private EditText userEmail, userPassword;
+
+    public View view;
 
 
     public LoginFragment() {
@@ -42,38 +42,25 @@ public class LoginFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_login, container, false);
+        view =  inflater.inflate(R.layout.fragment_login, container, false);
 
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
 
         if( user != null) {
             updateUI(user);
+        } else {
+            view.findViewById(R.id.signoutButton).setVisibility(View.GONE);
         }
 
         // buttons
-        register = view.findViewById(R.id.registerButton);
-        login = view.findViewById(R.id.loginButton);
+        view.findViewById(R.id.registerButton).setOnClickListener( LoginFragment.this);
+        view.findViewById(R.id.loginButton).setOnClickListener( LoginFragment.this);
+        view.findViewById(R.id.signoutButton).setOnClickListener( LoginFragment.this);
 
         userEmail = view.findViewById(R.id.email);
         userPassword = view.findViewById(R.id.password);
 
-        // login
-        login.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                signIn();
-            }
-        });
-
-        // register
-        register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                newRegisterFragment();
-            }
-        });
 
         return view;
     }
@@ -130,19 +117,39 @@ public class LoginFragment extends Fragment {
         transaction.commit();
     }
 
-    private void updateUI(FirebaseUser currentUser) {
+    private void updateUI(FirebaseUser currentUser ) {
 
-        // making new fragment
-       UserFragment userFragment = new UserFragment();
+        // remove visibility from views if user is logged in.
+        if (currentUser != null) {
+            // static text views
+            view.findViewById(R.id.passwordText).setVisibility(View.GONE);
+            view.findViewById(R.id.emailText).setVisibility(View.GONE);
 
-        // commiting fragment
-        final FragmentTransaction transaction = ((Activity) getContext()).getFragmentManager().beginTransaction();
-        transaction.replace(R.id.loginFragment, userFragment);
-        transaction.setTransition(transaction.TRANSIT_FRAGMENT_OPEN);
-        transaction.addToBackStack(null);
-        transaction.commit();
+            // edit text views
+            view.findViewById(R.id.email).setVisibility(View.GONE);
+            view.findViewById(R.id.password).setVisibility(View.GONE);
+
+            // buttons
+            view.findViewById(R.id.registerButton).setVisibility(View.GONE);
+            view.findViewById(R.id.loginButton).setVisibility(View.GONE);
+            view.findViewById(R.id.signoutButton).setVisibility(View.VISIBLE);
+        } else {
+            view.findViewById(R.id.signoutButton).setVisibility(View.GONE);
+        }
+
     }
 
-
+    // set onclick methods for correct buttons
+    @Override
+    public void onClick(View v){
+        int i = v.getId();
+        if (i == R.id.loginButton) {
+            signIn();
+        } else if ( i == R.id.registerButton) {
+            newRegisterFragment();
+        } else if(  i == R.id.signoutButton) {
+            mAuth.signOut();
+        }
+    }
 
 }

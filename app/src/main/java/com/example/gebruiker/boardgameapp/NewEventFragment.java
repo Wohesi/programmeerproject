@@ -2,9 +2,7 @@ package com.example.gebruiker.boardgameapp;
 
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.app.DialogFragment;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -13,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -21,15 +18,13 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.Calendar;
-
 import static com.example.gebruiker.boardgameapp.CalendarDialog.DATEPICKER_FRAGMENT;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class NewEventFragment extends DialogFragment {
+public class NewEventFragment extends DialogFragment implements View.OnClickListener{
 
 
     private Button confirm, cancel;
@@ -39,15 +34,14 @@ public class NewEventFragment extends DialogFragment {
     public static final int TIMEPICKER_FRAGMENT=2; // class variable
 
     // view values
-    private ImageButton setDate, setTime;
     private EditText set_event_title;
     private String eventTitle, eventDate, eventTime;
     private String resultTime, resultDate;
 
     // firebase connections - database
+    private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
     private FirebaseDatabase mFirebaseDatabase;
-    private Context context;
 
     // firebase connections - user
     FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -67,75 +61,49 @@ public class NewEventFragment extends DialogFragment {
         // get firebase connection
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
 
         // set title
         set_event_title = view.findViewById(R.id.set_event_title);
         eventTitle = set_event_title.getText().toString();
 
+       // set button listeners
+        view.findViewById(R.id.confirmEvent).setOnClickListener(NewEventFragment.this);
+        view.findViewById(R.id.cancelEvent).setOnClickListener(NewEventFragment.this);
+
         // set time and date
-        setDate = view.findViewById(R.id.setDate);
-        pickDate();
-        setTime = view.findViewById(R.id.setTime);
-        pickTime();
-
-       // confirm event
-        confirm = view.findViewById(R.id.confirmEvent);
-        confirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                createEvent();
-                System.out.println(eventTitle);
-                getDialog().dismiss();
-                Toast.makeText(NewEventFragment.this.context, "You created event: " + eventTitle, Toast.LENGTH_LONG).show();
-            }
-        });
-
-        // dismiss event
-        cancel = view.findViewById(R.id.cancelEvent);
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getDialog().dismiss();
-            }
-        });
+        view.findViewById(R.id.setTime).setOnClickListener(NewEventFragment.this);
+        view.findViewById(R.id.setDate).setOnClickListener(NewEventFragment.this);
 
         return view;
     }
 
+    // Method to select date from dialogfragment
     public void pickDate() {
-        setDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                CalendarDialog dialog = new CalendarDialog();
+        CalendarDialog dialog = new CalendarDialog();
 
-                Bundle date = new Bundle();
-                date.putString("Date", eventDate);
-                dialog.setArguments(date);
+        Bundle date = new Bundle();
+        date.putString("Date", eventDate);
+        dialog.setArguments(date);
 
-                dialog.setTargetFragment(NewEventFragment.this, DATEPICKER_FRAGMENT);
-                dialog.show(getFragmentManager(), "CalendarDialog");
-            }
-
-        });
+        dialog.setTargetFragment(NewEventFragment.this, DATEPICKER_FRAGMENT);
+        dialog.show(getFragmentManager(), "CalendarDialog");
     }
 
-
+    // method to select time from dialog fagment
     public void pickTime() {
-        setTime.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                TimeDialog dialog = new TimeDialog();
+        TimeDialog dialog = new TimeDialog();
 
-                Bundle time = new Bundle();
-                time.putString("time", eventTime);
-                dialog.setArguments(time);
+        Bundle time = new Bundle();
+        time.putString("time", eventTime);
+        dialog.setArguments(time);
 
-                dialog.setTargetFragment(NewEventFragment.this, TIMEPICKER_FRAGMENT);
-                dialog.show(getFragmentManager(), "TimeDialog");
-            }
-        });
+        dialog.setTargetFragment(NewEventFragment.this, TIMEPICKER_FRAGMENT);
+        dialog.show(getFragmentManager(), "TimeDialog");
     }
 
+    // get the corresponding results from the correct dialog fragment.
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch(requestCode) {
@@ -155,7 +123,7 @@ public class NewEventFragment extends DialogFragment {
         }
     }
 
-
+    // method where the correct data will be added to the database.
     public void createEvent() {
 
         String eventData = eventTitle +" "+ resultTime+" "+ resultDate;
@@ -175,5 +143,24 @@ public class NewEventFragment extends DialogFragment {
                 .child(firebaseUser.getUid())
                 .child("event")
                 .setValue(resultDate);
+
+        getDialog().dismiss();
+        Toast.makeText(getContext(), "Made event: " + eventTitle, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onClick(View v) {
+        int i = v.getId();
+
+        if ( i == R.id.confirmEvent) {
+            createEvent();
+        } else if (i == R.id.cancelEvent) {
+            getDialog().dismiss();
+        } else if (i == R.id.setTime) {
+            pickTime();
+        } else if (i == R.id.setDate) {
+            pickDate();
+        }
+
     }
 }

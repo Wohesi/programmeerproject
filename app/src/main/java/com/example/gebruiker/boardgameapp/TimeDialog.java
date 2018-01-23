@@ -2,7 +2,6 @@ package com.example.gebruiker.boardgameapp;
 
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,25 +9,18 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.TimePicker;
-
-import java.sql.Time;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TimeDialog extends DialogFragment {
+public class TimeDialog extends DialogFragment implements View.OnClickListener {
 
     public String time_selected;
 
     public static final int TIMEPICKER_FRAGMENT=2;
 
-    private Button confirmButton, cancelButton;
     private TimePicker timePicker;
 
 
@@ -43,38 +35,39 @@ public class TimeDialog extends DialogFragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.dialog_time, container, false);
 
-        // finding the views
-        confirmButton = view.findViewById(R.id.confirmButton);
-        cancelButton = view.findViewById(R.id.cancelButton);
+        // setting onclick listeners
+        view.findViewById(R.id.confirmButton).setOnClickListener(TimeDialog.this);
+        view.findViewById(R.id.cancelButton).setOnClickListener(TimeDialog.this);
+
+        // get the timepicker view
         timePicker = view.findViewById(R.id.timePicker);
 
-        cancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getDialog().dismiss();
-            }
-        });
-
-        confirmButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getTime();
-                getDialog().dismiss();
-            }
-        });
-
+        // return the view to the inflater
         return view;
     }
 
+    // method to send the correct time back to the NewEventFragment
     public void getTime() {
         int hour = timePicker.getHour();
         int min = timePicker.getMinute();
 
         time_selected = Integer.toString(hour) + " : " + Integer.toString(min);
 
+        // make new intent with the selected time
         Intent i  = new Intent();
         i.putExtra("time", time_selected);
         getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, i);
+        getDialog().dismiss();
     }
 
+    // onclick method
+    @Override
+    public void onClick(View v) {
+        int i = v.getId();
+        if (i == R.id.cancelButton ) {
+            getDialog().dismiss();
+        } else if ( i == R.id.confirmButton) {
+            getTime();
+        }
+    }
 }

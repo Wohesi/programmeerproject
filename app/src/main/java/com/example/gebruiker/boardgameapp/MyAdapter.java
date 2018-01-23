@@ -1,12 +1,9 @@
 package com.example.gebruiker.boardgameapp;
 
 import android.app.Activity;
-import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -19,7 +16,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implements Filterable {
+public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implements Filterable, View.OnClickListener {
 
     private ArrayList<SearchTile_boardgame> SearchTile_boardgames;
     private ArrayList<SearchTile_boardgame> mFilteredList;
@@ -47,12 +44,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implem
         holder.title.setText(mFilteredList.get(position).getName());
         holder.year.setText(mFilteredList.get(position).getYear());
         id = mFilteredList.get(position).getID();
-        holder.card.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                newFramgent();
-            }
-        });
+
+        // set listener on cardview
+        holder.card.setOnClickListener(MyAdapter.this);
     }
 
     @Override
@@ -110,8 +104,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implem
         transaction.setTransition(transaction.TRANSIT_FRAGMENT_OPEN);
         transaction.addToBackStack(null);
         transaction.commit();
+    }
 
-
+    // onclick listeners
+    @Override
+    public void onClick(View v) {
+        int i = v.getId();
+        if ( i == R.id.card) {
+            newFramgent();
+        }
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

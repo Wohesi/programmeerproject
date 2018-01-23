@@ -3,7 +3,6 @@ package com.example.gebruiker.boardgameapp;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +16,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -30,9 +31,11 @@ import java.util.ArrayList;
 
 public class SearchFragment extends Fragment {
 
+    // get views for adapter
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
 
+    // get API connection views / variables
     private RequestQueue requestQueue;
     private SearchTile_boardgame tileBoardgame;
     private ArrayList<SearchTile_boardgame> searchTiles = new ArrayList<>();
@@ -40,12 +43,19 @@ public class SearchFragment extends Fragment {
     private String url;
     public String tag_id = null;
 
+    // firebase variables
+    private FirebaseAuth mAuth;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View searchFragment =  inflater.inflate(R.layout.fragment_search, container, false);
+
+        // get the firebase data
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
 
         // setting the adaptor
         recyclerView = searchFragment.findViewById(R.id.rv);
