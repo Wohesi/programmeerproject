@@ -57,3 +57,6 @@ De dialog views geven nu de juiste data terug. Er kan een naam, tijd en datum ge
 Dit is gedaan aan de hand van de volgende stackoverflow hulp: 
 https://stackoverflow.com/questions/18579590/how-to-send-data-from-dialogfragment-to-a-fragment
 https://stackoverflow.com/questions/43866472/android-custom-dialog-view-change-button-color-before-showing-for-first-time
+
+het loginscherm aangepast zodat er niet een aparte activity gemaakt hoeft te worden. 
+Ook een hoop anonymous listeners verwijderd, onnodige imports verwijderd en comments toegevoegd zodat de code er netter uit ziet. 
