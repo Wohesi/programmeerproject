@@ -29,7 +29,6 @@ public class LoginFragment extends Fragment {
 
     private FirebaseAuth mAuth;
 
-
     private Button login, register;
     private EditText userEmail, userPassword;
 
@@ -44,6 +43,13 @@ public class LoginFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_login, container, false);
+
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
+
+        if( user != null) {
+            updateUI(user);
+        }
 
         // buttons
         register = view.findViewById(R.id.registerButton);
@@ -73,7 +79,7 @@ public class LoginFragment extends Fragment {
     }
 
     public void signIn() {
-        mAuth = FirebaseAuth.getInstance();
+
         // Checking if users filled in
         String email = userEmail.getText().toString();
         String password  = userPassword.getText().toString();
