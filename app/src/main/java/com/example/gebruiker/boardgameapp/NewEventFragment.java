@@ -132,17 +132,17 @@ public class NewEventFragment extends DialogFragment implements View.OnClickList
         mDatabase.child("users")
                 .child(firebaseUser.getUid())
                 .child("event")
-                .setValue(eventTitle);
+                .setValue(eventData);
 
-        mDatabase.child("users")
-                .child(firebaseUser.getUid())
-                .child("event")
-                .setValue(resultTime);
-
-        mDatabase.child("users")
-                .child(firebaseUser.getUid())
-                .child("event")
-                .setValue(resultDate);
+//        mDatabase.child("users")
+//                .child(firebaseUser.getUid())
+//                .child("event")
+//                .setValue(resultTime);
+//
+//        mDatabase.child("users")
+//                .child(firebaseUser.getUid())
+//                .child("event")
+//                .setValue(resultDate);
 
         getDialog().dismiss();
         Toast.makeText(getContext(), "Made event: " + eventTitle, Toast.LENGTH_LONG).show();
