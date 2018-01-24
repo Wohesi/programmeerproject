@@ -18,6 +18,7 @@ import java.util.ArrayList;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implements Filterable, View.OnClickListener {
 
+
     private ArrayList<SearchTile_boardgame> SearchTile_boardgames;
     private ArrayList<SearchTile_boardgame> mFilteredList;
     private Context context;
@@ -34,7 +35,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implem
     @Override
     public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v  = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.bg_listcard, parent, false);
+                .inflate(R.layout.card_search_game, parent, false);
         return new ViewHolder(v);
     }
 

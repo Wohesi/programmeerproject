@@ -137,7 +137,7 @@ public class NewEventFragment extends DialogFragment implements View.OnClickList
         mDatabase.child("users")
                 .child(firebaseUser.getUid())
                 .child("event")
-                .child(eventTitle)
+                //.child(eventTitle)
                 .updateChildren(setTitle);
 
         // set date
@@ -147,7 +147,7 @@ public class NewEventFragment extends DialogFragment implements View.OnClickList
         mDatabase.child("users")
                 .child(firebaseUser.getUid())
                 .child("event")
-                .child(eventTitle)
+                //.child(eventTitle)
                 .updateChildren(setDate);
 
         // set time
@@ -157,7 +157,7 @@ public class NewEventFragment extends DialogFragment implements View.OnClickList
         mDatabase.child("users")
                 .child(firebaseUser.getUid())
                 .child("event")
-                .child(eventTitle)
+                //.child(eventTitle)
                 .updateChildren(setTime);
 
         getDialog().dismiss();

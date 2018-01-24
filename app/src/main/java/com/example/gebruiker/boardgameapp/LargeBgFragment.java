@@ -55,7 +55,7 @@ public class LargeBgFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View LargeBgFragment = inflater.inflate(R.layout.activity_large_game, container, false);
+        View LargeBgFragment = inflater.inflate(R.layout.fragment_large_game, container, false);
 
         // get the corresponding ID from the bundle
         Bundle arguments = this.getArguments();

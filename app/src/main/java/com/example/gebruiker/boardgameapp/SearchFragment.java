@@ -51,14 +51,14 @@ public class SearchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View searchFragment =  inflater.inflate(R.layout.fragment_search, container, false);
+        View view =  inflater.inflate(R.layout.fragment_search, container, false);
 
         // get the firebase data
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
 
         // setting the adaptor
-        recyclerView = searchFragment.findViewById(R.id.rv);
+        recyclerView = view.findViewById(R.id.searchRv);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -74,7 +74,7 @@ public class SearchFragment extends Fragment {
         }
 
         // searchview initializing
-        SearchView searchView = (SearchView) searchFragment.findViewById(R.id.search_bar);
+        SearchView searchView = view.findViewById(R.id.search_bar);
         searchView.setOnQueryTextListener(
                 new SearchView.OnQueryTextListener() {
                     @Override
@@ -107,7 +107,7 @@ public class SearchFragment extends Fragment {
         );
 
         // Inflate the layout for this fragment
-        return searchFragment;
+        return view;
     }
 
     // load the data with the url constructed by the searchview.
