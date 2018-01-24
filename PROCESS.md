@@ -60,3 +60,6 @@ https://stackoverflow.com/questions/43866472/android-custom-dialog-view-change-b
 
 het loginscherm aangepast zodat er niet een aparte activity gemaakt hoeft te worden. 
 Ook een hoop anonymous listeners verwijderd, onnodige imports verwijderd en comments toegevoegd zodat de code er netter uit ziet. 
+
+# day 15 - 23-1-2018
+De data van een evenement wordt nu op de juiste manier in firebase gezet. 
