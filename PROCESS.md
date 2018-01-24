@@ -62,4 +62,5 @@ het loginscherm aangepast zodat er niet een aparte activity gemaakt hoeft te wor
 Ook een hoop anonymous listeners verwijderd, onnodige imports verwijderd en comments toegevoegd zodat de code er netter uit ziet. 
 
 # day 15 - 23-1-2018
-De data van een evenement wordt nu op de juiste manier in firebase gezet. 
+De data van een evenement wordt nu op de juiste manier in firebase gezet. Dit is gedaan aan de hand van het volgende voorbeeld: 
+https://stackoverflow.com/questions/37688031/class-java-util-map-has-generic-type-parameters-please-use-generictypeindicator
