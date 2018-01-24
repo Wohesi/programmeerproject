@@ -18,6 +18,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static com.example.gebruiker.boardgameapp.CalendarDialog.DATEPICKER_FRAGMENT;
 
 
@@ -66,7 +69,7 @@ public class NewEventFragment extends DialogFragment implements View.OnClickList
 
         // set title
         set_event_title = view.findViewById(R.id.set_event_title);
-        eventTitle = set_event_title.getText().toString();
+
 
        // set button listeners
         view.findViewById(R.id.confirmEvent).setOnClickListener(NewEventFragment.this);
@@ -126,23 +129,36 @@ public class NewEventFragment extends DialogFragment implements View.OnClickList
     // method where the correct data will be added to the database.
     public void createEvent() {
 
-        String eventData = eventTitle +" "+ resultTime+" "+ resultDate;
-        System.out.println(eventData + "FROM CREATE EVENT");
+        // set title
+        eventTitle = set_event_title.getText().toString();
+        Map<String, Object> setTitle = new HashMap<String, Object>();
+        setTitle.put("title", eventTitle);
 
         mDatabase.child("users")
                 .child(firebaseUser.getUid())
                 .child("event")
-                .setValue(eventData);
+                .child(eventTitle)
+                .updateChildren(setTitle);
 
-//        mDatabase.child("users")
-//                .child(firebaseUser.getUid())
-//                .child("event")
-//                .setValue(resultTime);
-//
-//        mDatabase.child("users")
-//                .child(firebaseUser.getUid())
-//                .child("event")
-//                .setValue(resultDate);
+        // set date
+        Map<String, Object> setDate = new HashMap<String, Object>();
+        setDate.put("date", resultDate);
+
+        mDatabase.child("users")
+                .child(firebaseUser.getUid())
+                .child("event")
+                .child(eventTitle)
+                .updateChildren(setDate);
+
+        // set time
+        Map<String, Object> setTime = new HashMap<String, Object>();
+        setTime.put("time", resultTime);
+
+        mDatabase.child("users")
+                .child(firebaseUser.getUid())
+                .child("event")
+                .child(eventTitle)
+                .updateChildren(setTime);
 
         getDialog().dismiss();
         Toast.makeText(getContext(), "Made event: " + eventTitle, Toast.LENGTH_LONG).show();
