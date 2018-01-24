@@ -64,3 +64,5 @@ Ook een hoop anonymous listeners verwijderd, onnodige imports verwijderd en comm
 # day 15 - 23-1-2018
 De data van een evenement wordt nu op de juiste manier in firebase gezet. Dit is gedaan aan de hand van het volgende voorbeeld: 
 https://stackoverflow.com/questions/37688031/class-java-util-map-has-generic-type-parameters-please-use-generictypeindicator
+
+De eventfragment heeft nu een aparte adapter en de data wordt opgehaald en in een adapter gezet, dit werkt nog niet helemaal naar behoren. 
