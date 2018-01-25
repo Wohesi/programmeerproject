@@ -16,7 +16,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implements Filterable, View.OnClickListener {
+public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder> implements Filterable, View.OnClickListener {
 
 
     private ArrayList<SearchTile_boardgame> SearchTile_boardgames;
@@ -24,7 +24,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implem
     private Context context;
     private String id;
 
-    public MyAdapter(ArrayList<SearchTile_boardgame> searchTiles, Context context) {
+    public SearchAdapter(ArrayList<SearchTile_boardgame> searchTiles, Context context) {
 
         SearchTile_boardgames = searchTiles;
         mFilteredList = searchTiles;
@@ -33,7 +33,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implem
 
 
     @Override
-    public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public SearchAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v  = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.card_search_game, parent, false);
         return new ViewHolder(v);
@@ -47,7 +47,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implem
         id = mFilteredList.get(position).getID();
 
         // set listener on cardview
-        holder.card.setOnClickListener(MyAdapter.this);
+        holder.card.setOnClickListener(SearchAdapter.this);
     }
 
     @Override
@@ -91,7 +91,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implem
        };
     }
 
-    public void newFramgent() {
+    public void newFragment() {
 
         // making new fragment
         LargeBgFragment largeBgFragment = new LargeBgFragment();
@@ -115,7 +115,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implem
         int i = v.getId();
         if ( i == R.id.card) {
             System.out.println(id);
-            newFramgent();
+            newFragment();
         }
     }
 

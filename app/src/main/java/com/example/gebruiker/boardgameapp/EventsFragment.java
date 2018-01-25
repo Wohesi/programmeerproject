@@ -82,20 +82,20 @@ public class EventsFragment extends Fragment{
             String value;
 
             // for loop for each child of the event. i.e. 'name' - 'date' - 'time'
-            for (DataSnapshot child : userEvent.getChildren()) {
-
-                key = child.getKey();
-                value = (String) child.getValue();
-
-                if (Objects.equals(key, "title")) {
-                    event.setTitle(value);
-                } else if (Objects.equals(key, "date")) {
-                    event.setDate(value);
-                } else if (Objects.equals(key, "time")) {
-                    event.setTime(value);
-                }
-                events.add(event);
-            }
+//            for (DataSnapshot child : userEvent.getChildren()) {
+//
+//                key = child.getKey();
+//                value = (String) child.getValue();
+//
+//                if (Objects.equals(key, "title")) {
+//                    event.setTitle(value);
+//                } else if (Objects.equals(key, "date")) {
+//                    event.setDate(value);
+//                } else if (Objects.equals(key, "time")) {
+//                    event.setTime(value);
+//                }
+//                events.add(event);
+//            }
 
             adapter = new EventAdapter(events, getContext());
             recyclerView.setAdapter(adapter);

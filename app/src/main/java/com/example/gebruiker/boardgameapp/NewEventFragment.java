@@ -20,8 +20,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import static com.example.gebruiker.boardgameapp.CalendarDialog.DATEPICKER_FRAGMENT;
+import java.util.Objects;
+import java.util.concurrent.atomic.AtomicInteger;
 
 
 /**
@@ -29,15 +29,12 @@ import static com.example.gebruiker.boardgameapp.CalendarDialog.DATEPICKER_FRAGM
  */
 public class NewEventFragment extends DialogFragment implements View.OnClickListener{
 
-
-    private Button confirm, cancel;
-
     // dialog values
     public static final int DATEPICKER_FRAGMENT = 1; // class variable
     public static final int TIMEPICKER_FRAGMENT=2; // class variable
 
     // view values
-    private EditText set_event_title;
+    private EditText setEventTitle;
     private String eventTitle, eventDate, eventTime;
     private String resultTime, resultDate;
 
@@ -48,6 +45,8 @@ public class NewEventFragment extends DialogFragment implements View.OnClickList
 
     // firebase connections - user
     FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
+    public static int count = 0;
 
 
     public NewEventFragment() {
@@ -68,7 +67,7 @@ public class NewEventFragment extends DialogFragment implements View.OnClickList
         FirebaseUser user = mAuth.getCurrentUser();
 
         // set title
-        set_event_title = view.findViewById(R.id.set_event_title);
+        setEventTitle = view.findViewById(R.id.set_event_title);
 
 
        // set button listeners
@@ -127,41 +126,27 @@ public class NewEventFragment extends DialogFragment implements View.OnClickList
     }
 
     // method where the correct data will be added to the database.
-    public void createEvent() {
+    public void createEvent(Integer count) {
 
-        // set title
-        eventTitle = set_event_title.getText().toString();
-        Map<String, Object> setTitle = new HashMap<String, Object>();
-        setTitle.put("title", eventTitle);
+        // set the values
+        eventTitle = setEventTitle.getText().toString();
+        Map<String, Object> setEvent = new HashMap<String, Object>();
+        setEvent.put("title", eventTitle);
+        setEvent.put("date", resultDate);
+        setEvent.put("time", resultTime);
 
+        // push the event to the database
         mDatabase.child("users")
                 .child(firebaseUser.getUid())
                 .child("event")
-                //.child(eventTitle)
-                .updateChildren(setTitle);
+                .child(String.valueOf(count))
+                .updateChildren(setEvent);
 
-        // set date
-        Map<String, Object> setDate = new HashMap<String, Object>();
-        setDate.put("date", resultDate);
-
-        mDatabase.child("users")
-                .child(firebaseUser.getUid())
-                .child("event")
-                //.child(eventTitle)
-                .updateChildren(setDate);
-
-        // set time
-        Map<String, Object> setTime = new HashMap<String, Object>();
-        setTime.put("time", resultTime);
-
-        mDatabase.child("users")
-                .child(firebaseUser.getUid())
-                .child("event")
-                //.child(eventTitle)
-                .updateChildren(setTime);
-
+        // dismiss the dialog and set a message to the user.
         getDialog().dismiss();
         Toast.makeText(getContext(), "Made event: " + eventTitle, Toast.LENGTH_LONG).show();
+
+
     }
 
     @Override
@@ -169,7 +154,11 @@ public class NewEventFragment extends DialogFragment implements View.OnClickList
         int i = v.getId();
 
         if ( i == R.id.confirmEvent) {
-            createEvent();
+
+            // create an event with auto increment
+            createEvent(count);
+            count = count +1;
+
         } else if (i == R.id.cancelEvent) {
             getDialog().dismiss();
         } else if (i == R.id.setTime) {

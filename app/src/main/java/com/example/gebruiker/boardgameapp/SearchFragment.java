@@ -100,7 +100,7 @@ public class SearchFragment extends Fragment {
                         // perform the search query
                         System.out.println("this has been changed:  "+ s);
 
-                        //MyAdapter.getFilter().filter(s);
+                        //SearchAdapter.getFilter().filter(s);
                         return false;
                     }
                 }
@@ -140,6 +140,7 @@ public class SearchFragment extends Fragment {
                                     System.out.println(ids);
                                     System.out.println(tag_id);
                                     tileBoardgame.setID(ids.get(0));
+                                    // need to figure out a way to connect the corresponding ID to the corresponding name
                                 }
                                 break;
 
@@ -163,7 +164,7 @@ public class SearchFragment extends Fragment {
                         event = xpp.next();
 
                         // add searched items to the adapter
-                        adapter = new MyAdapter(searchTiles, getContext());
+                        adapter = new SearchAdapter(searchTiles, getContext());
                         adapter.notifyDataSetChanged();
                         recyclerView.setAdapter(adapter);
                     }

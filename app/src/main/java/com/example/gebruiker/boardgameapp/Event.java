@@ -1,11 +1,14 @@
 package com.example.gebruiker.boardgameapp;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 /**
  * Created by Wout on 24-1-2018.
  */
 
 public class Event {
 
+    private static final AtomicInteger count = new AtomicInteger(0);
     public String titleEvent, date, time;
 
     public Event() {
