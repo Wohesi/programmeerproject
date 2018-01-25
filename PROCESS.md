@@ -73,4 +73,7 @@ Begin gemaakt om de data goed uit firebase te halen.
 # day 17 - 25-1-2018
 d.m.v. overleg met mijn daily standup groep heb ik op de juistemanier de elementen uit firebase kunnen verkijgen in inladen in de adapterview. Nu moet er gekeken worden naar een auto incement voor voorfirebase zodat meerdere unieke evenementen kunnen worden toegevoegd aan firebase zonder dat er duplicaten zijn. 
 
+Zodra de searchview een lijst van resultaten terug krijgt pakt hij altijd of het eerste of het laatstegenoteerde ID, er moet een oplossing voor komen dat de jusite ID bij de juiste searchview komt. 
+
+Voor het vertonen van de evenementen moet een auto increment tussen, zodat de jusite elementen worden laten zien. 
 
