@@ -63,8 +63,10 @@ public class LargeBgFragment extends Fragment {
             bg_id = arguments.getString("id", bg_id);
         }
 
+        // get the correct ID with the corresponding API url
         url = "https://www.boardgamegeek.com/xmlapi/boardgame/" + bg_id;
 
+        // set the views
         title = LargeBgFragment.findViewById(R.id.title);
         year = LargeBgFragment.findViewById(R.id.year);
         length_setter = LargeBgFragment.findViewById(R.id.length_setter);
@@ -79,8 +81,10 @@ public class LargeBgFragment extends Fragment {
         openCalendar = LargeBgFragment.findViewById(R.id.openCalendar);
         makeEvent();
 
+        // get API connection
         requestQueue = Volley.newRequestQueue(getContext());
 
+        // get XML parser conection
         try {
             XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
             xpp = factory.newPullParser();
@@ -94,6 +98,9 @@ public class LargeBgFragment extends Fragment {
 
 
     public void loadData() {
+
+        System.out.println(url);
+
         final StringRequest stringRequest = new StringRequest(
                 url,
                 new Response.Listener<String>() {
@@ -129,13 +136,14 @@ public class LargeBgFragment extends Fragment {
 
                                     description.setText(value);
                                     String text = (String) description.getText();
+                                    // remove and replace HTML text
                                     text = Html.fromHtml(text).toString();
                                     description.setText(text);
                                 }
 
                                 if (Objects.equals(tag, "image")) {
-                                    if(tag == "") {
-                                        background_img.setBackgroundColor(Color.TRANSPARENT);
+                                    if(Objects.equals(tag, "")) {
+                                        background_img.setVisibility(View.GONE);
                                     } else {
                                         Picasso.with(getContext()).load(value).fit().into(background_img);
                                     }

@@ -121,28 +121,32 @@ public class SearchFragment extends Fragment {
                     int event = xpp.getEventType();
 
                     String tag = "", value = "";
-
+                    ArrayList<String> ids = new ArrayList<String>();
 
                     while(event != XmlPullParser.END_DOCUMENT) {
-
                         tag = xpp.getName();
 
                         switch(event) {
 
                             case XmlPullParser.START_TAG:
-                                //value = xpp.getAttributeName(event);
-                                if(tag.equals("boardgame")) {
 
-                                    tag_id = xpp.getAttributeValue(null, "objectid");
+                                if(tag.equals("boardgame")) {
 
                                     tileBoardgame = new SearchTile_boardgame();
                                     searchTiles.add(tileBoardgame);
-                                    tileBoardgame.setID(tag_id);
+
+                                    tag_id = xpp.getAttributeValue(null, "objectid");
+                                    ids.add(tag_id);
+                                    System.out.println(ids);
+                                    System.out.println(tag_id);
+                                    tileBoardgame.setID(ids.get(0));
                                 }
                                 break;
+
                             case XmlPullParser.TEXT:
                                 value = xpp.getText();
                                 break;
+
                             case XmlPullParser.END_TAG:
 
                                 switch (tag) {
@@ -154,29 +158,21 @@ public class SearchFragment extends Fragment {
                                 }
                                 break;
                         }
+
+
                         event = xpp.next();
 
                         // add searched items to the adapter
-
                         adapter = new MyAdapter(searchTiles, getContext());
                         adapter.notifyDataSetChanged();
                         recyclerView.setAdapter(adapter);
-
-
                     }
 
                 // error catches
-                } catch (XmlPullParserException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
+                } catch (XmlPullParserException | IOException e) {
                     e.printStackTrace();
                 }
 
-
-                for(int i = 0; i < searchTiles.size(); i++ ) {
-                    // print info to console
-                    searchTiles.get(i).print_info();
-                }
             }
 
         }, new Response.ErrorListener() {

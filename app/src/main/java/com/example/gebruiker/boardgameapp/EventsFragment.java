@@ -2,16 +2,13 @@ package com.example.gebruiker.boardgameapp;
 
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.ListFragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -41,7 +38,6 @@ public class EventsFragment extends Fragment{
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private Event event;
-    private String nameEvent;
     final ArrayList<Event> events = new ArrayList<>();
 
     @Override
@@ -63,7 +59,6 @@ public class EventsFragment extends Fragment{
 
         if (user != null) {
             userID = user.getUid();
-            //getUserEvents();
             mDatabaseRef.addValueEventListener(eventListener);
         } else {
 
@@ -77,14 +72,16 @@ public class EventsFragment extends Fragment{
 
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
-                // get the events of the user
 
+            // get the events of the user
             DataSnapshot userEvent = dataSnapshot.child("users").child(userID).child("event");
 
+            // set the values for the events in the adapter for the recycler view
             event = new Event();
-            String key = "";
-            String value = "";
+            String key;
+            String value;
 
+            // for loop for each child of the event. i.e. 'name' - 'date' - 'time'
             for (DataSnapshot child : userEvent.getChildren()) {
 
                 key = child.getKey();
@@ -95,11 +92,9 @@ public class EventsFragment extends Fragment{
                 } else if (Objects.equals(key, "date")) {
                     event.setDate(value);
                 } else if (Objects.equals(key, "time")) {
-                    System.out.println(value + " TEEEESTTTTT");
                     event.setTime(value);
                 }
                 events.add(event);
-
             }
 
             adapter = new EventAdapter(events, getContext());
@@ -111,6 +106,5 @@ public class EventsFragment extends Fragment{
             Log.w("cancel", "loadPost:onCancelled", databaseError.toException());
         }
     };
-
 
 }

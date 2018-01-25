@@ -68,9 +68,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implem
                } else {
                    ArrayList<SearchTile_boardgame> filteredList = new ArrayList<>();
                    for(SearchTile_boardgame searchTile_boardgame : SearchTile_boardgames) {
-                       if( searchTile_boardgame.getName().contains(charString)  || searchTile_boardgame.getYear().contains(charSequence)) {
+
+                       if( searchTile_boardgame.getName().contains(charString)  || searchTile_boardgame.getYear().contains(charSequence) || searchTile_boardgame.getID().contains(charSequence)) {
                            filteredList.add(searchTile_boardgame);
                        }
+
                    }
                    mFilteredList = filteredList;
                }
@@ -83,7 +85,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implem
            @Override
            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
                 mFilteredList = (ArrayList<SearchTile_boardgame>) filterResults.values;
-                notifyDataSetChanged();
+                //notifyDataSetChanged();
 
            }
        };
@@ -112,6 +114,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implem
     public void onClick(View v) {
         int i = v.getId();
         if ( i == R.id.card) {
+            System.out.println(id);
             newFramgent();
         }
     }
