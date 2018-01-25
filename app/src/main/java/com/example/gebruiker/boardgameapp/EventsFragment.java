@@ -81,12 +81,15 @@ public class EventsFragment extends Fragment{
             String key;
             String value;
 
-            // for loop for each child of the event. i.e. 'name' - 'date' - 'time'
-//            for (DataSnapshot child : userEvent.getChildren()) {
-//
-//                key = child.getKey();
-//                value = (String) child.getValue();
-//
+             //for loop for each child of the event. i.e. 'name' - 'date' - 'time'
+            for (DataSnapshot child : userEvent.getChildren()) {
+
+                key = child.getKey();
+                //value = (String) child.getValue();
+                //System.out.println(key);
+
+                System.out.println(child.getChildren());
+
 //                if (Objects.equals(key, "title")) {
 //                    event.setTitle(value);
 //                } else if (Objects.equals(key, "date")) {
@@ -95,7 +98,7 @@ public class EventsFragment extends Fragment{
 //                    event.setTime(value);
 //                }
 //                events.add(event);
-//            }
+            }
 
             adapter = new EventAdapter(events, getContext());
             recyclerView.setAdapter(adapter);
