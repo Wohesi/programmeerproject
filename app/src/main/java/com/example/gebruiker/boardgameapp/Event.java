@@ -39,7 +39,7 @@ public class Event {
         return time;
     }
 
-    public void setTime() {
+    public void setTime(String time) {
         this.time = time;
     }
 }

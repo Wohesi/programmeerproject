@@ -22,6 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 /**
@@ -33,6 +34,8 @@ public class EventsFragment extends Fragment{
     private DatabaseReference mDatabaseRef;
     private FirebaseDatabase mFirebaseDatabase;
     private FirebaseAuth mAuth;
+    private FirebaseUser user;
+    private String userID;
 
     // get views for adapter
     private RecyclerView recyclerView;
@@ -51,53 +54,63 @@ public class EventsFragment extends Fragment{
         mAuth = FirebaseAuth.getInstance();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mDatabaseRef = mFirebaseDatabase.getReference();
+        user = mAuth.getCurrentUser();
 
         // setting up adapter
         recyclerView = view.findViewById(R.id.eventRv);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        getUserEvents();
+        if (user != null) {
+            userID = user.getUid();
+            //getUserEvents();
+            mDatabaseRef.addValueEventListener(eventListener);
+        } else {
+
+        }
 
         return view;
     }
 
-    public void getUserEvents() {
 
-        // set the adapter variables
+    private ValueEventListener eventListener = new ValueEventListener() {
 
-
-
-        ValueEventListener eventListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+        @Override
+        public void onDataChange(DataSnapshot dataSnapshot) {
                 // get the events of the user
-                String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                DataSnapshot userEvent = dataSnapshot.child("users").child(userID).child("event");
 
-                    event = new Event();
+            DataSnapshot userEvent = dataSnapshot.child("users").child(userID).child("event");
 
-                for (DataSnapshot child : userEvent.getChildren()) {
+            event = new Event();
+            String key = "";
+            String value = "";
 
-                    nameEvent = child.getValue(String.class);
-                    System.out.println(nameEvent + "  name from datasnapshot");
-                    System.out.println(child);
-                    event.setTitle(nameEvent);
-                    events.add(event);
-                    System.out.println(events + "ARRAYYYYYYY lmao");
+            for (DataSnapshot child : userEvent.getChildren()) {
+
+                key = child.getKey();
+                value = (String) child.getValue();
+
+                if (Objects.equals(key, "title")) {
+                    event.setTitle(value);
+                } else if (Objects.equals(key, "date")) {
+                    event.setDate(value);
+                } else if (Objects.equals(key, "time")) {
+                    System.out.println(value + " TEEEESTTTTT");
+                    event.setTime(value);
                 }
+                events.add(event);
 
-                adapter = new EventAdapter(events, getContext());
-                recyclerView.setAdapter(adapter);
             }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.w("cancel", "loadPost:onCancelled", databaseError.toException());
-            }
-        };
-        FirebaseDatabase.getInstance().getReference().addValueEventListener(eventListener);
+            adapter = new EventAdapter(events, getContext());
+            recyclerView.setAdapter(adapter);
+        }
+
+        @Override
+        public void onCancelled(DatabaseError databaseError) {
+            Log.w("cancel", "loadPost:onCancelled", databaseError.toException());
+        }
+    };
 
 
-    }
 }
