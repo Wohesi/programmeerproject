@@ -123,7 +123,9 @@ public class SearchFragment extends Fragment {
                     String tag = "", value = "";
                     ArrayList<String> ids = new ArrayList<String>();
 
+
                     while(event != XmlPullParser.END_DOCUMENT) {
+
                         tag = xpp.getName();
 
                         switch(event) {
@@ -137,9 +139,11 @@ public class SearchFragment extends Fragment {
 
                                     tag_id = xpp.getAttributeValue(null, "objectid");
                                     ids.add(tag_id);
-                                    System.out.println(ids);
-                                    System.out.println(tag_id);
-                                    tileBoardgame.setID(ids.get(0));
+                                    for(int i = 0; i<ids.size(); i ++) {
+
+                                    }
+                                    tileBoardgame.setID(tag_id);
+                                    //System.out.println(ids);
                                     // need to figure out a way to connect the corresponding ID to the corresponding name
                                 }
                                 break;

@@ -19,6 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Objects;
 
 
@@ -83,21 +84,26 @@ public class EventsFragment extends Fragment{
 
              //for loop for each child of the event. i.e. 'name' - 'date' - 'time'
             for (DataSnapshot child : userEvent.getChildren()) {
+                for (DataSnapshot c : child.getChildren() ){
 
-                key = child.getKey();
-                //value = (String) child.getValue();
-                //System.out.println(key);
+                    key = c.getKey();
+                    value = (String) c.getValue();
+                    System.out.println(value);
 
-                System.out.println(child.getChildren());
+                        System.out.println("test");
+                        System.out.println(value);
 
-//                if (Objects.equals(key, "title")) {
-//                    event.setTitle(value);
-//                } else if (Objects.equals(key, "date")) {
-//                    event.setDate(value);
-//                } else if (Objects.equals(key, "time")) {
-//                    event.setTime(value);
-//                }
-//                events.add(event);
+                        if (Objects.equals(key, "title")) {
+                            event.setTime(value);
+                        } else if (Objects.equals(key, "date")) {
+                            event.setDate(value);
+                        } else if (Objects.equals(key, "time")) {
+                            event.setTitle(value);
+                        }
+                }
+
+                events.add(event);
+
             }
 
             adapter = new EventAdapter(events, getContext());
