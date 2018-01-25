@@ -75,5 +75,6 @@ d.m.v. overleg met mijn daily standup groep heb ik op de juistemanier de element
 
 Zodra de searchview een lijst van resultaten terug krijgt pakt hij altijd of het eerste of het laatstegenoteerde ID, er moet een oplossing voor komen dat de jusite ID bij de juiste searchview komt. 
 
-Voor het vertonen van de evenementen moet een auto increment tussen, zodat de jusite elementen worden laten zien. 
+~~Voor het vertonen van de evenementen moet een auto increment tussen, zodat de jusite elementen worden laten zien. ~~
+auto increment werkt nu voor evenementen per user.
 
