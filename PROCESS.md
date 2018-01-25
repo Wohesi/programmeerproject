@@ -66,3 +66,11 @@ De data van een evenement wordt nu op de juiste manier in firebase gezet. Dit is
 https://stackoverflow.com/questions/37688031/class-java-util-map-has-generic-type-parameters-please-use-generictypeindicator
 
 De eventfragment heeft nu een aparte adapter en de data wordt opgehaald en in een adapter gezet, dit werkt nog niet helemaal naar behoren. 
+
+# day 16 - 24-1-2018
+Begin gemaakt om de data goed uit firebase te halen.
+
+# day 17 - 25-1-2018
+d.m.v. overleg met mijn daily standup groep heb ik op de juistemanier de elementen uit firebase kunnen verkijgen in inladen in de adapterview. Nu moet er gekeken worden naar een auto incement voor voorfirebase zodat meerdere unieke evenementen kunnen worden toegevoegd aan firebase zonder dat er duplicaten zijn. 
+
+
