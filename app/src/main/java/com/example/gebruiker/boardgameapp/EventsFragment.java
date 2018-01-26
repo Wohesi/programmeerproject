@@ -78,7 +78,7 @@ public class EventsFragment extends Fragment{
             DataSnapshot userEvent = dataSnapshot.child("users").child(userID).child("event");
 
             // set the values for the events in the adapter for the recycler view
-            event = new Event();
+
             String key;
             String value;
 
@@ -86,20 +86,26 @@ public class EventsFragment extends Fragment{
             for (DataSnapshot child : userEvent.getChildren()) {
                 for (DataSnapshot c : child.getChildren() ){
 
+                    event = new Event();
                     key = c.getKey();
                     value = (String) c.getValue();
+                    //System.out.println(value);
+
+                    System.out.println("test");
+                    System.out.println(key);
                     System.out.println(value);
+                    System.out.println("---------------");
 
-                        System.out.println("test");
-                        System.out.println(value);
+                    if (Objects.equals(key, "title")) {
+                        event.setTitle(value);
+                    }
+                    if (Objects.equals(key, "date")) {
+                        event.setDate(value);
+                    }
 
-                        if (Objects.equals(key, "title")) {
-                            event.setTime(value);
-                        } else if (Objects.equals(key, "date")) {
-                            event.setDate(value);
-                        } else if (Objects.equals(key, "time")) {
-                            event.setTitle(value);
-                        }
+                    if (Objects.equals(key, "time")) {
+                        event.setTime(value);
+                    }
                 }
 
                 events.add(event);

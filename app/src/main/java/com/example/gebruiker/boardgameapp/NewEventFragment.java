@@ -24,6 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 
 
@@ -131,7 +132,7 @@ public class NewEventFragment extends DialogFragment implements View.OnClickList
     }
 
     // method where the correct data will be added to the database.
-    public void createEvent(Integer count) {
+    public void createEvent(String ID) {
 
         // set the values
         eventTitle = setEventTitle.getText().toString();
@@ -144,7 +145,7 @@ public class NewEventFragment extends DialogFragment implements View.OnClickList
         mDatabase.child("users")
                 .child(firebaseUser.getUid())
                 .child("event")
-                .child(String.valueOf(count))
+                .child(String.valueOf(ID))
                 .updateChildren(setEvent);
 
         // dismiss the dialog and set a message to the user.
@@ -159,10 +160,9 @@ public class NewEventFragment extends DialogFragment implements View.OnClickList
         int i = v.getId();
 
         if ( i == R.id.confirmEvent) {
-
+            String uniqueID = UUID.randomUUID().toString();
             // create an event with auto increment
-            createEvent(count);
-            count = count +1;
+            createEvent(uniqueID);
 
         } else if (i == R.id.cancelEvent) {
             getDialog().dismiss();
