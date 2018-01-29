@@ -4,16 +4,9 @@ package com.example.gebruiker.boardgameapp;
 public class SearchTile {
 
     public String name, id, year ;
-    public int iD;
 
     public SearchTile() {
     }
-
-    // test print
-    public void print_info() {
-        System.out.println(id + " " + name + " " + year);
-    }
-
 
     // setter & getter of name
     public String getName() {
