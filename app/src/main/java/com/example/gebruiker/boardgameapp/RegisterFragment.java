@@ -60,16 +60,20 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
 
     }
 
+
+    // set the email and password for the new user.
     public void createAccount() {
         // Checking if correct info is filled in
         String email = newUserEmail.getText().toString();
         String password = newUserPass.getText().toString();
 
+        // check if the email field is empty
         if (TextUtils.isEmpty(email)) {
             Toast.makeText(getContext(), "Please enter an email", Toast.LENGTH_LONG).show();
             return;
         }
 
+        // checks if the password field is empty
         if (TextUtils.isEmpty(password)) {
             Toast.makeText(getContext(), "Please enter a password", Toast.LENGTH_LONG).show();
             return;
@@ -81,6 +85,13 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
             Toast.makeText(getContext(), "password need minumum 6 chars", Toast.LENGTH_LONG).show();
             return;
         }
+
+        validateCreateAccount(email, password);
+    }
+
+    // register the new user.
+    public void validateCreateAccount(String email, String password) {
+
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener((Activity) getContext(), new OnCompleteListener<AuthResult>() {
                     @Override
@@ -101,6 +112,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
                 });
     }
 
+    // onclick listener method
     @Override
     public void onClick(View v) {
         int i = v.getId();

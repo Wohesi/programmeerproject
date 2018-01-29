@@ -9,24 +9,17 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 import java.util.UUID;
-import java.util.concurrent.atomic.AtomicInteger;
-
 
 /**
  * A simple {@link Fragment} subclass.
@@ -50,8 +43,6 @@ public class NewEventFragment extends DialogFragment implements View.OnClickList
 
     // firebase connections - user
     FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-
-    public static int count = 0;
 
 
     public NewEventFragment() {

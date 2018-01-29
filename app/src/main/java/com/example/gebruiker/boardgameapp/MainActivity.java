@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -19,18 +20,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     // firebase instance
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
-
-    // firebase connections - database
-    private DatabaseReference mDatabase;
-    private FirebaseDatabase mFirebaseDatabase;
-
-    // firebase connections - user
-    FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
     // Setting variables for the toolbar
     private Toolbar toolbar;
@@ -41,6 +35,9 @@ public class MainActivity extends AppCompatActivity {
             R.drawable.ic_date_range_white_24dp,
             R.drawable.ic_person_white_24dp
     };
+
+    // sign out button
+    public Button signout, signin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,14 +52,19 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setVisibility(View.GONE);
         setSupportActionBar(toolbar);
 
+        // setup the actionbar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         viewPager = findViewById(R.id.viewpager);
         setupViewPager(viewPager);
 
+        // set up the tabs
         tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
         setupTabIcons();
+
+        signout = findViewById(R.id.signoutButton);
+        signin = findViewById(R.id.loginButton);
     }
 
 
@@ -81,6 +83,14 @@ public class MainActivity extends AppCompatActivity {
         adapter.addFragment(new LoginFragment(), "User");
         viewPager.setAdapter(adapter);
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        int i = v.getId();
+        if (i == R.id.signoutButton) {
+            super.recreate();
+        }
     }
 
     // set viewPagerAdapter for fragments
@@ -127,27 +137,5 @@ public class MainActivity extends AppCompatActivity {
         currentUser = mAuth.getCurrentUser();
 
     }
-
-
-    public void getCurrentUser() {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            // Name, email address, and profile photo Url
-            String name = user.getDisplayName();
-            String email = user.getEmail();
-            Uri photoUrl = user.getPhotoUrl();
-
-            // Check if user's email is verified
-            boolean emailVerified = user.isEmailVerified();
-
-            // The user's ID, unique to the Firebase project. Do NOT use this value to
-            // authenticate with your backend server, if you have one. Use
-            // FirebaseUser.getToken() instead.
-            String uid = user.getUid();
-        }
-    }
-
-
-
 
 }

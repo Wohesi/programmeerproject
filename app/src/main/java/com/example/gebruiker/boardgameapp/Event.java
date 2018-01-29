@@ -9,14 +9,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Event {
 
 
-    public String titleEvent, date, timeEvent;
+    public String titleEvent, dateEvent, timeEvent;
 
     public Event() {
-    }
-
-    // test print
-    public void print_event() {
-        System.out.println(titleEvent + " " + date + " " + timeEvent);
     }
 
     // setter & getter of title
@@ -30,11 +25,11 @@ public class Event {
 
     // setter & getter of date
     public String getDate () {
-        return date;
+        return dateEvent;
     }
 
     public void setDate(String date) {
-        this.date = date;
+        this.dateEvent = date;
     }
 
     // setter & getter of time

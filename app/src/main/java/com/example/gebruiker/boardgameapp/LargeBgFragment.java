@@ -1,14 +1,13 @@
 package com.example.gebruiker.boardgameapp;
 
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -34,9 +33,9 @@ import java.util.Objects;
 public class LargeBgFragment extends Fragment {
 
     // values for visuals
-    private Button openCalendar;
-    private TextView title, year, length_setter, weight_setter, avgRating_setter, numPlayers_setter_max, numPlayers_setter_min, description;
-    private ImageView background_img;
+    private ImageButton openCalendar;
+    private TextView title, year, age_setter, minPlaytime_setter, maxPlaytime_setter, maxPlayers_setter, minPlayers_setter, description;
+    private ImageView backgroundImg;
 
 
     // values for API connection
@@ -70,13 +69,17 @@ public class LargeBgFragment extends Fragment {
         // set the views
         title = LargeBgFragment.findViewById(R.id.title);
         year = LargeBgFragment.findViewById(R.id.year);
-        length_setter = LargeBgFragment.findViewById(R.id.length_setter);
-        weight_setter = LargeBgFragment.findViewById(R.id.weight_setter);
-        avgRating_setter = LargeBgFragment.findViewById(R.id.avg_rating_setter);
-        numPlayers_setter_max = LargeBgFragment.findViewById(R.id.num_players_setter_max);
-        numPlayers_setter_min = LargeBgFragment.findViewById(R.id.num_players_setter_min);
-        background_img = LargeBgFragment.findViewById(R.id.background_img);
+
+        maxPlayers_setter = LargeBgFragment.findViewById(R.id.num_players_setter_max);
+        minPlayers_setter = LargeBgFragment.findViewById(R.id.num_players_setter_min);
+
+        age_setter = LargeBgFragment.findViewById(R.id.age_setter);
+
+        backgroundImg = LargeBgFragment.findViewById(R.id.background_img);
         description = LargeBgFragment.findViewById(R.id.description_setter);
+
+        minPlaytime_setter = LargeBgFragment.findViewById(R.id.minPlaytime_setter);
+        maxPlaytime_setter = LargeBgFragment.findViewById(R.id.maxPlaytime_setter);
 
         // get the calendar dialog
         openCalendar = LargeBgFragment.findViewById(R.id.openCalendar);
@@ -127,28 +130,32 @@ public class LargeBgFragment extends Fragment {
                                 if (Objects.equals(tag, "yearpublished")) { year.setText(value);}
 
                                 if (Objects.equals(tag, "name")) {
-                                    //System.out.println(value);
+
                                     names.add(value);
-                                    //System.out.println(names);
-                                    //System.out.println(names.size());
 
                                     //System.out.println(names.e);
                                     title.setText(value);
                                 }
                                 //System.out.println(names);
                                 for(int i = 0; i < names.size(); i ++) {
-                                    System.out.println(names.get(i) + "POSITION: " + i);
+                                    // System.out.println(names.get(i) + "POSITION: " + i);
                                     //System.out.println(names.get(1));
                                 }
-                                System.out.println(names.size());
+                                //System.out.println(names.size());
                                 //System.out.println(names.get(1));
 
 
-                                if (Objects.equals(tag, "playingtime")) {length_setter.setText(value);}
+                                if (Objects.equals(tag, "minplaytime")) {minPlaytime_setter.setText("Min: "+ value);}
+                                if (Objects.equals(tag, "maxplaytime")) {maxPlaytime_setter.setText("Max: "+value);}
+                                if (Objects.equals(tag, "age")) {age_setter.setText(value);}
 
-                                if (Objects.equals(tag, "minplayers")) {numPlayers_setter_min.setText(value);}
+                                if (Objects.equals(tag, "minplayers")) {
+                                    minPlayers_setter.setText("Min: "+value);
+                                }
 
-                                if (Objects.equals(tag, "maxplayers")) {numPlayers_setter_max.setText(value);}
+                                if (Objects.equals(tag, "maxplayers")) {
+                                    maxPlayers_setter.setText("Max: "+value);
+                                }
 
                                 if (Objects.equals(tag, "description")) {
 
@@ -160,10 +167,10 @@ public class LargeBgFragment extends Fragment {
                                 }
 
                                 if (Objects.equals(tag, "image")) {
-                                    if(Objects.equals(tag, "")) {
-                                        background_img.setVisibility(View.GONE);
+                                    if(Objects.equals(tag, null)) {
+                                        backgroundImg.setVisibility(View.GONE);
                                     } else {
-                                        Picasso.with(getContext()).load(value).fit().into(background_img);
+                                        Picasso.with(getContext()).load(value).fit().into(backgroundImg);
                                     }
                                 }
 

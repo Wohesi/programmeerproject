@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -61,7 +62,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
         userEmail = view.findViewById(R.id.email);
         userPassword = view.findViewById(R.id.password);
 
-
         return view;
     }
 
@@ -82,6 +82,12 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
         }
 
         // Validating users
+        validateUser(email, password);
+
+    }
+
+    public void validateUser(String email, String password) {
+
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener((Activity) getContext(), new OnCompleteListener<AuthResult>() {
                     @Override
@@ -90,18 +96,16 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("Signed in", "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-
-                            Toast.makeText(getContext(), "Logged in as: "+ user,
-                                    Toast.LENGTH_SHORT).show();
-
+                            Toast.makeText(getContext(), "Logged in as: "+ user.getEmail(), Toast.LENGTH_SHORT).show();
+                            // update the login fragment with the right UI
                             updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.d("Failed to sign in", "signInWithEmail:failure", task.getException());
+                            Toast.makeText(getContext(), "Failed to login.", Toast.LENGTH_LONG).show();
                         }
                     }
                 });
-
     }
 
     public void newRegisterFragment() {
@@ -133,6 +137,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
             view.findViewById(R.id.registerButton).setVisibility(View.GONE);
             view.findViewById(R.id.loginButton).setVisibility(View.GONE);
             view.findViewById(R.id.signoutButton).setVisibility(View.VISIBLE);
+
+            TextView login = view.findViewById(R.id.loginText);
+            login.setText("You are logged in!");
         } else {
             view.findViewById(R.id.signoutButton).setVisibility(View.GONE);
         }
@@ -148,7 +155,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
         } else if ( i == R.id.registerButton) {
             newRegisterFragment();
         } else if(  i == R.id.signoutButton) {
-            mAuth.signOut();
+            //mAuth.signOut();
+            FirebaseAuth.getInstance().signOut();
         }
     }
 

@@ -150,6 +150,7 @@ public class SearchFragment extends Fragment {
 
                             // get the text between the opening and close tags.
                             case XmlPullParser.TEXT:
+                                // conver the text between the tags to a string
                                 value = xpp.getText();
                                 break;
 
@@ -163,6 +164,8 @@ public class SearchFragment extends Fragment {
                                 }
                                 break;
                         }
+
+                        // get the next XML object
                         event = xpp.next();
                     }
 

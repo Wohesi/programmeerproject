@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -19,7 +20,7 @@ import java.util.Date;
 
 public class CalendarDialog extends DialogFragment implements View.OnClickListener {
 
-    public String date_selected;
+    public String dateSelected;
 
     public static final int DATEPICKER_FRAGMENT=1; // adding this line
 
@@ -46,10 +47,10 @@ public class CalendarDialog extends DialogFragment implements View.OnClickListen
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
         Date date = new Date(year, month, day);
-        date_selected = dateFormat.format(date);
+        dateSelected = dateFormat.format(date);
 
         Intent i = new Intent();
-        i.putExtra("date", date_selected);
+        i.putExtra("date", dateSelected);
         getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, i);
         getDialog().dismiss();
     }
@@ -61,6 +62,7 @@ public class CalendarDialog extends DialogFragment implements View.OnClickListen
             getDialog().dismiss();
         } else if (i == R.id.confirmButton) {
             getDate();
+            Toast.makeText(getContext(), "You set date to: " + dateSelected, Toast.LENGTH_SHORT).show();
         }
 
     }

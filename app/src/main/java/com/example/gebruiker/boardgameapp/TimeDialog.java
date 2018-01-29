@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 
 /**
@@ -68,6 +69,7 @@ public class TimeDialog extends DialogFragment implements View.OnClickListener {
             getDialog().dismiss();
         } else if ( i == R.id.confirmButton) {
             getTime();
+            Toast.makeText(getContext(), "You set date to: " + time_selected, Toast.LENGTH_SHORT).show();
         }
     }
 }

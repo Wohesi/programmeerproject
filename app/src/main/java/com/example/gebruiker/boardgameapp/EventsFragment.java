@@ -19,8 +19,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Map;
-import java.util.Objects;
 
 
 /**
@@ -29,9 +27,9 @@ import java.util.Objects;
 public class EventsFragment extends Fragment{
 
     // get firebase information
-    private DatabaseReference mDatabaseRef;
-    private FirebaseDatabase mFirebaseDatabase;
-    private FirebaseAuth mAuth;
+    private DatabaseReference databaseRef;
+    private FirebaseDatabase firebaseDatabase;
+    private FirebaseAuth auth;
     private FirebaseUser user;
     private String userID;
 
@@ -48,10 +46,10 @@ public class EventsFragment extends Fragment{
         View view = inflater.inflate(R.layout.fragment_events, container, false);
 
         // set firebase refeences
-        mAuth = FirebaseAuth.getInstance();
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
-        mDatabaseRef = mFirebaseDatabase.getReference();
-        user = mAuth.getCurrentUser();
+        auth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseRef = firebaseDatabase.getReference();
+        user = auth.getCurrentUser();
 
         // setting up adapter
         recyclerView = view.findViewById(R.id.eventRv);
@@ -62,7 +60,7 @@ public class EventsFragment extends Fragment{
         // update if the user is logged in and get the events of the logged in user.
         if (user != null) {
             userID = user.getUid();
-            mDatabaseRef.addValueEventListener(eventListener);
+            databaseRef.addValueEventListener(eventListener);
         }
 
         return view;
@@ -81,10 +79,12 @@ public class EventsFragment extends Fragment{
             // set the values for the events in the adapter for the recycler view
             String key;
             String value;
-            Event event = new Event();
+            Event event;
 
              // for loop for each event
             for (DataSnapshot child : userEvent.getChildren()) {
+
+                event = new Event();
 
                 // for loop to get the values of each event
                 for (DataSnapshot c : child.getChildren() ){
