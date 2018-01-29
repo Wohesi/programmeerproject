@@ -19,15 +19,15 @@ import java.util.ArrayList;
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder> implements Filterable, View.OnClickListener {
 
 
-    private ArrayList<SearchTile_boardgame> SearchTile_boardgames;
-    private ArrayList<SearchTile_boardgame> mFilteredList;
+    private ArrayList<SearchTile> SearchTile_boardgames;
+    private ArrayList<SearchTile> filteredList;
     private Context context;
     private String id;
 
-    public SearchAdapter(ArrayList<SearchTile_boardgame> searchTiles, Context context) {
+    public SearchAdapter(ArrayList<SearchTile> searchTiles, Context context) {
 
         SearchTile_boardgames = searchTiles;
-        mFilteredList = searchTiles;
+        filteredList = searchTiles;
         this.context = context;
     }
 
@@ -42,17 +42,18 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
-        holder.title.setText(mFilteredList.get(position).getName());
-        holder.year.setText(mFilteredList.get(position).getYear());
-        id = mFilteredList.get(position).getID();
+        holder.title.setText(filteredList.get(position).getName());
+        holder.year.setText(filteredList.get(position).getYear());
+        id = filteredList.get(position).getID();
 
         // set listener on cardview
+        holder.card.setTag(id);
         holder.card.setOnClickListener(SearchAdapter.this);
     }
 
     @Override
     public int getItemCount() {
-        return mFilteredList.size();
+        return filteredList.size();
     }
 
     @Override
@@ -64,41 +65,42 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
                String charString = charSequence.toString();
 
                if(charString.isEmpty()) {
-                   mFilteredList = SearchTile_boardgames;
+                   filteredList = SearchTile_boardgames;
                } else {
-                   ArrayList<SearchTile_boardgame> filteredList = new ArrayList<>();
-                   for(SearchTile_boardgame searchTile_boardgame : SearchTile_boardgames) {
+                   ArrayList<SearchTile> filteredList = new ArrayList<>();
+                   for(SearchTile searchTile_boardgame : SearchTile_boardgames) {
 
                        if( searchTile_boardgame.getName().contains(charString)  || searchTile_boardgame.getYear().contains(charSequence) || searchTile_boardgame.getID().contains(charSequence)) {
                            filteredList.add(searchTile_boardgame);
                        }
 
                    }
-                   mFilteredList = filteredList;
+                   SearchAdapter.this.filteredList = filteredList;
                }
 
                FilterResults filterResults = new FilterResults();
-               filterResults.values = mFilteredList;
+               filterResults.values = filteredList;
                return filterResults;
            }
 
+           // update the filteredlist
            @Override
            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-                mFilteredList = (ArrayList<SearchTile_boardgame>) filterResults.values;
+                filteredList = (ArrayList<SearchTile>) filterResults.values;
                 //notifyDataSetChanged();
 
            }
        };
     }
 
-    public void newFragment() {
+    public void newFragment(Object id) {
 
         // making new fragment
         LargeBgFragment largeBgFragment = new LargeBgFragment();
 
         // setting bundle to add items
         Bundle arguments = new Bundle();
-        arguments.putString("id", id);
+        arguments.putString("id", id.toString());
         largeBgFragment.setArguments(arguments);
 
         // commiting fragment
@@ -113,14 +115,15 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
     @Override
     public void onClick(View v) {
         int i = v.getId();
+        Object id = v.getTag();
         if ( i == R.id.card) {
-            System.out.println(id);
-            newFragment();
+            newFragment(id);
         }
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
+        // initialize the views
         public TextView title;
         public TextView year;
         public CardView card;
@@ -128,6 +131,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         ViewHolder(View itemView) {
             super(itemView);
 
+            // set the views
             card = itemView.findViewById(R.id.card);
             title =  itemView.findViewById(R.id.title);
             year =  itemView.findViewById(R.id.year);

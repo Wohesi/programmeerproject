@@ -51,7 +51,7 @@ public class TimeDialog extends DialogFragment implements View.OnClickListener {
         int hour = timePicker.getHour();
         int min = timePicker.getMinute();
 
-        time_selected = Integer.toString(hour) + " : " + Integer.toString(min);
+        time_selected = Integer.toString(hour) + ":" + Integer.toString(min);
 
         // make new intent with the selected time
         Intent i  = new Intent();

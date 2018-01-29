@@ -25,6 +25,7 @@ import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.io.IOException;
 import java.io.StringReader;
+import java.util.ArrayList;
 import java.util.Objects;
 
 /**
@@ -109,6 +110,7 @@ public class LargeBgFragment extends Fragment {
                 try {
                     xpp.setInput(new StringReader(response));
                     int event = xpp.getEventType();
+                    ArrayList<String> names = new ArrayList<>();
 
                     while (event != XmlPullParser.END_DOCUMENT) {
                         tag = xpp.getName();
@@ -124,7 +126,23 @@ public class LargeBgFragment extends Fragment {
 
                                 if (Objects.equals(tag, "yearpublished")) { year.setText(value);}
 
-                                if (Objects.equals(tag, "name")) {title.setText(value);}
+                                if (Objects.equals(tag, "name")) {
+                                    //System.out.println(value);
+                                    names.add(value);
+                                    //System.out.println(names);
+                                    //System.out.println(names.size());
+
+                                    //System.out.println(names.e);
+                                    title.setText(value);
+                                }
+                                //System.out.println(names);
+                                for(int i = 0; i < names.size(); i ++) {
+                                    System.out.println(names.get(i) + "POSITION: " + i);
+                                    //System.out.println(names.get(1));
+                                }
+                                System.out.println(names.size());
+                                //System.out.println(names.get(1));
+
 
                                 if (Objects.equals(tag, "playingtime")) {length_setter.setText(value);}
 

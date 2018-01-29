@@ -8,15 +8,15 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class Event {
 
-    private static final AtomicInteger count = new AtomicInteger(0);
-    public String titleEvent, date, time;
+
+    public String titleEvent, date, timeEvent;
 
     public Event() {
     }
 
     // test print
     public void print_event() {
-        System.out.println(titleEvent + " " + date + " " + time);
+        System.out.println(titleEvent + " " + date + " " + timeEvent);
     }
 
     // setter & getter of title
@@ -39,10 +39,10 @@ public class Event {
 
     // setter & getter of time
     public String getTime() {
-        return time;
+        return timeEvent;
     }
 
     public void setTime(String time) {
-        this.time = time;
+        this.timeEvent = time;
     }
 }

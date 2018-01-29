@@ -38,7 +38,7 @@ public class EventsFragment extends Fragment{
     // get views for adapter
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
-    private Event event;
+
     final ArrayList<Event> events = new ArrayList<>();
 
     @Override
@@ -57,18 +57,19 @@ public class EventsFragment extends Fragment{
         recyclerView = view.findViewById(R.id.eventRv);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        adapter = new EventAdapter(events, getContext());
 
+        // update if the user is logged in and get the events of the logged in user.
         if (user != null) {
             userID = user.getUid();
             mDatabaseRef.addValueEventListener(eventListener);
-        } else {
-
         }
 
         return view;
     }
 
 
+    // eventlistener for the database
     private ValueEventListener eventListener = new ValueEventListener() {
 
         @Override
@@ -78,41 +79,42 @@ public class EventsFragment extends Fragment{
             DataSnapshot userEvent = dataSnapshot.child("users").child(userID).child("event");
 
             // set the values for the events in the adapter for the recycler view
-
             String key;
             String value;
+            Event event = new Event();
 
-             //for loop for each child of the event. i.e. 'name' - 'date' - 'time'
+             // for loop for each event
             for (DataSnapshot child : userEvent.getChildren()) {
+
+                // for loop to get the values of each event
                 for (DataSnapshot c : child.getChildren() ){
 
-                    event = new Event();
+                    // get the key and value
                     key = c.getKey();
                     value = (String) c.getValue();
-                    //System.out.println(value);
 
-                    System.out.println("test");
-                    System.out.println(key);
-                    System.out.println(value);
-                    System.out.println("---------------");
+                    // using cases for each key in the database
+                    switch (key) {
+                        case "time":
+                            event.setTime(value);
+                            break;
 
-                    if (Objects.equals(key, "title")) {
-                        event.setTitle(value);
-                    }
-                    if (Objects.equals(key, "date")) {
-                        event.setDate(value);
-                    }
+                        case "title":
+                            event.setTitle(value);
+                            break;
 
-                    if (Objects.equals(key, "time")) {
-                        event.setTime(value);
+                        case "date":
+                            event.setDate(value);
+                            break;
+
                     }
                 }
 
+                // add the events to a list
                 events.add(event);
 
             }
-
-            adapter = new EventAdapter(events, getContext());
+            // set the adapter
             recyclerView.setAdapter(adapter);
         }
 

@@ -37,8 +37,8 @@ public class SearchFragment extends Fragment {
 
     // get API connection views / variables
     private RequestQueue requestQueue;
-    private SearchTile_boardgame tileBoardgame;
-    private ArrayList<SearchTile_boardgame> searchTiles = new ArrayList<>();
+    private SearchTile tileBoardgame;
+    private ArrayList<SearchTile> searchTiles = new ArrayList<>();
     private XmlPullParser xpp;
     private String url;
     public String tag_id = null;
@@ -65,6 +65,10 @@ public class SearchFragment extends Fragment {
         // getting XML data from the API
         requestQueue = Volley.newRequestQueue(getContext());
 
+        // set the adapter
+        adapter = new SearchAdapter(searchTiles, getContext());
+        recyclerView.setAdapter(adapter);
+
         // initializing the pullparser for XMLparser
         try {
             XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
@@ -75,6 +79,7 @@ public class SearchFragment extends Fragment {
 
         // searchview initializing
         SearchView searchView = view.findViewById(R.id.search_bar);
+
         searchView.setOnQueryTextListener(
                 new SearchView.OnQueryTextListener() {
                     @Override
@@ -99,8 +104,6 @@ public class SearchFragment extends Fragment {
                     public boolean onQueryTextChange(String s) {
                         // perform the search query
                         System.out.println("this has been changed:  "+ s);
-
-                        //SearchAdapter.getFilter().filter(s);
                         return false;
                     }
                 }
@@ -120,40 +123,37 @@ public class SearchFragment extends Fragment {
                     xpp.setInput(new StringReader(response));
                     int event = xpp.getEventType();
 
+                    // empty values for name and tag to be set to the correct ones.
                     String tag = "", value = "";
-                    ArrayList<String> ids = new ArrayList<String>();
-
 
                     while(event != XmlPullParser.END_DOCUMENT) {
 
+                        // get the name of the tag.
                         tag = xpp.getName();
-
                         switch(event) {
 
                             case XmlPullParser.START_TAG:
 
                                 if(tag.equals("boardgame")) {
 
-                                    tileBoardgame = new SearchTile_boardgame();
+                                    // make new searchtile
+                                    tileBoardgame = new SearchTile();
                                     searchTiles.add(tileBoardgame);
 
+                                    // get the ID as attribute value
                                     tag_id = xpp.getAttributeValue(null, "objectid");
-                                    ids.add(tag_id);
-                                    for(int i = 0; i<ids.size(); i ++) {
 
-                                    }
+                                    // set the ID for the searchtile
                                     tileBoardgame.setID(tag_id);
-                                    //System.out.println(ids);
-                                    // need to figure out a way to connect the corresponding ID to the corresponding name
                                 }
                                 break;
 
+                            // get the text between the opening and close tags.
                             case XmlPullParser.TEXT:
                                 value = xpp.getText();
                                 break;
 
                             case XmlPullParser.END_TAG:
-
                                 switch (tag) {
                                     case "name":
                                         tileBoardgame.setName(value);
@@ -163,15 +163,11 @@ public class SearchFragment extends Fragment {
                                 }
                                 break;
                         }
-
-
                         event = xpp.next();
-
-                        // add searched items to the adapter
-                        adapter = new SearchAdapter(searchTiles, getContext());
-                        adapter.notifyDataSetChanged();
-                        recyclerView.setAdapter(adapter);
                     }
+
+                    // add searched items to the adapter
+                    adapter.notifyDataSetChanged();
 
                 // error catches
                 } catch (XmlPullParserException | IOException e) {

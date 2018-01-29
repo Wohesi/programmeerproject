@@ -1,12 +1,12 @@
 package com.example.gebruiker.boardgameapp;
 
 
-public class SearchTile_boardgame {
+public class SearchTile {
 
     public String name, id, year ;
     public int iD;
 
-    public SearchTile_boardgame() {
+    public SearchTile() {
     }
 
     // test print
