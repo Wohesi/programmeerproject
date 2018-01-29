@@ -79,3 +79,8 @@ Zodra de searchview een lijst van resultaten terug krijgt pakt hij altijd of het
 auto increment werkt nu voor evenementen per user,alleen reset de auto increment. moet hiervoor naar een oplossing zoeken.
 
 Ook voor het toevoegen van de evenemtnen vanuit firebase moet op een betere manier gedaan worden. 
+
+# day 18 - 26-1-2018
+De auto increment was een count, maar deze is vervangen voor een UUID: 
+https://stackoverflow.com/questions/1389736/how-do-i-create-a-unique-id-in-java
+ook de eventsfragment waar de events worden gegenereerd is aangepast zodat de het duidelijk erin zit. Echter, de juist elementen worden nog niet geladen.
