@@ -84,3 +84,13 @@ Ook voor het toevoegen van de evenemtnen vanuit firebase moet op een betere mani
 De auto increment was een count, maar deze is vervangen voor een UUID: 
 https://stackoverflow.com/questions/1389736/how-do-i-create-a-unique-id-in-java
 ook de eventsfragment waar de events worden gegenereerd is aangepast zodat de het duidelijk erin zit. Echter, de juist elementen worden nog niet geladen.
+
+# day 19 - 27-1-2018
+WEEKEND
+
+# day 20 - 28-1-2018
+WEEKEND
+
+# day 21 - 29-1-2018
+De ID's worden nu doorgestuurd naar en het juiste spel wordt geladen. Dit maakt de zoekfunctie handiger. Ook worden de evenementen goed geladen bij de juiste blokken
+Gewerkt aan de UI met betrekking tot placeholder images en app icon aangepast
