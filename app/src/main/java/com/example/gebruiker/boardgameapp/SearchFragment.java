@@ -65,6 +65,10 @@ public class SearchFragment extends Fragment {
         // getting XML data from the API
         requestQueue = Volley.newRequestQueue(getContext());
 
+        // set adapter
+        adapter = new SearchAdapter(searchTiles, getContext());
+        recyclerView.setAdapter(adapter);
+
         // initializing the pullparser for XMLparser
         try {
             XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
@@ -138,10 +142,11 @@ public class SearchFragment extends Fragment {
                                     searchTiles.add(tileBoardgame);
 
                                     tag_id = xpp.getAttributeValue(null, "objectid");
-                                    ids.add(tag_id);
-                                    for(int i = 0; i<ids.size(); i ++) {
+//                                    ids.add(tag_id);
+//                                    for(int i = 0; i<ids.size(); i ++) {
+//
+//                                    }
 
-                                    }
                                     tileBoardgame.setID(tag_id);
                                     //System.out.println(ids);
                                     // need to figure out a way to connect the corresponding ID to the corresponding name
@@ -164,14 +169,12 @@ public class SearchFragment extends Fragment {
                                 break;
                         }
 
-
                         event = xpp.next();
 
-                        // add searched items to the adapter
-                        adapter = new SearchAdapter(searchTiles, getContext());
-                        adapter.notifyDataSetChanged();
-                        recyclerView.setAdapter(adapter);
                     }
+
+                    // add searched items to the adapter
+                    adapter.notifyDataSetChanged();
 
                 // error catches
                 } catch (XmlPullParserException | IOException e) {

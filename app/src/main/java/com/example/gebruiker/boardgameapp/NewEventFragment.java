@@ -152,7 +152,6 @@ public class NewEventFragment extends DialogFragment implements View.OnClickList
         getDialog().dismiss();
         Toast.makeText(getContext(), "Made event: " + eventTitle, Toast.LENGTH_LONG).show();
 
-
     }
 
     @Override

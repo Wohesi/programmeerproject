@@ -47,6 +47,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         id = mFilteredList.get(position).getID();
 
         // set listener on cardview
+        holder.card.setTag(id);
         holder.card.setOnClickListener(SearchAdapter.this);
     }
 
@@ -91,14 +92,15 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
        };
     }
 
-    public void newFragment() {
+    public void newFragment(Object id) {
 
         // making new fragment
         LargeBgFragment largeBgFragment = new LargeBgFragment();
 
         // setting bundle to add items
         Bundle arguments = new Bundle();
-        arguments.putString("id", id);
+        arguments.putString("id", id.toString());
+
         largeBgFragment.setArguments(arguments);
 
         // commiting fragment
@@ -113,9 +115,10 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
     @Override
     public void onClick(View v) {
         int i = v.getId();
+        Object id = v.getTag();
         if ( i == R.id.card) {
-            System.out.println(id);
-            newFragment();
+            //System.out.println(id);
+            newFragment(id);
         }
     }
 
