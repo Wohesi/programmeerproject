@@ -1,7 +1,14 @@
+/**
+ * Name: Wout Singerling
+ * https://github.com/Wohesi/programmeerproject
+ * Student number: 11136324
+ */
+
 package com.example.gebruiker.boardgameapp;
 
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -21,9 +28,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class EventsFragment extends Fragment{
 
     // get firebase information
@@ -32,6 +36,7 @@ public class EventsFragment extends Fragment{
     private FirebaseAuth auth;
     private FirebaseUser user;
     private String userID;
+    private FirebaseAuth.AuthStateListener mAuthListener;
 
     // get views for adapter
     private RecyclerView recyclerView;
@@ -63,6 +68,15 @@ public class EventsFragment extends Fragment{
             databaseRef.addValueEventListener(eventListener);
         }
 
+        if (user != null) {
+            mAuthListener = new FirebaseAuth.AuthStateListener() {
+                @Override
+                public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                    userID = user.getUid();
+                    databaseRef.addValueEventListener(eventListener);
+                }
+            };
+        }
         return view;
     }
 

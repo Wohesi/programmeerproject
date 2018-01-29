@@ -1,3 +1,9 @@
+/**
+ * Name: Wout Singerling
+ * https://github.com/Wohesi/programmeerproject
+ * Student number: 11136324
+ */
+
 package com.example.gebruiker.boardgameapp;
 
 
@@ -22,6 +28,7 @@ public class TimeDialog extends DialogFragment implements View.OnClickListener {
 
     public static final int TIMEPICKER_FRAGMENT=2;
 
+    // set the timepicker view
     private TimePicker timePicker;
 
 
@@ -65,6 +72,7 @@ public class TimeDialog extends DialogFragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         int i = v.getId();
+        // when cancel is clicked close the dialog
         if (i == R.id.cancelButton ) {
             getDialog().dismiss();
         } else if ( i == R.id.confirmButton) {

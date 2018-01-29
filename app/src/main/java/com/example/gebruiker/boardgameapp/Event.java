@@ -1,10 +1,11 @@
+/**
+ * Name: Wout Singerling
+ * https://github.com/Wohesi/programmeerproject
+ * Student number: 11136324
+ */
+
 package com.example.gebruiker.boardgameapp;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
-/**
- * Created by Wout on 24-1-2018.
- */
 
 public class Event {
 

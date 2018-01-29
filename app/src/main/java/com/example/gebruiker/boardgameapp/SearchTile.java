@@ -1,3 +1,9 @@
+/**
+ * Name: Wout Singerling
+ * https://github.com/Wohesi/programmeerproject
+ * Student number: 11136324
+ */
+
 package com.example.gebruiker.boardgameapp;
 
 

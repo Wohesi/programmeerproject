@@ -1,3 +1,9 @@
+/**
+ * Name: Wout Singerling
+ * https://github.com/Wohesi/programmeerproject
+ * Student number: 11136324
+ */
+
 package com.example.gebruiker.boardgameapp;
 
 
@@ -27,9 +33,7 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+
 public class LargeBgFragment extends Fragment {
 
     // values for visuals
@@ -70,16 +74,19 @@ public class LargeBgFragment extends Fragment {
         title = LargeBgFragment.findViewById(R.id.title);
         year = LargeBgFragment.findViewById(R.id.year);
 
+        // maximum and minimum players
         maxPlayers_setter = LargeBgFragment.findViewById(R.id.num_players_setter_max);
         minPlayers_setter = LargeBgFragment.findViewById(R.id.num_players_setter_min);
 
+        // age
         age_setter = LargeBgFragment.findViewById(R.id.age_setter);
+
+        // minimum and maximum players
+        minPlaytime_setter = LargeBgFragment.findViewById(R.id.minPlaytime_setter);
+        maxPlaytime_setter = LargeBgFragment.findViewById(R.id.maxPlaytime_setter);
 
         backgroundImg = LargeBgFragment.findViewById(R.id.background_img);
         description = LargeBgFragment.findViewById(R.id.description_setter);
-
-        minPlaytime_setter = LargeBgFragment.findViewById(R.id.minPlaytime_setter);
-        maxPlaytime_setter = LargeBgFragment.findViewById(R.id.maxPlaytime_setter);
 
         // get the calendar dialog
         openCalendar = LargeBgFragment.findViewById(R.id.openCalendar);
@@ -145,17 +152,16 @@ public class LargeBgFragment extends Fragment {
                                 //System.out.println(names.get(1));
 
 
-                                if (Objects.equals(tag, "minplaytime")) {minPlaytime_setter.setText("Min: "+ value);}
-                                if (Objects.equals(tag, "maxplaytime")) {maxPlaytime_setter.setText("Max: "+value);}
-                                if (Objects.equals(tag, "age")) {age_setter.setText(value);}
-
+                                if (Objects.equals(tag, "minplaytime")) {
+                                    minPlaytime_setter.setText("Min: "+ value);}
+                                if (Objects.equals(tag, "maxplaytime")) {
+                                    maxPlaytime_setter.setText("Max: "+value);}
+                                if (Objects.equals(tag, "age")) {
+                                    age_setter.setText(value);}
                                 if (Objects.equals(tag, "minplayers")) {
-                                    minPlayers_setter.setText("Min: "+value);
-                                }
-
+                                    minPlayers_setter.setText("Min: "+value);}
                                 if (Objects.equals(tag, "maxplayers")) {
-                                    maxPlayers_setter.setText("Max: "+value);
-                                }
+                                    maxPlayers_setter.setText("Max: "+value);}
 
                                 if (Objects.equals(tag, "description")) {
 
@@ -167,11 +173,7 @@ public class LargeBgFragment extends Fragment {
                                 }
 
                                 if (Objects.equals(tag, "image")) {
-                                    if(Objects.equals(tag, null)) {
-                                        backgroundImg.setVisibility(View.GONE);
-                                    } else {
                                         Picasso.with(getContext()).load(value).fit().into(backgroundImg);
-                                    }
                                 }
 
                                 break;

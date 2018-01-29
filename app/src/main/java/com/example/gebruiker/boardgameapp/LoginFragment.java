@@ -1,3 +1,9 @@
+/**
+ * Name: Wout Singerling
+ * https://github.com/Wohesi/programmeerproject
+ * Student number: 11136324
+ */
+
 package com.example.gebruiker.boardgameapp;
 
 
@@ -22,9 +28,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class LoginFragment extends Fragment implements View.OnClickListener{
 
     private FirebaseAuth mAuth;
@@ -48,6 +51,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
 
+        // check if the user is logged in and update the UI
         if( user != null) {
             updateUI(user);
         } else {
@@ -59,6 +63,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
         view.findViewById(R.id.loginButton).setOnClickListener( LoginFragment.this);
         view.findViewById(R.id.signoutButton).setOnClickListener( LoginFragment.this);
 
+        // email and password
         userEmail = view.findViewById(R.id.email);
         userPassword = view.findViewById(R.id.password);
 
@@ -152,11 +157,12 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
         int i = v.getId();
         if (i == R.id.loginButton) {
             signIn();
+            //getActivity().recreate();
         } else if ( i == R.id.registerButton) {
             newRegisterFragment();
         } else if(  i == R.id.signoutButton) {
-            //mAuth.signOut();
             FirebaseAuth.getInstance().signOut();
+            getActivity().recreate();
         }
     }
 

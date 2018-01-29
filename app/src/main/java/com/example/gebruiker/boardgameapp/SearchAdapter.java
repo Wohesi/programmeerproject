@@ -1,3 +1,9 @@
+/**
+ * Name: Wout Singerling
+ * https://github.com/Wohesi/programmeerproject
+ * Student number: 11136324
+ */
+
 package com.example.gebruiker.boardgameapp;
 
 import android.app.Activity;
@@ -18,7 +24,7 @@ import java.util.ArrayList;
 
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder> implements Filterable, View.OnClickListener {
 
-
+    // set variables
     private ArrayList<SearchTile> SearchTile_boardgames;
     private ArrayList<SearchTile> filteredList;
     private Context context;
@@ -26,6 +32,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
 
     public SearchAdapter(ArrayList<SearchTile> searchTiles, Context context) {
 
+        // initialize the class variables
         SearchTile_boardgames = searchTiles;
         filteredList = searchTiles;
         this.context = context;
@@ -42,11 +49,13 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
+        // set the correct views with the correct contents
         holder.title.setText(filteredList.get(position).getName());
         holder.year.setText(filteredList.get(position).getYear());
         id = filteredList.get(position).getID();
 
         // set listener on cardview
+        // get the ID of the game clicked
         holder.card.setTag(id);
         holder.card.setOnClickListener(SearchAdapter.this);
     }
@@ -56,6 +65,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         return filteredList.size();
     }
 
+    // filter function for the searchview
     @Override
     public Filter getFilter() {
 
@@ -68,13 +78,15 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
                    filteredList = SearchTile_boardgames;
                } else {
                    ArrayList<SearchTile> filteredList = new ArrayList<>();
-                   for(SearchTile searchTile_boardgame : SearchTile_boardgames) {
 
+                   // checks if each element has been filled before adding it to the list of searchtiles.
+                   for(SearchTile searchTile_boardgame : SearchTile_boardgames) {
                        if( searchTile_boardgame.getName().contains(charString)  || searchTile_boardgame.getYear().contains(charSequence) || searchTile_boardgame.getID().contains(charSequence)) {
                            filteredList.add(searchTile_boardgame);
                        }
 
                    }
+                   // set the adapter to the list where is been searched for
                    SearchAdapter.this.filteredList = filteredList;
                }
 

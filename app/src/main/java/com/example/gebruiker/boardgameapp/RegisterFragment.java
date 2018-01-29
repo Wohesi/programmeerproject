@@ -1,3 +1,9 @@
+/**
+ * Name: Wout Singerling
+ * https://github.com/Wohesi/programmeerproject
+ * Student number: 11136324
+ */
+
 package com.example.gebruiker.boardgameapp;
 
 
@@ -20,14 +26,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
+
+
 public class RegisterFragment extends Fragment implements View.OnClickListener {
 
     // Firebase connection
     private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
 
     // Set parameters
     private EditText newUserEmail;
@@ -86,6 +90,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
             return;
         }
 
+        // set the validation for the user and password.
         validateCreateAccount(email, password);
     }
 

@@ -1,3 +1,9 @@
+/**
+ * Name: Wout Singerling
+ * https://github.com/Wohesi/programmeerproject
+ * Student number: 11136324
+ */
+
 package com.example.gebruiker.boardgameapp;
 
 import android.app.Activity;
@@ -14,14 +20,12 @@ import android.widget.Toast;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * Created by Wout on 18-1-2018.
- */
 
 public class CalendarDialog extends DialogFragment implements View.OnClickListener {
 
     public String dateSelected;
 
+    // set a pointer so the fragments can communicate
     public static final int DATEPICKER_FRAGMENT=1; // adding this line
 
     private DatePicker datePicker;
@@ -45,10 +49,12 @@ public class CalendarDialog extends DialogFragment implements View.OnClickListen
         int month = datePicker.getMonth();
         int year = datePicker.getYear() - 1900;
 
+        // set the format to which the date can be stored
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
         Date date = new Date(year, month, day);
         dateSelected = dateFormat.format(date);
 
+        // send the date back to NewEventFragment
         Intent i = new Intent();
         i.putExtra("date", dateSelected);
         getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, i);
@@ -58,9 +64,13 @@ public class CalendarDialog extends DialogFragment implements View.OnClickListen
     @Override
     public void onClick(View v) {
         int i = v.getId();
+
+        // when cancel is clicked close the dialog
         if (i == R.id.cancelButton) {
             getDialog().dismiss();
-        } else if (i == R.id.confirmButton) {
+        }
+        // if 'ok' is clicked, confirm the time
+        else if (i == R.id.confirmButton) {
             getDate();
             Toast.makeText(getContext(), "You set date to: " + dateSelected, Toast.LENGTH_SHORT).show();
         }

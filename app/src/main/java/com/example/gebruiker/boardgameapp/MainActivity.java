@@ -1,6 +1,12 @@
+/**
+ * Name: Wout Singerling
+ * https://github.com/Wohesi/programmeerproject
+ * Student number: 11136324
+ */
+
+
 package com.example.gebruiker.boardgameapp;
 
-import android.net.Uri;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -14,13 +20,12 @@ import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+
+public class MainActivity extends AppCompatActivity {
 
     // firebase instance
     private FirebaseAuth mAuth;
@@ -62,9 +67,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
         setupTabIcons();
-
-        signout = findViewById(R.id.signoutButton);
-        signin = findViewById(R.id.loginButton);
     }
 
 
@@ -85,13 +87,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    @Override
-    public void onClick(View v) {
-        int i = v.getId();
-        if (i == R.id.signoutButton) {
-            super.recreate();
-        }
-    }
 
     // set viewPagerAdapter for fragments
     class ViewPagerAdapter extends FragmentPagerAdapter {
@@ -108,9 +103,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (position == 0 ) {
                 return new BlankFragment();
             }
-
                 return mFragmentList.get(position);
-
         }
 
         @Override

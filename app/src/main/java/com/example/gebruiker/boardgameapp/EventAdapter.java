@@ -1,3 +1,9 @@
+/**
+ * Name: Wout Singerling
+ * https://github.com/Wohesi/programmeerproject
+ * Student number: 11136324
+ */
+
 package com.example.gebruiker.boardgameapp;
 
 import android.content.Context;
@@ -32,7 +38,7 @@ public class EventAdapter  extends RecyclerView.Adapter<EventAdapter.ViewHolder>
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-
+        // set the correct texts
         holder.titleEvent.setText(eventList.get(position).getTitle());
         holder.dateEvent.setText(eventList.get(position).getDate());
         holder.timeEvent.setText(eventList.get(position).getTime());
@@ -46,13 +52,14 @@ public class EventAdapter  extends RecyclerView.Adapter<EventAdapter.ViewHolder>
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
+        // set the views
         public TextView titleEvent;
         public TextView dateEvent;
         public TextView timeEvent;
 
         ViewHolder(View itemView) {
             super(itemView);
-
+            // get the views from the layout file
             titleEvent = itemView.findViewById(R.id.titleEvent);
             dateEvent = itemView.findViewById(R.id.dateEvent);
             timeEvent = itemView.findViewById(R.id.timeEvent);

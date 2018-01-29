@@ -1,3 +1,9 @@
+/**
+ * Name: Wout Singerling
+ * https://github.com/Wohesi/programmeerproject
+ * Student number: 11136324
+ */
+
 package com.example.gebruiker.boardgameapp;
 
 
@@ -5,7 +11,6 @@ import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,9 +26,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+
+
 public class NewEventFragment extends DialogFragment implements View.OnClickListener{
 
     // dialog values
@@ -150,16 +154,24 @@ public class NewEventFragment extends DialogFragment implements View.OnClickList
     public void onClick(View v) {
         int i = v.getId();
 
+        // confirm the event
         if ( i == R.id.confirmEvent) {
+            // create an event with auto increment by using an unique string for each event.
+            // this to prevent events with the same time, date and name get overwritten.
             String uniqueID = UUID.randomUUID().toString();
-            // create an event with auto increment
             createEvent(uniqueID);
 
-        } else if (i == R.id.cancelEvent) {
+        }
+        // when cancel is clicked close the dialog
+        else if (i == R.id.cancelEvent) {
             getDialog().dismiss();
-        } else if (i == R.id.setTime) {
+        }
+        // open the timepicker
+        else if (i == R.id.setTime) {
             pickTime();
-        } else if (i == R.id.setDate) {
+        }
+        // open the datepicker
+        else if (i == R.id.setDate) {
             pickDate();
         }
 

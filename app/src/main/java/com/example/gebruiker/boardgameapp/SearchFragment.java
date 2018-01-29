@@ -1,3 +1,9 @@
+/**
+ * Name: Wout Singerling
+ * https://github.com/Wohesi/programmeerproject
+ * Student number: 11136324
+ */
+
 package com.example.gebruiker.boardgameapp;
 
 
@@ -93,8 +99,10 @@ public class SearchFragment extends Fragment {
                         //+"&exact=1"
                         System.out.println(url);
 
+                        // clear the list before a new seach query is performed
                         searchTiles.clear();
 
+                        // load the data with the URL containing the correct searchquery
                         loadData(url);
 
                         return false;
