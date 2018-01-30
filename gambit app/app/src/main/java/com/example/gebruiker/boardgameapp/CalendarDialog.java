@@ -61,6 +61,7 @@ public class CalendarDialog extends DialogFragment implements View.OnClickListen
         getDialog().dismiss();
     }
 
+    // onclick method
     @Override
     public void onClick(View v) {
         int i = v.getId();

@@ -41,7 +41,7 @@ public class NewEventFragment extends DialogFragment implements View.OnClickList
 
     // firebase connections - database
     private FirebaseAuth mAuth;
-    private DatabaseReference mDatabase;
+    private DatabaseReference database;
     private FirebaseDatabase mFirebaseDatabase;
     private String userID;
 
@@ -62,7 +62,7 @@ public class NewEventFragment extends DialogFragment implements View.OnClickList
 
         // get firebase connection
         mFirebaseDatabase = FirebaseDatabase.getInstance();
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+        database = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
         userID = user.getUid();
@@ -110,6 +110,7 @@ public class NewEventFragment extends DialogFragment implements View.OnClickList
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch(requestCode) {
+            // get the date from the calendar dialogfragment
             case DATEPICKER_FRAGMENT:
                 if(resultCode == Activity.RESULT_OK) {
                     Bundle bundle = data.getExtras();
@@ -117,6 +118,7 @@ public class NewEventFragment extends DialogFragment implements View.OnClickList
                     System.out.println(resultDate + "FROM NEW EVENT DIALOG");
                 }
                 break;
+            // get the time from time dialogfragment
             case TIMEPICKER_FRAGMENT:
                 if(resultCode == Activity.RESULT_OK) {
                     Bundle bundle = data.getExtras();
@@ -129,7 +131,7 @@ public class NewEventFragment extends DialogFragment implements View.OnClickList
     // method where the correct data will be added to the database.
     public void createEvent(String ID) {
 
-        // set the values
+        // add the values to a map
         eventTitle = setEventTitle.getText().toString();
         Map<String, Object> setEvent = new HashMap<String, Object>();
         setEvent.put("title", eventTitle);
@@ -137,7 +139,7 @@ public class NewEventFragment extends DialogFragment implements View.OnClickList
         setEvent.put("time", resultTime);
 
         // push the event to the database
-        mDatabase.child("users")
+        database.child("users")
                 .child(firebaseUser.getUid())
                 .child("event")
                 .child(String.valueOf(ID))

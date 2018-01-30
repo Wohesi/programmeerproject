@@ -31,7 +31,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class RegisterFragment extends Fragment implements View.OnClickListener {
 
     // Firebase connection
-    private FirebaseAuth mAuth;
+    private FirebaseAuth auth;
 
     // Set parameters
     private EditText newUserEmail;
@@ -50,7 +50,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.fragment_register, container, false);
 
         // firebase authentication
-        mAuth = FirebaseAuth.getInstance();
+        auth = FirebaseAuth.getInstance();
 
         // get the email and username
         newUserEmail = view.findViewById(R.id.registerEmail);
@@ -96,14 +96,14 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
     // register the new user.
     public void validateCreateAccount(String email, String password) {
 
-        mAuth.createUserWithEmailAndPassword(email, password)
+        auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener((Activity) getContext(), new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("User created", "createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
+                            FirebaseUser user = auth.getCurrentUser();
                             Toast.makeText(getContext(), "You registered as: "+ user, Toast.LENGTH_LONG).show();
                         } else {
                             // If sign in fails, display a message to the user.
@@ -122,7 +122,6 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
         int i = v.getId();
         if (i == R.id.registerButton) {
             createAccount();
-            // toast
         }
     }
 }

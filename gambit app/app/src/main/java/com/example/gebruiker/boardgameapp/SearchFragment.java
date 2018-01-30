@@ -48,10 +48,10 @@ public class SearchFragment extends Fragment {
     private ArrayList<SearchTile> searchTiles = new ArrayList<>();
     private XmlPullParser xpp;
     private String url;
-    public String tag_id = null;
+    public String tagId = null;
 
     // firebase variables
-    private FirebaseAuth mAuth;
+    private FirebaseAuth auth;
 
 
     @Override
@@ -61,8 +61,8 @@ public class SearchFragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_search, container, false);
 
         // get the firebase data
-        mAuth = FirebaseAuth.getInstance();
-        FirebaseUser user = mAuth.getCurrentUser();
+        auth = FirebaseAuth.getInstance();
+        FirebaseUser user = auth.getCurrentUser();
 
         // setting the adaptor
         recyclerView = view.findViewById(R.id.searchRv);
@@ -80,7 +80,7 @@ public class SearchFragment extends Fragment {
         xmlConnector();
 
         // searchview initializing
-        SearchView searchView = view.findViewById(R.id.search_bar);
+        SearchView searchView = view.findViewById(R.id.searchBar);
 
         searchView.setOnQueryTextListener(onQueryTextListener);
 
@@ -163,10 +163,10 @@ public class SearchFragment extends Fragment {
         searchTiles.add(tileBoardgame);
 
         // get the ID as attribute value
-        tag_id = xpp.getAttributeValue(null, "objectid");
+        tagId = xpp.getAttributeValue(null, "objectid");
 
         // set the ID for the searchtile
-        tileBoardgame.setID(tag_id);
+        tileBoardgame.setID(tagId);
     }
 
     public void xmlConnector() {

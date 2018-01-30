@@ -100,9 +100,10 @@ public class EventsFragment extends Fragment {
              // for loop for each event
             for (DataSnapshot child : userEvent.getChildren()) {
 
+                // make a new event for each element in the databse.
                 event = new Event();
 
-                // for loop to get the values of each event
+                // for loop to get the values of each event and put it in the new event.
                 for (DataSnapshot c : child.getChildren() ){
 
                     // get the key and value
@@ -140,6 +141,7 @@ public class EventsFragment extends Fragment {
         }
     };
 
+    // update the UI with the correct events.
     public void updateUI() {
         if (auth.getCurrentUser() != null) {
             userID = auth.getCurrentUser().getUid();

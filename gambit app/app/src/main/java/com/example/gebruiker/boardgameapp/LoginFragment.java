@@ -30,7 +30,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class LoginFragment extends Fragment implements View.OnClickListener{
 
-    private FirebaseAuth mAuth;
+    private FirebaseAuth auth;
 
     private EditText userEmail, userPassword;
 
@@ -48,15 +48,11 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
         // Inflate the layout for this fragment
         view =  inflater.inflate(R.layout.fragment_login, container, false);
 
-        mAuth = FirebaseAuth.getInstance();
-        FirebaseUser user = mAuth.getCurrentUser();
+        auth = FirebaseAuth.getInstance();
+        FirebaseUser user = auth.getCurrentUser();
 
         // check if the user is logged in and update the UI
-        if( user != null) {
-            updateUI(user);
-        } else {
-            view.findViewById(R.id.signoutButton).setVisibility(View.GONE);
-        }
+        loginCheck(user);
 
         // buttons
         view.findViewById(R.id.registerButton).setOnClickListener( LoginFragment.this);
@@ -93,14 +89,14 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
 
     public void validateUser(String email, String password) {
 
-        mAuth.signInWithEmailAndPassword(email, password)
+        auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener((Activity) getContext(), new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("Signed in", "signInWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
+                            FirebaseUser user = auth.getCurrentUser();
                             Toast.makeText(getContext(), "Logged in as: "+ user.getEmail(), Toast.LENGTH_SHORT).show();
                             // update the login fragment with the right UI
                             updateUI(user);
@@ -126,6 +122,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
         transaction.commit();
     }
 
+    // update the UI after a user is logged in
     private void updateUI(FirebaseUser currentUser ) {
 
         // remove visibility from views if user is logged in.
@@ -161,7 +158,16 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
             newRegisterFragment();
         } else if(  i == R.id.signoutButton) {
             FirebaseAuth.getInstance().signOut();
+            Toast.makeText(getContext(), "Signed out", Toast.LENGTH_SHORT).show();
             getActivity().recreate();
+        }
+    }
+
+    public void loginCheck(FirebaseUser user) {
+        if( user != null) {
+            updateUI(user);
+        } else {
+            view.findViewById(R.id.signoutButton).setVisibility(View.GONE);
         }
     }
 

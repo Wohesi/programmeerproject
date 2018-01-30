@@ -25,7 +25,7 @@ import java.util.ArrayList;
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder> implements Filterable, View.OnClickListener {
 
     // set variables
-    private ArrayList<SearchTile> SearchTile_boardgames;
+    private ArrayList<SearchTile> searchTileBoardgames;
     private ArrayList<SearchTile> filteredList;
     private Context context;
     private String id;
@@ -33,7 +33,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
     public SearchAdapter(ArrayList<SearchTile> searchTiles, Context context) {
 
         // initialize the class variables
-        SearchTile_boardgames = searchTiles;
+        searchTileBoardgames = searchTiles;
         filteredList = searchTiles;
         this.context = context;
     }
@@ -75,12 +75,12 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
                String charString = charSequence.toString();
 
                if(charString.isEmpty()) {
-                   filteredList = SearchTile_boardgames;
+                   filteredList = searchTileBoardgames;
                } else {
                    ArrayList<SearchTile> filteredList = new ArrayList<>();
 
                    // checks if each element has been filled before adding it to the list of searchtiles.
-                   for(SearchTile searchTile_boardgame : SearchTile_boardgames) {
+                   for(SearchTile searchTile_boardgame : searchTileBoardgames) {
                        if( searchTile_boardgame.getName().contains(charString)  || searchTile_boardgame.getYear().contains(charSequence) || searchTile_boardgame.getID().contains(charSequence)) {
                            filteredList.add(searchTile_boardgame);
                        }

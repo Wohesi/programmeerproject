@@ -16,7 +16,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -28,7 +27,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     // firebase instance
-    private FirebaseAuth mAuth;
+    private FirebaseAuth auth;
     private FirebaseUser currentUser;
 
     // Setting variables for the toolbar
@@ -48,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // initialize the firebase
-        mAuth = FirebaseAuth.getInstance();
+        auth = FirebaseAuth.getInstance();
 
         // Setting up the tabs and toolbar
         toolbar = findViewById(R.id.toolbar);
@@ -82,14 +81,13 @@ public class MainActivity extends AppCompatActivity {
         adapter.addFragment(new EventsFragment(), "Events");
         adapter.addFragment(new LoginFragment(), "User");
         viewPager.setAdapter(adapter);
-
     }
 
 
     // set viewPagerAdapter for fragments
     class ViewPagerAdapter extends FragmentPagerAdapter {
-        private final List<Fragment> mFragmentList = new ArrayList<>();
-        private final List<String> mFragmentTitleList = new ArrayList<>();
+        private final List<Fragment> fragmentList = new ArrayList<>();
+        private final List<String> fragmentTitleList = new ArrayList<>();
 
         public ViewPagerAdapter(FragmentManager manager) {
             super(manager);
@@ -101,31 +99,33 @@ public class MainActivity extends AppCompatActivity {
             if (position == 0 ) {
                 return new BlankFragment();
             }
-                return mFragmentList.get(position);
+                return fragmentList.get(position);
         }
 
+        // count the amount of fragments
         @Override
         public int getCount() {
-            return mFragmentList.size();
+            return fragmentList.size();
         }
 
+        // method to add fragments to the tabbar
         public void addFragment(Fragment fragment, String title) {
-            mFragmentList.add(fragment);
-            mFragmentTitleList.add(title);
+            fragmentList.add(fragment);
+            fragmentTitleList.add(title);
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return mFragmentTitleList.get(position);
+            return fragmentTitleList.get(position);
         }
     }
 
-    // firebase methods
+    // firebase connection
     @Override
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-        currentUser = mAuth.getCurrentUser();
+        currentUser = auth.getCurrentUser();
 
     }
 

@@ -30,7 +30,6 @@ import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.io.IOException;
 import java.io.StringReader;
-import java.util.ArrayList;
 import java.util.Objects;
 
 
@@ -45,11 +44,9 @@ public class LargeBgFragment extends Fragment {
     private String url;
     private RequestQueue requestQueue;
     private XmlPullParser xpp;
-    private String bg_id;
+    private String bgId;
     private String tag;
-    private String tagAttr;
     private String value;
-    ArrayList<String> names = new ArrayList<>();
 
 
     public LargeBgFragment() {
@@ -65,11 +62,11 @@ public class LargeBgFragment extends Fragment {
         // get the corresponding ID from the bundle
         Bundle arguments = this.getArguments();
         if(arguments != null) {
-            bg_id = arguments.getString("id", bg_id);
+            bgId = arguments.getString("id", bgId);
         }
 
         // get the correct ID with the corresponding API url
-        url = "https://www.boardgamegeek.com/xmlapi/boardgame/" + bg_id;
+        url = "https://www.boardgamegeek.com/xmlapi/boardgame/" + bgId;
 
         // get views
         findId(LargeBgFragment);
@@ -106,7 +103,6 @@ public class LargeBgFragment extends Fragment {
 
                     while (event != XmlPullParser.END_DOCUMENT) {
                         tag = xpp.getName();
-                        tagAttr = xpp.getAttributeValue(null, "primary");
 
                         switch (event) {
                             case XmlPullParser.START_TAG:
@@ -118,13 +114,17 @@ public class LargeBgFragment extends Fragment {
 
                             case XmlPullParser.END_TAG:
 
-                                if (Objects.equals(tag, "yearpublished")) { year.setText(value);}
 
-                                if (Objects.equals(tag, "name")) {
-                                    names.add(value);
-                                    title.setText(value);
+
+                                // set the title of the game where the title is the primary title in the xml file
+                                if(Objects.equals(xpp.getName(), "name") && Objects.equals(xpp.getAttributeValue(null, "primary"), "true")) {
+                                    if(xpp.next() == XmlPullParser.TEXT) {
+                                        title.setText(xpp.getText());
+                                    }
                                 }
 
+                                // set other values of the game.
+                                if (Objects.equals(tag, "yearpublished"))   { year.setText(value);}
                                 if (Objects.equals(tag, "minplaytime"))     {minPlaytime_setter.setText("Min: "+ value);}
                                 if (Objects.equals(tag, "maxplaytime"))     {maxPlaytime_setter.setText("Max: "+value);}
                                 if (Objects.equals(tag, "age"))             {age_setter.setText(value);}
@@ -135,6 +135,7 @@ public class LargeBgFragment extends Fragment {
 
                                 break;
                         }
+                        // get the next event, which is the next "boardgame" tag
                         event = xpp.next();
                     }
                 } catch (XmlPullParserException | IOException e) {
@@ -149,9 +150,9 @@ public class LargeBgFragment extends Fragment {
         });
 
         requestQueue.add(stringRequest);
-        testTitle();
     }
 
+    // set the description without the HTML mark up.
     public void description() {
         description.setText(value);
         String text = (String) description.getText();
@@ -160,6 +161,7 @@ public class LargeBgFragment extends Fragment {
         description.setText(text);
     }
 
+    // make a new event in a dialog screen
     public void makeEvent() {
         openCalendar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -171,11 +173,7 @@ public class LargeBgFragment extends Fragment {
         });
     }
 
-    public void testTitle() {
-        System.out.println(names.size());
-        //title.setText(names.get(1));
-    }
-
+    // make a new XMLpul parser
     public void xmlConnector() {
         try {
             XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
@@ -185,6 +183,7 @@ public class LargeBgFragment extends Fragment {
         }
     }
 
+    // set the views of the fragment.
     public void findId(View LargeBgFragment) {
         // set the views
         title = LargeBgFragment.findViewById(R.id.title);
