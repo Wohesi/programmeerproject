@@ -41,8 +41,6 @@ public class MainActivity extends AppCompatActivity {
             R.drawable.ic_person_white_24dp
     };
 
-    // sign out button
-    public Button signout, signin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

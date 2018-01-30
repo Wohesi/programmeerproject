@@ -37,7 +37,6 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
     private EditText newUserEmail;
     private EditText newUserPass;
 
-    private RegisterFragment context;
 
     public RegisterFragment() {
         // Required empty public constructor
@@ -123,6 +122,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
         int i = v.getId();
         if (i == R.id.registerButton) {
             createAccount();
+            // toast
         }
     }
 }

@@ -41,14 +41,15 @@ public class LargeBgFragment extends Fragment {
     private TextView title, year, age_setter, minPlaytime_setter, maxPlaytime_setter, maxPlayers_setter, minPlayers_setter, description;
     private ImageView backgroundImg;
 
-
     // values for API connection
     private String url;
     private RequestQueue requestQueue;
     private XmlPullParser xpp;
     private String bg_id;
-    private String tag = "";
+    private String tag;
+    private String tagAttr;
     private String value;
+    ArrayList<String> names = new ArrayList<>();
 
 
     public LargeBgFragment() {
@@ -70,6 +71,121 @@ public class LargeBgFragment extends Fragment {
         // get the correct ID with the corresponding API url
         url = "https://www.boardgamegeek.com/xmlapi/boardgame/" + bg_id;
 
+        // get views
+        findId(LargeBgFragment);
+
+        // get the calendar dialog
+        openCalendar = LargeBgFragment.findViewById(R.id.openCalendar);
+        makeEvent();
+
+        // get API connection
+        requestQueue = Volley.newRequestQueue(getContext());
+
+        // get XML parser conection
+        xmlConnector();
+
+        // load data
+        loadData();
+
+        return LargeBgFragment;
+    }
+
+
+    public void loadData() {
+
+        System.out.println(url);
+
+        final StringRequest stringRequest = new StringRequest(
+                url,
+                new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    xpp.setInput(new StringReader(response));
+                    int event = xpp.getEventType();
+
+                    while (event != XmlPullParser.END_DOCUMENT) {
+                        tag = xpp.getName();
+                        tagAttr = xpp.getAttributeValue(null, "primary");
+
+                        switch (event) {
+                            case XmlPullParser.START_TAG:
+                                if (tag.equals("boardgame"))
+                                    break;
+
+                            case XmlPullParser.TEXT:
+                                value = xpp.getText();
+
+                            case XmlPullParser.END_TAG:
+
+                                if (Objects.equals(tag, "yearpublished")) { year.setText(value);}
+
+                                if (Objects.equals(tag, "name")) {
+                                    names.add(value);
+                                    title.setText(value);
+                                }
+
+                                if (Objects.equals(tag, "minplaytime"))     {minPlaytime_setter.setText("Min: "+ value);}
+                                if (Objects.equals(tag, "maxplaytime"))     {maxPlaytime_setter.setText("Max: "+value);}
+                                if (Objects.equals(tag, "age"))             {age_setter.setText(value);}
+                                if (Objects.equals(tag, "minplayers"))      {minPlayers_setter.setText("Min: "+value);}
+                                if (Objects.equals(tag, "maxplayers"))      {maxPlayers_setter.setText("Max: "+value);}
+                                if (Objects.equals(tag, "description"))     {description();}
+                                if (Objects.equals(tag, "image"))           {Picasso.with(getContext()).load(value).fit().into(backgroundImg);}
+
+                                break;
+                        }
+                        event = xpp.next();
+                    }
+                } catch (XmlPullParserException | IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println(error);
+            }
+        });
+
+        requestQueue.add(stringRequest);
+        testTitle();
+    }
+
+    public void description() {
+        description.setText(value);
+        String text = (String) description.getText();
+        // remove and replace HTML text
+        text = Html.fromHtml(text).toString();
+        description.setText(text);
+    }
+
+    public void makeEvent() {
+        openCalendar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NewEventFragment dialog = new NewEventFragment();
+                dialog.show(getFragmentManager(), "newEventDragment");
+            }
+
+        });
+    }
+
+    public void testTitle() {
+        System.out.println(names.size());
+        //title.setText(names.get(1));
+    }
+
+    public void xmlConnector() {
+        try {
+            XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+            xpp = factory.newPullParser();
+        } catch (XmlPullParserException e ) {
+            e.printStackTrace();
+        }
+    }
+
+    public void findId(View LargeBgFragment) {
         // set the views
         title = LargeBgFragment.findViewById(R.id.title);
         year = LargeBgFragment.findViewById(R.id.year);
@@ -87,125 +203,6 @@ public class LargeBgFragment extends Fragment {
 
         backgroundImg = LargeBgFragment.findViewById(R.id.background_img);
         description = LargeBgFragment.findViewById(R.id.description_setter);
-
-        // get the calendar dialog
-        openCalendar = LargeBgFragment.findViewById(R.id.openCalendar);
-        makeEvent();
-
-        // get API connection
-        requestQueue = Volley.newRequestQueue(getContext());
-
-        // get XML parser conection
-        try {
-            XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
-            xpp = factory.newPullParser();
-        } catch (XmlPullParserException e ) {
-            e.printStackTrace();
-        }
-
-        loadData();
-        return LargeBgFragment;
-    }
-
-
-    public void loadData() {
-
-        System.out.println(url);
-
-        final StringRequest stringRequest = new StringRequest(
-                url,
-                new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    xpp.setInput(new StringReader(response));
-                    int event = xpp.getEventType();
-                    ArrayList<String> names = new ArrayList<>();
-
-                    while (event != XmlPullParser.END_DOCUMENT) {
-                        tag = xpp.getName();
-
-                        switch (event) {
-                            case XmlPullParser.START_TAG:
-                                if (tag.equals("boardgame"))
-                                    break;
-                            case XmlPullParser.TEXT:
-                                value = xpp.getText();
-
-                            case XmlPullParser.END_TAG:
-
-                                if (Objects.equals(tag, "yearpublished")) { year.setText(value);}
-
-                                if (Objects.equals(tag, "name")) {
-
-                                    names.add(value);
-
-                                    //System.out.println(names.e);
-                                    title.setText(value);
-                                }
-                                //System.out.println(names);
-                                for(int i = 0; i < names.size(); i ++) {
-                                    // System.out.println(names.get(i) + "POSITION: " + i);
-                                    //System.out.println(names.get(1));
-                                }
-                                //System.out.println(names.size());
-                                //System.out.println(names.get(1));
-
-
-                                if (Objects.equals(tag, "minplaytime")) {
-                                    minPlaytime_setter.setText("Min: "+ value);}
-                                if (Objects.equals(tag, "maxplaytime")) {
-                                    maxPlaytime_setter.setText("Max: "+value);}
-                                if (Objects.equals(tag, "age")) {
-                                    age_setter.setText(value);}
-                                if (Objects.equals(tag, "minplayers")) {
-                                    minPlayers_setter.setText("Min: "+value);}
-                                if (Objects.equals(tag, "maxplayers")) {
-                                    maxPlayers_setter.setText("Max: "+value);}
-
-                                if (Objects.equals(tag, "description")) {
-
-                                    description.setText(value);
-                                    String text = (String) description.getText();
-                                    // remove and replace HTML text
-                                    text = Html.fromHtml(text).toString();
-                                    description.setText(text);
-                                }
-
-                                if (Objects.equals(tag, "image")) {
-                                        Picasso.with(getContext()).load(value).fit().into(backgroundImg);
-                                }
-
-                                break;
-                        }
-                        event = xpp.next();
-                    }
-                } catch (XmlPullParserException e) {
-                    e.printStackTrace();
-                } catch (IOException e ) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                System.out.println(error);
-            }
-        });
-
-        requestQueue.add(stringRequest);
-    }
-
-
-    public void makeEvent() {
-        openCalendar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NewEventFragment dialog = new NewEventFragment();
-                dialog.show(getFragmentManager(), "newEventDragment");
-            }
-
-        });
     }
 
 }

@@ -76,12 +76,7 @@ public class SearchFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
         // initializing the pullparser for XMLparser
-        try {
-            XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
-            xpp = factory.newPullParser();
-        } catch (XmlPullParserException e) {
-            e.printStackTrace();
-        }
+        xmlConnector();
 
         // searchview initializing
         SearchView searchView = view.findViewById(R.id.search_bar);
@@ -96,8 +91,6 @@ public class SearchFragment extends Fragment {
 
                         // getting the correct url of searched game.
                         url = "https://www.boardgamegeek.com/xmlapi/search?search="+s+"&exact=1";
-                        //+"&exact=1"
-                        System.out.println(url);
 
                         // clear the list before a new seach query is performed
                         searchTiles.clear();
@@ -110,8 +103,6 @@ public class SearchFragment extends Fragment {
 
                     @Override
                     public boolean onQueryTextChange(String s) {
-                        // perform the search query
-                        System.out.println("this has been changed:  "+ s);
                         return false;
                     }
                 }
@@ -143,16 +134,7 @@ public class SearchFragment extends Fragment {
                             case XmlPullParser.START_TAG:
 
                                 if(tag.equals("boardgame")) {
-
-                                    // make new searchtile
-                                    tileBoardgame = new SearchTile();
-                                    searchTiles.add(tileBoardgame);
-
-                                    // get the ID as attribute value
-                                    tag_id = xpp.getAttributeValue(null, "objectid");
-
-                                    // set the ID for the searchtile
-                                    tileBoardgame.setID(tag_id);
+                                    newTile();
                                 }
                                 break;
 
@@ -169,6 +151,7 @@ public class SearchFragment extends Fragment {
                                         break;
                                     case "yearpublished":
                                         tileBoardgame.setYear(value);
+                                        break;
                                 }
                                 break;
                         }
@@ -197,5 +180,26 @@ public class SearchFragment extends Fragment {
         requestQueue.add(stringRequest);
     }
 
+    public void newTile() {
+        // make new searchtile
+        tileBoardgame = new SearchTile();
+        searchTiles.add(tileBoardgame);
+
+        // get the ID as attribute value
+        tag_id = xpp.getAttributeValue(null, "objectid");
+
+        // set the ID for the searchtile
+        tileBoardgame.setID(tag_id);
+    }
+
+    public void xmlConnector() {
+        try {
+            XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+            xpp = factory.newPullParser();
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+        }
+
+    }
 }
 

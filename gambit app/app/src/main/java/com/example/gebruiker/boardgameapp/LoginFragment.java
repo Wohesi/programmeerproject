@@ -157,7 +157,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
         int i = v.getId();
         if (i == R.id.loginButton) {
             signIn();
-            //getActivity().recreate();
         } else if ( i == R.id.registerButton) {
             newRegisterFragment();
         } else if(  i == R.id.signoutButton) {

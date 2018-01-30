@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -28,21 +29,21 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 
-public class EventsFragment extends Fragment{
+public class EventsFragment extends Fragment {
 
     // get firebase information
     private DatabaseReference databaseRef;
     private FirebaseDatabase firebaseDatabase;
     private FirebaseAuth auth;
-    private FirebaseUser user;
     private String userID;
-    private FirebaseAuth.AuthStateListener mAuthListener;
+
 
     // get views for adapter
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
 
     final ArrayList<Event> events = new ArrayList<>();
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,7 +55,7 @@ public class EventsFragment extends Fragment{
         auth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseRef = firebaseDatabase.getReference();
-        user = auth.getCurrentUser();
+        auth.addAuthStateListener(mAuthListener);
 
         // setting up adapter
         recyclerView = view.findViewById(R.id.eventRv);
@@ -63,23 +64,30 @@ public class EventsFragment extends Fragment{
         adapter = new EventAdapter(events, getContext());
 
         // update if the user is logged in and get the events of the logged in user.
-        if (user != null) {
-            userID = user.getUid();
-            databaseRef.addValueEventListener(eventListener);
+        if (auth.getCurrentUser() != null) {
+            userID = auth.getCurrentUser().getUid();
+            recyclerView.setAdapter(adapter);
         }
 
-        if (user != null) {
-            mAuthListener = new FirebaseAuth.AuthStateListener() {
-                @Override
-                public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                    userID = user.getUid();
-                    databaseRef.addValueEventListener(eventListener);
-                }
-            };
-        }
         return view;
     }
 
+    private FirebaseAuth.AuthStateListener mAuthListener = new FirebaseAuth.AuthStateListener() {
+        @Override
+        public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+
+            if (firebaseAuth.getCurrentUser() != null) {
+
+                System.out.println(userID + "!!!!!!!!!!!!!!!!!!!!!!!");
+                userID = firebaseAuth.getCurrentUser().getUid();
+                databaseRef.addValueEventListener(eventListener);
+                adapter.notifyDataSetChanged();
+
+            } else {
+                databaseRef.removeEventListener(eventListener);
+            }
+        }
+    };
 
     // eventlistener for the database
     private ValueEventListener eventListener = new ValueEventListener() {
@@ -120,7 +128,6 @@ public class EventsFragment extends Fragment{
                         case "date":
                             event.setDate(value);
                             break;
-
                     }
                 }
 
@@ -130,6 +137,7 @@ public class EventsFragment extends Fragment{
             }
             // set the adapter
             recyclerView.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
         }
 
         @Override
