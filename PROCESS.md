@@ -97,4 +97,5 @@ Gewerkt aan de UI met betrekking tot placeholder images en app icon aangepast
 
 # day 22 - 30-1-2018
 Aan de hand van de code review zijn er anonymous listeners weggehaald en is code opgedeeld in meer methods om het kleiner en overzichtelijker te maken. Ook zijn er nog enkele comments toegevoegd om het leesbaarder te maken. Ook worden de evenementen goed ingeladen zodra een gebruiker in of uitlogt. Dit is gedaan samen met een student in mijn groepje die mij hierbij heeft geholpen. 
-De titel van een spel wordt nogsteeds niet goed geladen, de XML pullparser werkt nog niet. Dit is de laatste bug.
+~~De titel van een spel wordt nogsteeds niet goed geladen, de XML pullparser werkt nog niet. Dit is de laatste bug.~~
+XML pull parser haalt nu de juiste titel op en zet deze op de correcte plek
