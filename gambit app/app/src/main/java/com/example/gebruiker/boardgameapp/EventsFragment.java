@@ -64,10 +64,7 @@ public class EventsFragment extends Fragment {
         adapter = new EventAdapter(events, getContext());
 
         // update if the user is logged in and get the events of the logged in user.
-        if (auth.getCurrentUser() != null) {
-            userID = auth.getCurrentUser().getUid();
-            recyclerView.setAdapter(adapter);
-        }
+        updateUI();
 
         return view;
     }
@@ -77,12 +74,9 @@ public class EventsFragment extends Fragment {
         public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
 
             if (firebaseAuth.getCurrentUser() != null) {
-
-                System.out.println(userID + "!!!!!!!!!!!!!!!!!!!!!!!");
                 userID = firebaseAuth.getCurrentUser().getUid();
                 databaseRef.addValueEventListener(eventListener);
                 adapter.notifyDataSetChanged();
-
             } else {
                 databaseRef.removeEventListener(eventListener);
             }
@@ -146,4 +140,10 @@ public class EventsFragment extends Fragment {
         }
     };
 
+    public void updateUI() {
+        if (auth.getCurrentUser() != null) {
+            userID = auth.getCurrentUser().getUid();
+            recyclerView.setAdapter(adapter);
+        }
+    }
 }

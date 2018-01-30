@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
+import android.widget.SearchView.OnQueryTextListener;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -81,32 +82,8 @@ public class SearchFragment extends Fragment {
         // searchview initializing
         SearchView searchView = view.findViewById(R.id.search_bar);
 
-        searchView.setOnQueryTextListener(
-                new SearchView.OnQueryTextListener() {
-                    @Override
-                    public boolean onQueryTextSubmit(String s) {
-                        // replacing spaces for appropriate characters
-                        // here, s = name of the game
-                        s  = s.replace(" ", "%20");
+        searchView.setOnQueryTextListener(onQueryTextListener);
 
-                        // getting the correct url of searched game.
-                        url = "https://www.boardgamegeek.com/xmlapi/search?search="+s+"&exact=1";
-
-                        // clear the list before a new seach query is performed
-                        searchTiles.clear();
-
-                        // load the data with the URL containing the correct searchquery
-                        loadData(url);
-
-                        return false;
-                    }
-
-                    @Override
-                    public boolean onQueryTextChange(String s) {
-                        return false;
-                    }
-                }
-        );
 
         // Inflate the layout for this fragment
         return view;
@@ -199,7 +176,34 @@ public class SearchFragment extends Fragment {
         } catch (XmlPullParserException e) {
             e.printStackTrace();
         }
-
     }
+
+    private OnQueryTextListener  onQueryTextListener = new OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                // replacing spaces for appropriate characters
+                // here, s = name of the game
+                s  = s.replace(" ", "%20");
+
+                // getting the correct url of searched game.
+                url = "https://www.boardgamegeek.com/xmlapi/search?search="+s+"&exact=1";
+
+                // clear the list before a new seach query is performed
+                searchTiles.clear();
+
+                // load the data with the URL containing the correct searchquery
+                loadData(url);
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                return false;
+            }
+
+    };
+
+
 }
 
