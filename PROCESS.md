@@ -99,3 +99,8 @@ Gewerkt aan de UI met betrekking tot placeholder images en app icon aangepast
 Aan de hand van de code review zijn er anonymous listeners weggehaald en is code opgedeeld in meer methods om het kleiner en overzichtelijker te maken. Ook zijn er nog enkele comments toegevoegd om het leesbaarder te maken. Ook worden de evenementen goed ingeladen zodra een gebruiker in of uitlogt. Dit is gedaan samen met een student in mijn groepje die mij hierbij heeft geholpen. 
 ~~De titel van een spel wordt nogsteeds niet goed geladen, de XML pullparser werkt nog niet. Dit is de laatste bug.~~
 XML pull parser haalt nu de juiste titel op en zet deze op de correcte plek
+
+# day 23 - 31-1-2018
+Ik heb meer mensen gevraag om hun mening met betrekking tot de zoekresultaten. De keuze was of er specifiek één resultaat getoont moest worden, of meerdere. Het gevolg want het laatstenoemde is dat de kans aanwezig is dat er ontzettend veel resultaten komen. Echter, de feedback gaf aan dat dit meer gewenst is dan een kleine hoeveelheid opties. 
+
+ook is de button om een evenement weggehaald zodat als eenuser niet is ingelogd er ook geen evenement aangemaakt kan worden.
