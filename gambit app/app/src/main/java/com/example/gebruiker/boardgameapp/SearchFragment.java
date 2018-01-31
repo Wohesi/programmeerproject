@@ -186,7 +186,8 @@ public class SearchFragment extends Fragment {
                 s  = s.replace(" ", "%20");
 
                 // getting the correct url of searched game.
-                url = "https://www.boardgamegeek.com/xmlapi/search?search="+s+"&exact=1";
+                // update in processbook
+                url = "https://www.boardgamegeek.com/xmlapi/search?search="+s;
 
                 // clear the list before a new seach query is performed
                 searchTiles.clear();

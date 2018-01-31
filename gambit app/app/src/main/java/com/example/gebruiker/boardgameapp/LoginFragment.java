@@ -66,7 +66,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
         return view;
     }
 
-    public void signIn() {
+    public void checkInput() {
 
         // Checking if users filled in
         String email = userEmail.getText().toString();
@@ -83,11 +83,11 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
         }
 
         // Validating users
-        validateUser(email, password);
+        signIn(email, password);
 
     }
 
-    public void validateUser(String email, String password) {
+    public void signIn(String email, String password) {
 
         auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener((Activity) getContext(), new OnCompleteListener<AuthResult>() {
@@ -153,7 +153,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
     public void onClick(View v){
         int i = v.getId();
         if (i == R.id.loginButton) {
-            signIn();
+            checkInput();
         } else if ( i == R.id.registerButton) {
             newRegisterFragment();
         } else if(  i == R.id.signoutButton) {
