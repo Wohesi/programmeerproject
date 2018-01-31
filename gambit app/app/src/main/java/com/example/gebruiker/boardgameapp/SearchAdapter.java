@@ -82,6 +82,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
                    // checks if each element has been filled before adding it to the list of searchtiles.
                    for(SearchTile searchTile_boardgame : searchTileBoardgames) {
                        if( searchTile_boardgame.getName().contains(charString)  || searchTile_boardgame.getYear().contains(charSequence) || searchTile_boardgame.getID().contains(charSequence)) {
+                           // add a filtered result to the filterlist
                            filteredList.add(searchTile_boardgame);
                        }
 
@@ -90,6 +91,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
                    SearchAdapter.this.filteredList = filteredList;
                }
 
+               // set the list of filter results
                FilterResults filterResults = new FilterResults();
                filterResults.values = filteredList;
                return filterResults;
@@ -105,7 +107,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
        };
     }
 
-    public void newFragment(Object id) {
+    public void newLargeBgFragment(Object id) {
 
         // making new fragment
         LargeBgFragment largeBgFragment = new LargeBgFragment();
@@ -115,7 +117,8 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         arguments.putString("id", id.toString());
         largeBgFragment.setArguments(arguments);
 
-        // commiting fragment
+        // commiting fragment and replecing the rootframe with the LargeBgFragment to prevent
+        // clicking on other search results from the previous fragment.
         final FragmentTransaction transaction = ((Activity) context).getFragmentManager().beginTransaction();
         transaction.replace(R.id.root_frame, largeBgFragment);
         transaction.setTransition(transaction.TRANSIT_FRAGMENT_OPEN);
@@ -129,7 +132,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         int i = v.getId();
         Object id = v.getTag();
         if ( i == R.id.card) {
-            newFragment(id);
+            newLargeBgFragment(id);
         }
     }
 

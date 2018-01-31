@@ -65,7 +65,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
 
 
     // set the email and password for the new user.
-    public void createAccount() {
+    public void checkInput() {
         // Checking if correct info is filled in
         String email = newUserEmail.getText().toString();
         String password = newUserPass.getText().toString();
@@ -90,11 +90,11 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
         }
 
         // set the validation for the user and password.
-        validateCreateAccount(email, password);
+        createAccount(email, password);
     }
 
     // register the new user.
-    public void validateCreateAccount(String email, String password) {
+    public void createAccount(String email, String password) {
 
         auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener((Activity) getContext(), new OnCompleteListener<AuthResult>() {
@@ -121,7 +121,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         int i = v.getId();
         if (i == R.id.registerButton) {
-            createAccount();
+            checkInput();
         }
     }
 }

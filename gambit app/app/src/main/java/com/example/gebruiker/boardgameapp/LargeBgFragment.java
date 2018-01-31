@@ -9,6 +9,7 @@ package com.example.gebruiker.boardgameapp;
 
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.annotation.NonNull;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -73,6 +74,7 @@ public class LargeBgFragment extends Fragment {
 
         // firebase
         auth = FirebaseAuth.getInstance();
+        auth.addAuthStateListener(mAuthListener);
         FirebaseUser user = auth.getCurrentUser();
 
         // hide the make event button if a user is not logged in.
@@ -115,20 +117,24 @@ public class LargeBgFragment extends Fragment {
                     xpp.setInput(new StringReader(response));
                     int event = xpp.getEventType();
 
+                    // while the event is not the end of the document, continue the loop.
                     while (event != XmlPullParser.END_DOCUMENT) {
+
+                        // get the name of the XML tag
                         tag = xpp.getName();
 
+                        // set a switch on the type of event
                         switch (event) {
+                            // check for the starttag
                             case XmlPullParser.START_TAG:
                                 if (tag.equals("boardgame"))
                                     break;
-
+                            // set value to the text between the tags
                             case XmlPullParser.TEXT:
                                 value = xpp.getText();
 
+                            // check the end tag
                             case XmlPullParser.END_TAG:
-
-
 
                                 // set the title of the game where the title is the primary title in the xml file
                                 if(Objects.equals(xpp.getName(), "name") && Objects.equals(xpp.getAttributeValue(null, "primary"), "true")) {
@@ -224,4 +230,13 @@ public class LargeBgFragment extends Fragment {
             view.findViewById(R.id.openCalendar).setVisibility(View.GONE);
         }
     }
+
+    private FirebaseAuth.AuthStateListener mAuthListener = new FirebaseAuth.AuthStateListener() {
+        @Override
+        public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+            if (firebaseAuth.getCurrentUser() != null) {
+                userID = firebaseAuth.getCurrentUser().getUid();
+            }
+        }
+    };
 }
