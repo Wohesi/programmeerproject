@@ -22,6 +22,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -48,6 +50,10 @@ public class LargeBgFragment extends Fragment {
     private String tag;
     private String value;
 
+    // firebase
+    private FirebaseAuth auth;
+    private String userID;
+
 
     public LargeBgFragment() {
         // Required empty public constructor
@@ -64,6 +70,14 @@ public class LargeBgFragment extends Fragment {
         if(arguments != null) {
             bgId = arguments.getString("id", bgId);
         }
+
+        // firebase
+        auth = FirebaseAuth.getInstance();
+        FirebaseUser user = auth.getCurrentUser();
+
+        // hide the make event button if a user is not logged in.
+        // this so that only a signed in user can make an event.
+        hideButton(user, LargeBgFragment);
 
         // get the correct ID with the corresponding API url
         url = "https://www.boardgamegeek.com/xmlapi/boardgame/" + bgId;
@@ -204,4 +218,10 @@ public class LargeBgFragment extends Fragment {
         description = LargeBgFragment.findViewById(R.id.description_setter);
     }
 
+    // update the UI with the correct events.
+    public void hideButton( FirebaseUser currentUser, View view ) {
+        if (currentUser == null) {
+            view.findViewById(R.id.openCalendar).setVisibility(View.GONE);
+        }
+    }
 }
