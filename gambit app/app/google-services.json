@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "136676139461",
+    "firebase_url": "https://boardgameapp-a515e.firebaseio.com",
+    "project_id": "boardgameapp-a515e",
+    "storage_bucket": "boardgameapp-a515e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:136676139461:android:9113f2b0dab5310e",
+        "android_client_info": {
+          "package_name": "com.example.gebruiker.boardgameapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "136676139461-t3dl4hm1gu9q3t1q3nrb8l74erqmopsn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.gebruiker.boardgameapp",
+            "certificate_hash": "d22fde2b5d65115e384662df11e25a6716571343"
+          }
+        },
+        {
+          "client_id": "136676139461-pakr0bfjs4anf0ngk1mpngnbleroqnd8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDh1eAtpSnxlFq4qhMJRQNfHZAwO0erGGU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "136676139461-pakr0bfjs4anf0ngk1mpngnbleroqnd8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

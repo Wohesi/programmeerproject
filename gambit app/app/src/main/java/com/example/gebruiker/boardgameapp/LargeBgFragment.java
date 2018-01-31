@@ -239,4 +239,5 @@ public class LargeBgFragment extends Fragment {
             }
         }
     };
+
 }
