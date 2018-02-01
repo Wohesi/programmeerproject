@@ -117,8 +117,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         arguments.putString("id", id.toString());
         largeBgFragment.setArguments(arguments);
 
-        // commiting fragment and replecing the rootframe with the LargeBgFragment to prevent
-        // clicking on other search results from the previous fragment.
+        // commiting fragment and replecing the rootframe with the
         final FragmentTransaction transaction = ((Activity) context).getFragmentManager().beginTransaction();
         transaction.replace(R.id.root_frame, largeBgFragment);
         transaction.setTransition(transaction.TRANSIT_FRAGMENT_OPEN);

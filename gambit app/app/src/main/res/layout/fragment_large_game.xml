@@ -159,7 +159,7 @@
                             android:layout_margin="10dp"
                             android:layout_weight="1"
                             android:text="@string/max"
-                            android:textColor="#FFFFFF" />
+                            android:textColor="@color/colorBackground" />
 
                     </LinearLayout>
 
