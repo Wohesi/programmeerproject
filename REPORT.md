@@ -32,15 +32,15 @@ In het NewEventFragment kan een nieuw evenement gemaakt worden. Hierin wordt de 
 
 ## LoginFragment.java
 ![sc5](https://github.com/Wohesi/programmeerproject/blob/master/doc/final%20screenshots/userfragments.png)
-* In het loginfragment kan worden ingelogd. Dit fragment wordt geupdate zodra een gebruiker is ingelogd, of als een gebruiker zich uitlogd. 
-* In het registerfragment kan een gebruiker zich registreren. 
+* In het **LoginFragment** kan worden ingelogd. Dit fragment wordt geupdate zodra een gebruiker is ingelogd, of als een gebruiker zich uitlogd. 
+* **RegisterFragment:** Hier kan een gebruiker zich registreren 
 
 -------
 
 # Uitdagingen
 Gedurende het project ben ik tegen een aantal obstakels heen gelopen. Allereerst vond ik parsen van de XML data via de XmlPullParser een stuk ingewikkelder dan via een JSON string request. Ook het combineren en uitvogelen van hoe een XML bestand verwerkt wordt en hoe je het juiste element verkrijgt en opslaat was een uitdaging. Het heeft enige tijd gekost om de juiste elementen te verkrijgen. Daarnaast was de API van boardgamegeek anders ingedeeld dan ik had verwacht, en moest data op verschillende manieren verkregen worden vanuit de API. Zo waren bijvoorbeeld plaatjes of andere informatie via andere queries te verkrijgen. 
 
-Daarnaast was het een uitdaging om connectie te maken via de google calendar. Hiervoor was een OAuth2 verificatie vereist. Dit koste mij veel moeite om te voor elkaar te krijgen. Aangezien de API waar ik hoofdzakelijk gebruik van maakte offline was en slecht werkte voor enige tijd vanwege een DDoS aanval (1), had ik veel tijd verspild aan het testen van mijn code, aangezien ik het vermoeden had dat ik fouten maakte, waardoor er vaak een timeout error verscheen.
+Daarnaast was het een uitdaging om connectie te maken via de google calendar. Hiervoor was een OAuth2 verificatie vereist. Dit koste mij veel moeite om te voor elkaar te krijgen. Aangezien de API waar ik hoofdzakelijk gebruik van maakte offline was en slecht werkte voor enige tijd vanwege een DDoS aanval (1), had ik veel tijd verspild aan het testen van mijn code, aangezien ik het vermoeden had dat ik fouten maakte, waardoor er vaak een timeout error verscheen. Het vermoeden dat ik fouten maakte kwam voornamelijk vanwege mijn onwetendheid met betrekking tot de XmlPullParser. 
 
  Gezien de tijd leek het mij de beste optie om af te stappen van de google calendar API en gebruik te maken van Firebase. Op deze manier kunnen mensen een account aanmaken op de app en via deze manier evenementen maken, in plaats van via de google calendar app.  
 De omschakeling naar Firebase ging over het algemeen goed, hoewel ik moeite had met de juiste data uit de database halen, is dit uiteindelijk gelukt. Ook was het een uitdaging om te kijken hoe er geen dubbele evenementen gemaakt konden worden met dezelfde attributen. Dit is uiteindelijk opgelost met een uniek ID voor elk evenement. 
