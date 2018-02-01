@@ -1,30 +1,30 @@
 # programmerproject [![BCH compliance](https://bettercodehub.com/edge/badge/Wohesi/programmeerproject?branch=master)](https://bettercodehub.com/)
 
-## Probleem
-Bordspellen zijn tegenwoordig razend populair. Veel mensen kiezen ervoor om samen te komen om bordspellen zeer complexe, or snelle bordspellen te spelen. Echter, met deze steeds populairder wordende hobby komen ook bordspellen kijken die soms veel tijd in beslag nemen. Dit kan soms moeilijk in te schatten en te plannen zijn. 
+## Beschrijving
+Met deze app kan gezocht worden naar bordspellen. Er kan informatie over een bepaald spel gevonden worden. Daarnaast kan er een evenement gemaakt worden om een spel te spelen. Deze evenementen worden per gebruiker opgeslagen.
 
-## Oplossing
-Deze app bied de oplossing om naar een spel te zoeken, te kijken hoelang dit bordspel gemiddeld duurt en dit vervolgens in te plannen via google calendar. Op deze manier kan je gemakkelijk en snel een gezellige bordspelsessie organiseren!
+## Version
+1.0.0
 
-## Schetsen
-De volgende screenshots geven een idee van hoe de app werkt
+## Works on
+Android 7.1
 
-![text](https://github.com/Wohesi/programmeerproject/blob/master/doc/wireframes_flow2.png)
-![text](https://github.com/Wohesi/programmeerproject/blob/master/doc/wireframes_image2.png)
+## Credits
+##### Recyclerview met searchview combineren in de SearchFragment.java
+https://stackoverflow.com/questions/30398247/how-to-filter-a-recyclerview-with-a-searchview 
+##### Hoe parse je een Xml file - SearchFragment.java / LargeBgFragment.java
+https://developer.android.com/training/basics/network-ops/xml.html
+##### Filteren van resultaten - SearchAdapter.java
+https://www.androidhive.info/2017/11/android-recyclerview-with-search-filter-functionality/
+##### Diagonale achtergrond - background_diagonal.xml
+https://medium.com/@adinugroho/create-diagonal-cut-view-in-android-5a376eca6a1c
+##### Het uitwisselen van data tussen DialogFragments - NewEventFragment.java
+https://stackoverflow.com/questions/18579590/how-to-send-data-from-dialogfragment-to-a-fragment
+##### Data op een correcte manier naar firebase sturen - NewEventFragment.java
+https://stackoverflow.com/questions/37688031/class-java-util-map-has-generic-type-parameters-please-use-generictypeindicator
+##### Unieke ID per evenement - newEventFragment.java
+https://stackoverflow.com/questions/1389736/how-do-i-create-a-unique-id-in-java
 
-## Main features
-De gebruiker kan de volgende activiteiten doen op de app. 
-1. Naar een bordspel zoeken en hier de relevante informatie van opvragen
-2. Een evenement maken voor het desbetreffende bordspel. 
-3. Mensen uitnodigen om dit bordspel te spelen op het geplande evenement
-
-## Data sources
-Er zal gebruik gemaakt worden van de boardgamegeek API die hier te vinden is:
-https://boardgamegeek.com/wiki/page/BGG_XML_API2
-
-Ook zal er gebruik gemaakt worden van de google calendar api om mensen uit te nodigen
-
-## Vereisten
-De huidige apps die beschikbaar zijn in de playstore zijn vaak onvolledig of onoverzichtelijk. Er wordt vaak te veel informatie gegeven en op een onoverzichtelijke manier weer gegeven.
-
-Het zal lastig worden om er voor te zorgen dat de google calendar library alleen de relevante evenementen zal laten zien op de app. 
+## Screenshots
+![sc1](https://github.com/Wohesi/programmeerproject/blob/master/doc/final%20screenshots/largebgfragment.png)
+![sc2](https://github.com/Wohesi/programmeerproject/blob/master/doc/final%20screenshots/largebgfragment.png)
