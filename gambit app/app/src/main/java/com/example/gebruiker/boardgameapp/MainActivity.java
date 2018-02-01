@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        // check if user is signed in (non-null) and update UI accordingly.
+        // heck if user is signed in (non-null) and update UI accordingly.
         currentUser = auth.getCurrentUser();
 
     }
