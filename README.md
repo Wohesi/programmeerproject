@@ -24,6 +24,10 @@ https://stackoverflow.com/questions/18579590/how-to-send-data-from-dialogfragmen
 https://stackoverflow.com/questions/37688031/class-java-util-map-has-generic-type-parameters-please-use-generictypeindicator
 ##### Unieke ID per evenement - newEventFragment.java
 https://stackoverflow.com/questions/1389736/how-do-i-create-a-unique-id-in-java
+##### Kijken of de juiste waarde is ingevuld voor een password - LoginFragment.java
+https://stackoverflow.com/questions/36388581/android-textutils-isempty-vs-string-isempty
+##### De tablayout met de juiste fragments - MainActivity.java
+https://www.youtube.com/watch?v=6UI3XcIjH6Y&t=518s
 
 ## Screenshots
 twee voorbeelden van screenshots van de app
