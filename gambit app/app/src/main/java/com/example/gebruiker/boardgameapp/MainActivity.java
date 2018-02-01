@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         // initialize the firebase
         auth = FirebaseAuth.getInstance();
 
-        // Setting up the tabs and toolbar
+        // setting up the tabs and toolbar
         toolbar = findViewById(R.id.toolbar);
         toolbar.setVisibility(View.GONE);
         setSupportActionBar(toolbar);
@@ -67,14 +67,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    // Setting icons to the tabs
+    // setting icons to the tabs
     private void setupTabIcons() {
         tabLayout.getTabAt(0).setIcon(tabIcons[0]);
         tabLayout.getTabAt(1).setIcon(tabIcons[1]);
         tabLayout.getTabAt(2).setIcon(tabIcons[2]);
     }
 
-    // Setting the tabs into the tabbar
+    // setting the tabs into the tabbar
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new SearchFragment(), "Search");
@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
+        // check if user is signed in (non-null) and update UI accordingly.
         currentUser = auth.getCurrentUser();
 
     }

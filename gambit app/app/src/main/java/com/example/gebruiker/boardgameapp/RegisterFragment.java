@@ -85,7 +85,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
         // Firebase passwords need to have a minimum of 6 characters
         // https://stackoverflow.com/questions/36318198/set-minimum-password-length-firebase-email-password-authentication
         if (password.length() < 6) {
-            Toast.makeText(getContext(), "password need minumum 6 chars", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), "password need minimum 6 chars", Toast.LENGTH_LONG).show();
             return;
         }
 

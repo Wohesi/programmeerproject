@@ -57,7 +57,7 @@ public class LargeBgFragment extends Fragment {
 
 
     public LargeBgFragment() {
-        // Required empty public constructor
+        // required empty public constructor
     }
 
 
@@ -105,8 +105,6 @@ public class LargeBgFragment extends Fragment {
 
 
     public void loadData() {
-
-        System.out.println(url);
 
         final StringRequest stringRequest = new StringRequest(
                 url,

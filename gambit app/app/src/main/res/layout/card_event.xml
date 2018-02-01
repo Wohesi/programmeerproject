@@ -57,8 +57,8 @@
                         android:paddingBottom="15dp"
                         android:padding="5dp"
                         android:fontFamily="@font/bentonsans_bold"
-                        android:text="Title"
-                        android:textSize="20dp" />
+                        android:text="@string/title"
+                        android:textSize="20sp" />
 
                     <TextView
                         android:id="@+id/dateEvent"
@@ -67,7 +67,7 @@
                         android:layout_margin="5dp"
                         android:paddingBottom="13dp"
                         android:fontFamily="@font/bentonsans_reg"
-                        android:text="year" />
+                        android:text="@string/year" />
 
                     <TextView
                         android:id="@+id/timeEvent"

@@ -35,7 +35,6 @@ public class BlankFragment extends Fragment {
         transaction.replace(R.id.root_frame, new SearchFragment());
         transaction.commit();
 
-
        return view;
     }
 

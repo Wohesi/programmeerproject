@@ -51,7 +51,7 @@
                 android:layout_weight="1"
                 android:padding="10dp"
                 android:src="@android:drawable/ic_lock_idle_alarm"
-                android:background="#FFFFFFFF"/>
+                android:background="@color/transparant"/>
 
             <ImageButton
                 android:id="@+id/setDate"
@@ -60,7 +60,7 @@
                 android:layout_weight="1"
                 android:src="@android:drawable/ic_menu_today"
                 android:padding="10dp"
-                android:background="#FFFFFFFF"/>
+                android:background="@color/transparant"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -72,7 +72,7 @@
         android:layout_below="@+id/linearLayout"
         android:layout_marginStart="20dp"
         android:text="@string/ok"
-        android:background="#FFFFFFFF"
+        android:background="@color/transparant"
         android:textColor="@color/colorPrimary"/>
 
     <Button
@@ -83,6 +83,6 @@
         android:layout_below="@+id/linearLayout"
         android:layout_marginEnd="20dp"
         android:text="@string/cancel"
-        android:background="#FFFFFFFF"
+        android:background="@color/transparant"
         android:textColor="@color/colorPrimary"/>
 </RelativeLayout>

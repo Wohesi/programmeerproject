@@ -12,4 +12,14 @@
     <string name="set_a_title">Set a title:</string>
     <string name="set_date_and_time">Set date and time:</string>
     <string name="time">time</string>
+    <string name="year">year</string>
+    <string name="title">Title</string>
+    <string name="age">Age:</string>
+    <string name="players">Players:</string>
+    <string name="playtime">Playtime:</string>
+    <string name="max">max</string>
+    <string name="min">min</string>
+    <string name="description">Description</string>
+    <string name="login">Login</string>
+    <string name="sign_out">sign out</string>
 </resources>

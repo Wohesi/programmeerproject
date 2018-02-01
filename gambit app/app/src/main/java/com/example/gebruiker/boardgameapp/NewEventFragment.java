@@ -115,7 +115,6 @@ public class NewEventFragment extends DialogFragment implements View.OnClickList
                 if(resultCode == Activity.RESULT_OK) {
                     Bundle bundle = data.getExtras();
                     resultDate = bundle.getString("date");
-                    System.out.println(resultDate + "FROM NEW EVENT DIALOG");
                 }
                 break;
             // get the time from time dialogfragment
@@ -123,7 +122,6 @@ public class NewEventFragment extends DialogFragment implements View.OnClickList
                 if(resultCode == Activity.RESULT_OK) {
                     Bundle bundle = data.getExtras();
                     resultTime = bundle.getString("time");
-                    System.out.println(resultTime + "FROM TIME DIALOG");
                 }
         }
     }

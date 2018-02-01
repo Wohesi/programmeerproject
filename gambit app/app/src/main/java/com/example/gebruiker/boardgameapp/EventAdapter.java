@@ -6,7 +6,6 @@
 
 package com.example.gebruiker.boardgameapp;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,11 +19,9 @@ public class EventAdapter  extends RecyclerView.Adapter<EventAdapter.ViewHolder>
 
     // setting up variables
     private ArrayList<Event> eventList;
-    private Context context;
 
-    public EventAdapter(ArrayList<Event> events, Context context) {
+    public EventAdapter(ArrayList<Event> events) {
         eventList = events;
-        this.context = context;
     }
 
     @Override

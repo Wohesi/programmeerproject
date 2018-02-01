@@ -85,7 +85,7 @@ public class SearchFragment extends Fragment {
         searchView.setOnQueryTextListener(onQueryTextListener);
 
 
-        // Inflate the layout for this fragment
+        // inflate the layout for this fragment
         return view;
     }
 

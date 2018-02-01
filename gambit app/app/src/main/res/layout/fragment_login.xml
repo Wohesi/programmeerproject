@@ -17,16 +17,16 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/bentonsans_bold"
             android:paddingBottom="20dp"
-            android:text="Login"
+            android:text="@string/login"
             android:textAlignment="center"
-            android:textSize="30dp" />
+            android:textSize="30sp" />
 
         <TextView
             android:id="@+id/emailText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="email"
-            android:textSize="15dp"
+            android:text="@string/email"
+            android:textSize="15sp"
             android:textAlignment="center"/>
         <EditText
             android:id="@+id/email"
@@ -40,8 +40,8 @@
             android:id="@+id/passwordText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="password"
-            android:textSize="15dp"
+            android:text="@string/password"
+            android:textSize="15sp"
             android:textAlignment="center"
             android:paddingTop="20dp"/>
         <EditText
@@ -64,7 +64,7 @@
 
                 android:backgroundTint="@color/colorPrimary"
                 android:padding="20dp"
-                android:text="login" />
+                android:text="@string/login" />
 
             <Button
                 android:id="@+id/signoutButton"
@@ -73,7 +73,7 @@
 
                 android:backgroundTint="@color/colorPrimary"
                 android:padding="20dp"
-                android:text="sign out" />
+                android:text="@string/sign_out" />
 
 
             <Button
@@ -83,7 +83,7 @@
                 android:layout_margin="30dp"
                 android:background="#00000000"
                 android:padding="20dp"
-                android:text="Register" />
+                android:text="@string/register" />
 
 
         </LinearLayout>

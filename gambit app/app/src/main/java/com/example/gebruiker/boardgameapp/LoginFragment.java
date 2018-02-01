@@ -38,14 +38,14 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
 
 
     public LoginFragment() {
-        // Required empty public constructor
+        // required empty public constructor
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        // inflate the layout for this fragment
         view =  inflater.inflate(R.layout.fragment_login, container, false);
 
         auth = FirebaseAuth.getInstance();
@@ -68,11 +68,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
 
     public void checkInput() {
 
-        // Checking if users filled in
+        // checking if users filled in
         String email = userEmail.getText().toString();
         String password  = userPassword.getText().toString();
 
-        // https://stackoverflow.com/questions/36388581/android-textutils-isempty-vs-string-isempty
         if(TextUtils.isEmpty(email)) {
             Toast.makeText(getContext(), "Enter email", Toast.LENGTH_SHORT).show();
             return;
@@ -82,7 +81,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
             return;
         }
 
-        // Validating users
+        // signing in a user
         signIn(email, password);
 
     }
