@@ -30,8 +30,8 @@ Deze app kan gebruikt worden om bordspellen en de bijbehorende informatie te vin
 
 ## LoginFragment.java
 ![sc5](https://github.com/Wohesi/programmeerproject/blob/master/doc/final%20screenshots/userfragments.png)
-* * In het loginfragment kan worden ingelogd. Dit fragment wordt geupdate zodra een gebruiker is ingelogd, of als een gebruiker zich uitlogd. 
-* * In het registerfragment kan een gebruiker zich registreren. 
+* In het loginfragment kan worden ingelogd. Dit fragment wordt geupdate zodra een gebruiker is ingelogd, of als een gebruiker zich uitlogd. 
+* In het registerfragment kan een gebruiker zich registreren. 
 
 -------
 
