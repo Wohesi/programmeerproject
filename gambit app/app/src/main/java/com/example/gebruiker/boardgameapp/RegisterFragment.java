@@ -104,7 +104,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("User created", "createUserWithEmail:success");
                             FirebaseUser user = auth.getCurrentUser();
-                            Toast.makeText(getContext(), "You registered as: "+ user, Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), "You registered with email: "+ user.getEmail(), Toast.LENGTH_LONG).show();
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("failed to create user", "createUserWithEmail:failure", task.getException());
