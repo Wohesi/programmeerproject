@@ -26,5 +26,6 @@ https://stackoverflow.com/questions/37688031/class-java-util-map-has-generic-typ
 https://stackoverflow.com/questions/1389736/how-do-i-create-a-unique-id-in-java
 
 ## Screenshots
+twee voorbeelden van screenshots van de app
 ![sc1](https://github.com/Wohesi/programmeerproject/blob/master/doc/final%20screenshots/largebgfragment.png)
 ![sc2](https://github.com/Wohesi/programmeerproject/blob/master/doc/final%20screenshots/eventsfragment.png)
