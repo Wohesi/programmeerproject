@@ -143,14 +143,6 @@
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
 
-                        <TextView
-                            android:id="@+id/num_players_setter_min"
-                            android:layout_width="wrap_content"
-                            android:layout_height="40dp"
-                            android:layout_margin="10dp"
-                            android:layout_weight="1"
-                            android:text="@string/min"
-                            android:textColor="@color/colorBackground" />
 
                         <TextView
                             android:id="@+id/num_players_setter_max"
@@ -160,6 +152,17 @@
                             android:layout_weight="1"
                             android:text="@string/max"
                             android:textColor="@color/colorBackground" />
+
+                        <TextView
+                            android:id="@+id/num_players_setter_min"
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp"
+                            android:layout_margin="10dp"
+                            android:layout_weight="1"
+                            android:text="@string/min"
+                            android:textColor="@color/colorBackground" />
+
+
 
                     </LinearLayout>
 
