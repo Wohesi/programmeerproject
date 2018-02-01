@@ -24,10 +24,11 @@ Deze app kan gebruikt worden om bordspellen en de bijbehorende informatie te vin
 * **EventAdapter.java:** Adapter class om de recycler view op de juiste manier te vullen met eventcards. 
 
 ### NewEventFragment.java
-![sc4]()
-*
-*
-*
+![sc4](https://github.com/Wohesi/programmeerproject/blob/master/doc/final%20screenshots/register_timepick.png)
+In het NewEventFragment kan een nieuw evenement gemaakt worden. Hierin wordt de titel gezet met een edit text. Doormiddel van een OnActivityResult method kan gecommuniceerd worden tussen de dialogframents. Zo wordt de datum en tijd teruggegeven naar de NewEventFragment waarin het in de database gezet wordt. 
+* **TimeDialog.java:** Hier kan een tijd geselecteerd worden met een TimePicker.
+* **CalendarDialog.java:** Hier kan een datum geselecteerd worden met een DatePicker.
+
 
 ## LoginFragment.java
 ![sc5](https://github.com/Wohesi/programmeerproject/blob/master/doc/final%20screenshots/userfragments.png)
