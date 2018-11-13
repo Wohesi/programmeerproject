@@ -34,8 +34,6 @@ twee voorbeelden van screenshots van de app
 ![sc1](https://github.com/Wohesi/programmeerproject/blob/master/doc/final%20screenshots/largebgfragment.png)
 ![sc2](https://github.com/Wohesi/programmeerproject/blob/master/doc/final%20screenshots/eventsfragment.png)
 
-## Product video
-https://youtu.be/Fz28sci6jrI
 
 ## Licence
 I dedicate any and all copyright interest in this software to the
